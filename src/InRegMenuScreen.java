@@ -1,2 +1,2 @@
-public class InRegMenuScreen {
+public class InRegMenuScreen extends Screen{
 }
