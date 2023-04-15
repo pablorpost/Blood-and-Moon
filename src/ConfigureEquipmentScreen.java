@@ -1,0 +1,2 @@
+public class ConfigureEquipmentScreen {
+}
