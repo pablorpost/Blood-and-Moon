@@ -11,7 +11,12 @@ public class Store {
     private List<Skill> skills;
 
     public Store(){
+        //out/atrifacts/Blood-and-moon.jar
         this.directorio = "../../../storeFiles";
+
+        //src/
+        //this.directorio = "storeFiles";
+
         loadStore(this.directorio);
 
 
