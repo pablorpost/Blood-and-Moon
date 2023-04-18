@@ -1,6 +1,6 @@
-public class BanDesbanScreen extends Screen{
+public class BanUnbanScreen extends Screen{
     private boolean ban;
-    public BanDesbanScreen() {
+    public BanUnbanScreen() {
     }
     public void ban(User user){
 
