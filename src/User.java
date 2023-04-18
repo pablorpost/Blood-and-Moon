@@ -2,24 +2,19 @@ import java.util.List;
 
 public class User extends Person{
 
-    private String id;
     private Character character;
     private List<String> weapons;
     private String armor;
     private boolean ban;
     private List<String> pendingRequest;
     private List<Battle> battles;
+    private int gold;
 
+    public User(String nick, int password){
+        super(nick,password,DataBaseResult.user);
+    }
     public void uploadBattles(Battle value){
-
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        this.battles.add(value);
     }
 
     public Character getCharacter() {
@@ -70,5 +65,13 @@ public class User extends Person{
     @Override
     public void setBattles(List<Battle> battles) {
         this.battles = battles;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 }

@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.List;
 
 public class DBManager {
@@ -6,35 +7,58 @@ public class DBManager {
     private List<User> requests;
 
     public User getUser(String nick, String password){
-        return null;
+        return dataBase.getUser(nick, password.hashCode());
     }
 
     public Admin getAdmin(String nick, String password){
-        return null;
+        return dataBase.getAdmin(nick, password.hashCode());
     }
 
     public DataBaseResult inDataBase(String nick, String password){
         return null;
     }
 
-    public void loadDataBase(){
-
+    public DBManager(){
+        this.dataBase = loadDataBase();
+        this.adminPassword=53195061;
+    }
+    public DataBase loadDataBase(){
+        DataBase dataBaseCop = null;
+        if (new File("dataBase.binaryDB").exists()) {
+            try {
+                ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("dataBase.binaryDB"));
+                dataBaseCop = (DataBase) entrada.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else{
+            dataBaseCop = new DataBase();
+            save();
+        }
+        return dataBaseCop;
     }
 
     public boolean adminPasswordCheck(int value){
-        return false;
+        return Integer.toString(value).hashCode()==adminPassword;
     }
 
     public void addUser(String nick, String password){
-
+        dataBase.addUser(nick, password.hashCode());
     }
 
     public void addAdmin(String nick, String password){
-
+        dataBase.addAdmin(nick, password.hashCode());
     }
 
     public void save(){
-
+        try {
+            ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream("dataBase.binaryDB"));
+            salida.writeObject(this.dataBase);
+            salida.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<User> getRequests() {
@@ -45,3 +69,11 @@ public class DBManager {
         this.requests = requests;
     }
 }
+
+
+
+
+
+
+
+

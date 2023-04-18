@@ -5,10 +5,15 @@ public class Person implements Serializable {
 
     private String name;
     private String nick;
-    private String password;
+    private int password;
     private DataBaseResult type;
     private List<Battle> battles;
 
+    public Person(String nick, int password, DataBaseResult type){
+        this.nick = nick;
+        this.password = password;
+        this.type = type;
+    }
     public void addBattle(Battle battle){
 
     }
@@ -29,11 +34,11 @@ public class Person implements Serializable {
         this.nick = nick;
     }
 
-    public String getPassword() {
+    public int getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(int password) {
         this.password = password;
     }
 
