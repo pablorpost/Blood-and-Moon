@@ -1,6 +1,8 @@
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class Store {
+    private String directorio;
     private List<Character> chracters;
     private List<Weapon> weapons;
     private List<Armor> armors;
@@ -8,11 +10,37 @@ public class Store {
     private List<Modifier> modifiers;
     private List<Skill> skills;
 
+    public Store(){
+        this.directorio = "storeFiles";
+        loadStore(this.directorio);
+
+
+    }
+
     public void uploadInfo(){
 
     }
 
-    private void loadStore(){
+    private void loadStore(String directorio){
+        Armor armor= new Armor();
+        try {
+            this.armors = armor.loadArmors(directorio);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Weapon weapon= new Weapon();
+        try {
+            this.weapons = weapon.loadWeapon(directorio);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Skill skill = new Skill();
+        try {
+            this.skills = skill.loadSkills(directorio);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
