@@ -12,7 +12,7 @@ public class UserMainMenuScreen extends Screen{
         setDataBase(dataBase);
         setStore(store);
         this.user = user;
-        Map <String, List<String>> auxOptions = new HashMap<>();
+        options = new HashMap<>();
         List<String> auxList = new ArrayList<>();
         auxList.add("0. Challenge user");
         auxList.add("1. Configure my equipment");
@@ -20,9 +20,7 @@ public class UserMainMenuScreen extends Screen{
         auxList.add("3. Ranking");
         auxList.add("4. Delete character");
         auxList.add("5. Log out");
-        auxOptions.put("0", auxList);
-        setOptions(auxOptions);
-
+        options.put("0", auxList);
     }
 
     public int showOptions(String option) {
