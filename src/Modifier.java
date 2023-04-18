@@ -20,7 +20,7 @@ public class Modifier {
 
     public List<Modifier> loadModifiers(String directorio) throws FileNotFoundException {
         ArrayList<Modifier> modifiers = new ArrayList<>();
-        String ruta = directorio + File.separatorChar + "modifiers";
+        String ruta = directorio + File.separatorChar + "modifiers" + File.separatorChar + "modifiers.txt";
         File fichero = new File(ruta);
         Scanner scanner = new Scanner(fichero);
         while (scanner.hasNextLine()){ //mientras existan lineas

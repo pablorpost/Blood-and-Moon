@@ -20,7 +20,7 @@ public class Skill {
 
     public List<Skill> loadSkills(String directorio) throws FileNotFoundException {
         ArrayList<Skill> skills = new ArrayList<>();
-        String ruta = directorio + File.separatorChar + "skills";
+        String ruta = directorio + File.separatorChar + "skills"  + File.separatorChar + "skills.txt";
         File fichero = new File(ruta);
         Scanner scanner = new Scanner(fichero);
         while (scanner.hasNextLine()){ //mientras existan lineas

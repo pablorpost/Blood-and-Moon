@@ -23,7 +23,7 @@ public class Weapon {
 
     public List<Weapon> loadWeapon(String directorio) throws FileNotFoundException {
         ArrayList<Weapon> weapons = new ArrayList<>();
-        String ruta = directorio + File.separatorChar + "weapons";
+        String ruta = directorio + File.separatorChar + "weapons" + File.separatorChar + "weapons.txt";
         File fichero = new File(ruta);
         Scanner scanner = new Scanner(fichero);
         while (scanner.hasNextLine()){ //mientras existan lineas
