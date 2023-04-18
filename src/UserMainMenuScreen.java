@@ -1,5 +1,4 @@
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UserMainMenuScreen extends Screen{
     private Character character;
@@ -13,10 +12,27 @@ public class UserMainMenuScreen extends Screen{
         setDataBase(dataBase);
         setStore(store);
         this.user = user;
+        options = new HashMap<>();
+        List<String> auxList = new ArrayList<>();
+        auxList.add("0. Challenge user");
+        auxList.add("1. Configure my equipment");
+        auxList.add("2. Battle history");
+        auxList.add("3. Ranking");
+        auxList.add("4. Delete character");
+        auxList.add("5. Log out");
+        options.put("0", auxList);
     }
 
     public int showOptions(String option) {
-        return 0; //Vacío
+        Map <String, List<String>> auxOptions = getOptions();
+        List<String> show = auxOptions.get(option);
+        for(int i = 0; i<show.size(); i ++){
+            System.out.println(show.get(i));
+        }
+
+        Scanner sc = new Scanner(System.in);
+        int optionSelected = sc.nextInt();
+        return optionSelected;
     }
 
 
