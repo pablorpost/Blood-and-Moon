@@ -11,7 +11,7 @@ public class Store {
     private List<Skill> skills;
 
     public Store(){
-        this.directorio = "storeFiles";
+        this.directorio = "../../../storeFiles";
         loadStore(this.directorio);
 
 
