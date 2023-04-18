@@ -9,9 +9,10 @@ public class User extends Person{
     private boolean ban;
     private List<String> pendingRequest;
     private List<Battle> battles;
+    private int gold;
 
     public void uploadBattles(Battle value){
-
+        this.battles.add(value);
     }
 
     public String getId() {
@@ -70,5 +71,13 @@ public class User extends Person{
     @Override
     public void setBattles(List<Battle> battles) {
         this.battles = battles;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 }
