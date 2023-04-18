@@ -1,9 +1,37 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Armor {
     private String name;
     private int defense;
     private int atack;
 
-    public void loadArmor(){
+    public Armor(String [] line) {
+        this.name = line[0];
+        this.defense = Integer.valueOf(line[1]);
+        this.atack = Integer.valueOf(line[2]);
+    }
+
+    public Armor() {
+
+
+    }
+
+    public List<Armor> loadArmors(String directorio) throws FileNotFoundException {
+        ArrayList<Armor> armors = new ArrayList<>();
+        String ruta = directorio + File.separatorChar + "armors";
+        File fichero = new File(ruta);
+        Scanner scanner = new Scanner(fichero);
+        while (scanner.hasNextLine()){ //mientras existan lineas
+            String linea = scanner.nextLine();
+            String [] var = linea.split(" ");
+            Armor armor = new Armor(var);
+            armors.add(armor);
+        }
+        return armors;
 
     }
 

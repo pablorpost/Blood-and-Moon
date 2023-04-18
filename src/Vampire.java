@@ -2,6 +2,12 @@ public class Vampire extends Character{
     private int age;
     private int blood;
 
+    public Vampire (){
+        super();
+
+
+    }
+
     public int getAge() {
         return age;
     }
