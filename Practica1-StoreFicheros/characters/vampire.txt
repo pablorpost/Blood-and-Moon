@@ -1,0 +1,19 @@
+Vampire
+5
+Le encanta beber sangre
+3
+Pistol1
+Pistol2
+Shotgun1
+4
+Armor1
+Armor2
+Armor3
+Armor4
+Disciplines
+25
+10
+2
+Demon
+Ghoul
+SangreCerca

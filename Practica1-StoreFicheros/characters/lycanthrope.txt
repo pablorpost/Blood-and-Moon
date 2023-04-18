@@ -1,0 +1,20 @@
+Lycanthrope
+5
+Le encanta la luna llena
+4
+Pistol1
+Pistol2
+Shotgun1
+Shotgun2
+4
+Armor1
+Armor2
+Armor3
+Armor4
+Gift
+0
+3
+Demon
+Ghoul
+Human
+LunaLlena

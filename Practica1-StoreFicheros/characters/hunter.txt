@@ -1,0 +1,21 @@
+Hunter
+5
+Le encanta asesinar
+4
+Pistol1
+Shotgun1
+Shotgun2
+Shotgun3
+4
+Armor1
+Armor2
+Armor3
+Armor4
+Talent
+3
+0
+3
+Demon
+Ghoul
+Human
+Licantropos
