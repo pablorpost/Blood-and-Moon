@@ -4,7 +4,12 @@ public class Screen {
     private Person person;
     private DBManager dataBase;
     private Store store;
+    private Manager manager;
 
+
+    public ScreenResult showOptions(){
+        return null;
+    }
 
     public String getTitle() {
         return title;
@@ -44,5 +49,13 @@ public class Screen {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 }

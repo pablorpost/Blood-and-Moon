@@ -1,31 +1,64 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class InRegMenuScreen extends Screen{
 
     private Map<String, List<String>> options;
     private Map<String, List<String>> formVersions;
 
-    public InRegMenuScreen(DBManager dataBase, Store store) {
+    private String option;
+    public InRegMenuScreen(DBManager dataBase, Store store,Manager manager) {
         super.setStore(store);
         super.setDataBase(dataBase);
-        super.setTitle("");
+        super.setManager(manager);
+        super.setTitle("What would you like to do?");
+        this.options = new HashMap<String, List<String>>();
+        this.formVersions = new HashMap<String, List<String>>();
+        option = "user";
+        List<String> optionsUser = new ArrayList<String>();
+        optionsUser.add("Log in");
+        optionsUser.add("Sign up");
+        optionsUser.add("Log as admin");
+        options.put("user",optionsUser);
+        List<String> optionsAdmin = new ArrayList<String>();
+        optionsAdmin.add("Log in as Admin");
+        optionsAdmin.add("Create new Admin");
+        optionsAdmin.add("Exit");
+        options.put("admin",optionsAdmin);
 
     }
 
 
-
-    public int showOptions(String option){
+    @Override
+    public ScreenResult showOptions(){
+        int election = -1;
         List<String> thisOptions = options.get(option);
-        for (int i = 0; i < options.size(); i++) {
-            System.out.println(Integer.toString(i) + ".    " + thisOptions.get(i));
+        for (int i = 0; i < thisOptions.size(); i++) {
+            System.out.println(i+ ".    " + thisOptions.get(i));
         }
-        String election;
         Scanner teclado = new Scanner(System.in);
-        election = teclado.nextLine();
-        return Integer.valueOf(election);
+        try{
+            election = Integer.parseInt(teclado.nextLine());
+        }
+        catch (NumberFormatException e){}
+        if (election>=0 && election<thisOptions.size()){
+            if (option.equals("user")){
+                if(election==2){
+                    option = "admin";
+                }
+            }
+            else{
+                if (option.equals("admin")) {
+                    if (election == 2) {
+                        option = "user";
+                    }
+                }
+            }
+            if (election==0 || election==1){
+                this.getManager().clearConsole();
+                showForm((election==1),(option.equals("admin")));
+            }
+        }
+        return ScreenResult.stay;
     }
 
     public Map<String, String> showForm(boolean isRegist, boolean isAdmin){
@@ -35,20 +68,20 @@ public class InRegMenuScreen extends Screen{
         } else {
             System.out.println("User Login...");
         }
-        System.out.println("User/Nick:");
+        System.out.print("User/Nick:  ");
         String election;
         Scanner teclado = new Scanner(System.in);
         election = teclado.nextLine();
         formulario.put("nick", election);
 
         if (isRegist){
-            System.out.println("Name:");
+            System.out.print("Name:  ");
             teclado = new Scanner(System.in);
             election = teclado.nextLine();
             formulario.put("name", election);
         }
 
-        System.out.println("Password:");
+        System.out.print("Password:  ");
         teclado = new Scanner(System.in);
         election = teclado.nextLine();
         formulario.put("pas", election);

@@ -7,23 +7,27 @@ public class Manager {
     public Manager(Store store) {
         this.store = store;
         this.database = new DBManager();
-        InRegMenuScreen inicio = new InRegMenuScreen(database, store);
+        InRegMenuScreen inicio = new InRegMenuScreen(database, store,this);
         showScreen(inicio);
     }
 
 
     public void showScreen(Screen screen) {
         ScreenResult sr = ScreenResult.stay;
-        int i=0;
+        String title;
+        String desc;
         while (sr.equals(ScreenResult.stay)) {
             clearConsole();
-            System.out.println(Integer.toBinaryString(i++));
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            title = screen.getTitle();
+            desc = screen.getDescription();
+            if (title!=null){
+                System.out.println(screen.getTitle());
             }
-
+            if (desc!=null){
+                System.out.println(screen.getDescription());
+            }
+            System.out.println();
+            sr = screen.showOptions();
         }
 
     }
