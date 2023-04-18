@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Blood-and-Moon:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Blood_and_Moon_jar</output-path>
+    <root id="archive" name="Blood-and-Moon.jar">
+      <element id="module-output" name="Blood-and-Moon" />
+    </root>
+  </artifact>
+</component>

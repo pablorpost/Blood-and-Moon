@@ -56,8 +56,8 @@ public class DataBase implements Serializable{
 
     }
 
-    public void getTop10(){
-
+    public List<User> getTop10(){
+        return null;
     }
 
     public void uploadTop10(){
