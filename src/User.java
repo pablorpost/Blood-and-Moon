@@ -2,7 +2,6 @@ import java.util.List;
 
 public class User extends Person{
 
-    private String id;
     private Character character;
     private List<String> weapons;
     private String armor;
@@ -10,16 +9,11 @@ public class User extends Person{
     private List<String> pendingRequest;
     private List<Battle> battles;
 
+    public User(String nick, int password){
+        super(nick,password,DataBaseResult.user);
+    }
     public void uploadBattles(Battle value){
 
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Character getCharacter() {
