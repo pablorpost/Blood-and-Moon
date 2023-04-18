@@ -1,0 +1,3 @@
+Human
+3
+ALTA/BAJA/NORMAL

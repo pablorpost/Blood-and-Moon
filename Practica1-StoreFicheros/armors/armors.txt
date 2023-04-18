@@ -1,0 +1,5 @@
+Armor1 2 1
+Armor2 3 2
+Armor3 5 2
+Armor4 6 2
+Armor5 8 2
