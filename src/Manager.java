@@ -7,6 +7,7 @@ public class Manager {
     public Manager(Store store) {
         this.store = store;
         this.database = new DBManager();
+        name();
         InRegMenuScreen inicio = new InRegMenuScreen(database, store,this);
         showScreen(inicio);
     }
@@ -46,6 +47,24 @@ public class Manager {
             }
         } catch (final Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void name(){
+        for (int i=0;i<101;i=i+2) {
+            try {
+                clearConsole();
+                System.out.println("██████╗ ██╗      ██████╗  ██████╗ ██████╗    ██╗   ███╗   ███╗ ██████╗  ██████╗ ███╗   ██╗\n██╔══██╗██║     ██╔═══██╗██╔═══██╗██╔══██╗   ██║   ████╗ ████║██╔═══██╗██╔═══██╗████╗  ██║\n██████╔╝██║     ██║   ██║██║   ██║██║  ██║████████╗██╔████╔██║██║   ██║██║   ██║██╔██╗ ██║\n██╔══██╗██║     ██║   ██║██║   ██║██║  ██║██╔═██╔═╝██║╚██╔╝██║██║   ██║██║   ██║██║╚██╗██║\n██████╔╝███████╗╚██████╔╝╚██████╔╝██████╔╝██████║  ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║ ╚████║\n╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝  ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝");
+                System.out.println("\n\n\n");
+                System.out.println("                                         "+i+"%");
+                for (int j=0;j<i;j++) {
+                    System.out.print(".-");
+                }
+                Thread.sleep(25);
+
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
