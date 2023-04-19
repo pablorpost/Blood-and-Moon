@@ -1,19 +1,19 @@
-Vampire
-5
-Le encanta beber sangre
-3
-Pistol1
-Pistol2
-Shotgun1
-4
-Armor1
-Armor2
-Armor3
-Armor4
-Disciplines
-25
-10
-2
-Demon
-Ghoul
-SangreCerca
+name:Vampire
+life:5
+description:Le encanta beber sangre
+weapons :3
+weapon:Pistol1
+weapon:Pistol2
+weapon:Shotgun1
+armors:4
+armor:Armor1
+armor:Armor2
+armor:Armor3
+armor:Armor4
+skill:Disciplines
+age:25
+blood:10
+minions:2
+minion:Demon
+minion:Ghoul
+modifier:SangreCerca

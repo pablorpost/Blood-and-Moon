@@ -19,7 +19,6 @@ public class Store {
 
         loadStore(this.directorio);
 
-
     }
 
     public void uploadInfo(){
