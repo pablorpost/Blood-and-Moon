@@ -41,8 +41,8 @@ public class DBManager {
         return dataBaseCop;
     }
 
-    public boolean adminPasswordCheck(int value){
-        return Integer.toString(value).hashCode()==adminPassword;
+    public boolean adminPasswordCheck(String value){
+        return value.hashCode()==adminPassword;
     }
 
     public void addUser(String nick, String password){

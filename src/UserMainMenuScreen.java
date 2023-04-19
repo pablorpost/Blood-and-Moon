@@ -9,6 +9,8 @@ public class UserMainMenuScreen extends Screen{
 
 
     public UserMainMenuScreen(DBManager dataBase, Store store, User user) {
+        super.setTitle("What would you like to do?");
+        this.setDescription(null);
         setDataBase(dataBase);
         setStore(store);
         this.user = user;
@@ -22,17 +24,15 @@ public class UserMainMenuScreen extends Screen{
         auxList.add("5. Log out");
         options.put("0", auxList);
     }
-
-    public int showOptions(String option) {
-        Map <String, List<String>> auxOptions = getOptions();
-        List<String> show = auxOptions.get(option);
+    public ScreenResult showOptions() {
+        List<String> show = options.get("0");
         for(int i = 0; i<show.size(); i ++){
             System.out.println(show.get(i));
         }
 
         Scanner sc = new Scanner(System.in);
         int optionSelected = sc.nextInt();
-        return optionSelected;
+        return ScreenResult.exit;
     }
 
 

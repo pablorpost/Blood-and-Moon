@@ -64,9 +64,25 @@ public class InRegMenuScreen extends Screen{
     public Map<String, String> showForm(boolean isRegist, boolean isAdmin){
         Map<String, String> formulario = new HashMap<String, String>();
         if (isAdmin){
-            System.out.println("Admin Login...");
+            System.out.print("Admin ");
         } else {
-            System.out.println("User Login...");
+            System.out.print("User ");
+        }
+        if (isRegist){
+            System.out.println("Register...");
+        }
+        else{
+            System.out.println("Login...");
+        }
+        if (isAdmin && isRegist){
+            System.out.println("Introduce la contraseña de administrador");
+            Scanner teclado = new Scanner(System.in);
+            String election = teclado.nextLine();
+            if (!getDataBase().adminPasswordCheck(election)){
+                return null;
+            }
+            System.out.println();
+
         }
         System.out.print("User/Nick:  ");
         String election;
