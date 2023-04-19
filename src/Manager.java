@@ -29,6 +29,7 @@ public class Manager {
             }
             System.out.println();
             sr = screen.showOptions();
+            database.save();
         }
 
     }

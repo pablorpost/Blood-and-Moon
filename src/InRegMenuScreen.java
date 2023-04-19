@@ -101,11 +101,17 @@ public class InRegMenuScreen extends Screen{
     }
 
     public DataBaseResult checkPerson(String nick, String pass){
-        return null;
+        return getDataBase().inDataBase(nick,pass);
     }
 
     public Person addPerson(String nick, String name, String pass, boolean isAdmin){
-        return null;
+        DBManager d = getDataBase();
+        if (isAdmin){
+            d.addAdmin(nick,pass);
+            return d.getAdmin(nick,pass);
+        }
+        d.addUser(nick,pass);
+        return d.getUser(nick,pass);
     }
 
     public void showError(){

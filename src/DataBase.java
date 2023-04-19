@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,11 @@ public class DataBase implements Serializable{
     private List<Battle> battles;
 
     private List<String> top10;
+
+    public DataBase(){
+        users = new HashMap<String, User>();
+        admins = new HashMap<String,Admin>();
+    }
 
     public User getUser(String nick, int password){
         if (inDataBase(nick,password)==DataBaseResult.user){
@@ -66,5 +72,24 @@ public class DataBase implements Serializable{
 
     private void loadData(){
 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    //para borrar
+    public Map<String, User> getUsers(){
+        return users;
+    }
+    public Map<String, Admin> getAdmins(){
+        return admins;
     }
 }

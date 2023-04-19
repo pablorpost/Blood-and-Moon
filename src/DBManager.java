@@ -20,6 +20,8 @@ public class DBManager {
 
     public DBManager(){
         this.dataBase = loadDataBase();
+        System.out.println(dataBase.getUsers());
+        System.out.println(dataBase.getAdmins());
         this.adminPassword=53195061;
     }
     public DataBase loadDataBase(){
