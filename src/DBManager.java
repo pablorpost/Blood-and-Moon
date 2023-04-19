@@ -36,6 +36,7 @@ public class DBManager {
         }
         else{
             dataBaseCop = new DataBase();
+            this.dataBase = dataBaseCop; //Para que save guarde la nueva base de datos. Se puede cambiar de forma esto
             save();
         }
         return dataBaseCop;
