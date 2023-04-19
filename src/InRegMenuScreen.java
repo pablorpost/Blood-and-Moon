@@ -41,16 +41,11 @@ public class InRegMenuScreen extends Screen{
         }
         catch (NumberFormatException e){}
         if (election>=0 && election<thisOptions.size()){
-            if (option.equals("user")){
-                if(election==2){
+            if(election==2){
+                if (option.equals("user")) {
                     option = "admin";
-                }
-            }
-            else{
-                if (option.equals("admin")) {
-                    if (election == 2) {
-                        option = "user";
-                    }
+                }else {
+                    option = "user";
                 }
             }
             if (election==0 || election==1){
@@ -104,25 +99,22 @@ public class InRegMenuScreen extends Screen{
 
         if (isRegist){
             this.addPerson(formulario.get("nick"), formulario.get("name"), formulario.get("pas"), isAdmin);
-        } else {
-            DataBaseResult resulta = this.checkPerson(formulario.get("nick"), formulario.get("pas"));
-            System.out.println(resulta);
-            if (resulta.equals(DataBaseResult.user) || resulta.equals(DataBaseResult.admin)){
-                if (resulta == DataBaseResult.user){
-                    User user = getDataBase().getUser(formulario.get("nick"), formulario.get("pas"));
-                    UserMainMenuScreen pantalla = new UserMainMenuScreen(getDataBase(),getStore(),user);
-                    getManager().showScreen(pantalla);
-                    return null;
-                }if (resulta==DataBaseResult.admin){
-                    Admin admin = getDataBase().getAdmin(formulario.get("nick"), formulario.get("pas"));
-                    AdminMainMenuScreen pantalla = new AdminMainMenuScreen(getDataBase(),getStore(),admin);
-                    getManager().showScreen(pantalla);
-                    return null;
-                }
-                // por terminar------------------------------------
-
-            }
         }
+        DataBaseResult resulta = this.checkPerson(formulario.get("nick"), formulario.get("pas"));
+        System.out.println(resulta);
+        if (resulta == DataBaseResult.user && !isAdmin){
+            User user = getDataBase().getUser(formulario.get("nick"), formulario.get("pas"));
+            UserMainMenuScreen pantalla = new UserMainMenuScreen(getDataBase(),getStore(),user);
+            getManager().showScreen(pantalla);
+            return null;
+        } else if (resulta==DataBaseResult.admin && isAdmin){
+            Admin admin = getDataBase().getAdmin(formulario.get("nick"), formulario.get("pas"));
+            AdminMainMenuScreen pantalla = new AdminMainMenuScreen(getDataBase(),getStore(),admin);
+            getManager().showScreen(pantalla);
+            return null;
+        }
+        // por terminar------------------------------------
+
         return null;
     }
 
@@ -142,10 +134,6 @@ public class InRegMenuScreen extends Screen{
 
     public void showError(){
 
-    }
-
-    public boolean checkAdmin(int pas){
-        return false;
     }
 
     public Person getPersonAndSet(String name, String pass){
