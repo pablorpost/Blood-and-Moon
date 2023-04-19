@@ -15,7 +15,7 @@ public class DBManager {
     }
 
     public DataBaseResult inDataBase(String nick, String password){
-        return null;
+        return dataBase.inDataBase(nick,password.hashCode());
     }
 
     public DBManager(){

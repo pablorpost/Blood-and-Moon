@@ -90,9 +90,13 @@ public class InRegMenuScreen extends Screen{
             this.addPerson(formulario.get("nick"), formulario.get("name"), formulario.get("pas"), isAdmin);
         } else {
             DataBaseResult resulta = this.checkPerson(formulario.get("nick"), formulario.get("pas"));
-            if (resulta == DataBaseResult.user || resulta == DataBaseResult.admin){
-                Person thisPerson = this.getPersonAndSet(formulario.get("nick"), formulario.get("pas"));
-
+            System.out.println(resulta);
+            if (resulta.equals(DataBaseResult.user) || resulta.equals(DataBaseResult.admin)){
+                if (resulta == DataBaseResult.user){
+                    User user = getDataBase().getUser(formulario.get("nick"), formulario.get("pas"));
+                    UserMainMenuScreen pantalla = new UserMainMenuScreen(getDataBase(),getStore(),user);
+                    getManager().showScreen(pantalla);
+                }
                 // por terminar------------------------------------
 
             }

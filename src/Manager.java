@@ -39,7 +39,7 @@ public class Manager {
     }
 
     public void clearConsole() {
-        try {
+        /*try {
             final String os = System.getProperty("os.name");
             if (os.contains("Windows")) {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -48,7 +48,7 @@ public class Manager {
             }
         } catch (final Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void name(){
