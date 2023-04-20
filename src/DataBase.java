@@ -30,6 +30,15 @@ public class DataBase implements Serializable{
         return null;
     }
 
+    public void deletePerson(Person person){
+        // IMPLEMENTAR ----------------------------------------------------------------------------------------
+        if (person instanceof User){
+            System.out.println("User " + person.getName() + " has been deleted.");
+        } else {
+            System.out.println("Admin " + person.getName() + " has been deleted.");
+        }
+    }
+
     public DataBaseResult inDataBase(String nick, int password){
         if (users.containsKey(nick)){
             if (users.get(nick).getPassword()==password){

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.List;
 
-public class DBManager {
+public class DBManager implements Serializable{
     private DataBase dataBase;
     private int adminPassword;
     private List<User> requests;
@@ -62,6 +62,10 @@ public class DBManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void deletePerson(Person person){
+        dataBase.deletePerson(person);
     }
 
     public List<User> getRequests() {

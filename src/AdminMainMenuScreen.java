@@ -6,6 +6,7 @@ public class AdminMainMenuScreen extends Screen{
     private Map<String, List<String>> options;
 
     public ScreenResult showOptions() {
+        super.getManager().clearConsole();
         List<String> show = options.get("0");
         for(int i = 0; i<show.size(); i ++){
             System.out.println(show.get(i));
@@ -20,11 +21,12 @@ public class AdminMainMenuScreen extends Screen{
 
     }
 
-    public AdminMainMenuScreen(DBManager dataBase, Store store, Admin admin) {
+    public AdminMainMenuScreen(DBManager dataBase, Store store, Manager manager, Admin admin) {
         super.setTitle("What would you like to do?");
         this.setDescription(null);
         setDataBase(dataBase);
         setStore(store);
+        super.setManager(manager);
         this.admin = admin;
         options = new HashMap<>();
         List<String> auxList = new ArrayList<>();

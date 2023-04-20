@@ -4,15 +4,15 @@ public class UserMainMenuScreen extends Screen{
     private Character character;
     private int gold;
     private Map<String, List<String>> options;
-    private User request;
     private User user;
 
 
-    public UserMainMenuScreen(DBManager dataBase, Store store, User user) {
+    public UserMainMenuScreen(DBManager dataBase, Store store, Manager manager, User user) {
         super.setTitle("What would you like to do?");
         this.setDescription(null);
         setDataBase(dataBase);
         setStore(store);
+        super.setManager(manager);
         this.user = user;
         this.options = new HashMap<>();
         List<String> auxList = new ArrayList<>();
@@ -34,6 +34,7 @@ public class UserMainMenuScreen extends Screen{
 
     }
     public ScreenResult showOptions() {
+        super.getManager().clearConsole();
         List<String> show;
         if (this.user.getCharacter() == null){
             show = options.get("1");
@@ -47,6 +48,43 @@ public class UserMainMenuScreen extends Screen{
 
         Scanner sc = new Scanner(System.in);
         int optionSelected = sc.nextInt();
+        if (this.user.getCharacter() != null) {
+            switch (optionSelected) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    return ScreenResult.exit;
+            }
+        } else{
+            switch (optionSelected) {
+                case 0:
+                    break;
+                case 1:
+                    PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
+                    ScreenResult result = popUp.showPopUp(2);
+                    if (result == ScreenResult.stay){
+                        super.getDataBase().deletePerson(user);
+                    } else {
+                        this.showOptions();
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    return ScreenResult.exit;
+
+            }
+        }
         return ScreenResult.exit;
     }
 
@@ -73,13 +111,5 @@ public class UserMainMenuScreen extends Screen{
 
     public void setOptions(Map<String, List<String>> options) {
         this.options = options;
-    }
-
-    public User getRequest() {
-        return request;
-    }
-
-    public void setRequest(User request) {
-        this.request = request;
     }
 }
