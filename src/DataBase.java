@@ -55,15 +55,15 @@ public class DataBase implements Serializable{
         return DataBaseResult.notFound;
     }
 
-    public void addUser(String nick, int password){
+    public void addUser(String nick, String name, int password){
         if (inDataBase(nick,password)==DataBaseResult.notFound){
-            users.put(nick, new User(nick,password));
+            users.put(nick, new User(nick, name, password));
         }
     }
 
-    public void addAdmin(String nick, int password){
+    public void addAdmin(String nick,String name, int password){
         if (inDataBase(nick,password)==DataBaseResult.notFound){
-            admins.put(nick, new Admin(nick,password));
+            admins.put(nick, new Admin(nick,name,password));
         }
     }
 

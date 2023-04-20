@@ -5,7 +5,7 @@ import java.util.List;
 public class DBManager implements Serializable{
     private DataBase dataBase;
     private int adminPassword;
-    private List<User> requests;
+    private List<List<User>> requests;
 
     public User getUser(String nick, String password){
         return dataBase.getUser(nick, password.hashCode());
@@ -48,12 +48,12 @@ public class DBManager implements Serializable{
         return value.hashCode()==adminPassword;
     }
 
-    public void addUser(String nick, String password){
-        dataBase.addUser(nick, password.hashCode());
+    public void addUser(String nick, String name, String password){
+        dataBase.addUser(nick, name, password.hashCode());
     }
 
-    public void addAdmin(String nick, String password){
-        dataBase.addAdmin(nick, password.hashCode());
+    public void addAdmin(String nick, String name, String password){
+        dataBase.addAdmin(nick, name, password.hashCode());
     }
 
     public void save(){
@@ -70,11 +70,21 @@ public class DBManager implements Serializable{
         dataBase.deletePerson(person);
     }
 
-    public List<User> getRequests() {
+    public User getRequestUser(User searching){
+        User hasUser = null;
+        for (int i = 0; i < requests.size(); i++) {
+            if (requests.get(i).get(0).equals(searching)){
+                hasUser = requests.get(i).get(1);
+            }
+        }
+        return hasUser;
+    }
+
+    public List<List<User>> getRequests() {
         return requests;
     }
 
-    public void setRequests(List<User> requests) {
+    public void setRequests(List<List<User>> requests) {
         this.requests = requests;
     }
 }
