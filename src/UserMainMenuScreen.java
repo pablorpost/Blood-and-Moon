@@ -33,18 +33,19 @@ public class UserMainMenuScreen extends Screen{
         this.options.put("1", auxList2);
 
     }
+    @Override
     public ScreenResult showOptions() {
         super.getManager().clearConsole();
-        User requester = super.getDataBase().getRequestUser(user);
+        String requester = super.getDataBase().getRequestUser(user.getNick());
         if (requester != null){
             PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
             ScreenResult result = popUp.showPopUp(0);
             if (result == ScreenResult.stay){
                 // REVISAR -----------------------------------------------------------------------------------
-                System.out.println("combatir " + user.getName() + " vs " + requester.getName());
+                System.out.println("combatir " + user.getNick() + " vs " + requester);
             } else {
                 // REVISAR -----------------------------------------------------------------------------------
-                System.out.println("rechazar combate " + user.getName() + " vs " + requester.getName());
+                System.out.println("rechazar combate " + user.getNick() + " vs " + requester);
             }
         }
 
