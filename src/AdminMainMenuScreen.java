@@ -14,6 +14,26 @@ public class AdminMainMenuScreen extends Screen{
 
         Scanner sc = new Scanner(System.in);
         int optionSelected = sc.nextInt();
+
+        switch (optionSelected){
+            case 0:
+                break;
+
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                return ScreenResult.exit;
+        }
+
+
+
         return ScreenResult.exit;
     }
 
