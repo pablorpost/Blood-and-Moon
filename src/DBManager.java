@@ -38,6 +38,7 @@ public class DBManager implements Serializable{
         }
         else{
             dataBaseCop = new DataBase();
+            this.dataBase = dataBaseCop;
             save();
         }
         return dataBaseCop;

@@ -14,7 +14,7 @@ public class UserMainMenuScreen extends Screen{
         setDataBase(dataBase);
         setStore(store);
         this.user = user;
-        options = new HashMap<>();
+        this.options = new HashMap<>();
         List<String> auxList = new ArrayList<>();
         auxList.add("0. Challenge user");
         auxList.add("1. Configure my equipment");
@@ -22,10 +22,25 @@ public class UserMainMenuScreen extends Screen{
         auxList.add("3. Ranking");
         auxList.add("4. Delete character");
         auxList.add("5. Log out");
-        options.put("0", auxList);
+        this.options.put("0", auxList);
+
+        List<String> auxList2 = new ArrayList<>();
+        auxList2.add("0. Create character");
+        auxList2.add("1. Delete user");
+        auxList2.add("2. Battle history");
+        auxList2.add("3. Ranking");
+        auxList2.add("4. Log out");
+        this.options.put("1", auxList2);
+
     }
     public ScreenResult showOptions() {
-        List<String> show = options.get("0");
+        List<String> show;
+        if (this.user.getCharacter() == null){
+            show = options.get("1");
+        } else{
+            show = options.get("0");
+        }
+
         for(int i = 0; i<show.size(); i ++){
             System.out.println(show.get(i));
         }
