@@ -11,8 +11,8 @@ public class Minion{
     public Minion (){
     }
 
-    public  void laodMinion(String minion) throws FileNotFoundException {
-        String ruta = "storeFiles" + File.separatorChar + "minions" + File.separatorChar + minion+ ".txt";
+    public  void laodMinion(String directorio,String minion) throws FileNotFoundException {
+        String ruta = directorio + File.separatorChar + "minions" + File.separatorChar + minion+ ".txt";
         File fichero = new File(ruta);
         Scanner scanner = new Scanner(fichero);
         while (scanner.hasNextLine()) { //mientras existan lineas

@@ -19,8 +19,8 @@ public class Character {
         this.minions = new ArrayList<>();
     }
 
-    public  void laodCharacter(String character) throws FileNotFoundException {
-            String ruta = "storeFiles" + File.separatorChar + "characters" + File.separatorChar + character+ ".txt";
+    public  void laodCharacter(String directorio, String character) throws FileNotFoundException {
+            String ruta = directorio + File.separatorChar + "characters" + File.separatorChar + character+ ".txt";
             File fichero = new File(ruta);
             Scanner scanner = new Scanner(fichero);
             while (scanner.hasNextLine()) { //mientras existan lineas
