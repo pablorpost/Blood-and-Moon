@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
@@ -11,6 +12,9 @@ public class Store {
     private List<Skill> skills;
 
     public Store(){
+        this.minions = new ArrayList<>();
+        this.chracters = new ArrayList<>();
+
         //out/atrifacts/Blood-and-moon.jar
         this.directorio = "../../../storeFiles";
 
@@ -44,8 +48,29 @@ public class Store {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        loadCharacters();
+        loadMinions();
 
 
+    }
+
+    private void loadMinions() {
+        Human human = new Human();
+        this.minions.add(human);
+        Ghoul ghoul = new Ghoul();
+        this.minions.add(ghoul);
+        Demon demon = new Demon();
+        this.minions.add(demon);
+
+    }
+
+    private void loadCharacters() {
+        Vampire vampire = new Vampire();
+        this.chracters.add(vampire);
+        Hunter hunter = new Hunter();
+        this.chracters.add(hunter);
+        Lycanthrope lycanthrope = new Lycanthrope();
+        this.chracters.add(lycanthrope);
     }
 
     public Weapon getInfoWeapon(String name){

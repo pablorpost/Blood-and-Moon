@@ -1,0 +1,4 @@
+name:Demon
+life:3
+minions:Minions
+oath:Oath
