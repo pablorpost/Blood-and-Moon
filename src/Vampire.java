@@ -36,7 +36,11 @@ public class Vampire extends Character{
                 addArmor(var[1]);
                 break;
             case "minion":
+                //Los vampiros NO pueden tener esbirros humanos
+                if  (!var[1].equalsIgnoreCase("human")){
                 addMinion(var[1]);
+
+            }
                 break;
             case "age":
                 setAge(Integer.valueOf(var[1]));

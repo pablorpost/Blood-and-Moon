@@ -104,12 +104,12 @@ public class InRegMenuScreen extends Screen{
         System.out.println(resulta);
         if (resulta == DataBaseResult.user && !isAdmin){
             User user = getDataBase().getUser(formulario.get("nick"), formulario.get("pas"));
-            UserMainMenuScreen pantalla = new UserMainMenuScreen(getDataBase(),getStore(),user);
+            UserMainMenuScreen pantalla = new UserMainMenuScreen(getDataBase(),getStore(),getManager(), user);
             getManager().showScreen(pantalla);
             return null;
         } else if (resulta==DataBaseResult.admin && isAdmin){
             Admin admin = getDataBase().getAdmin(formulario.get("nick"), formulario.get("pas"));
-            AdminMainMenuScreen pantalla = new AdminMainMenuScreen(getDataBase(),getStore(),admin);
+            AdminMainMenuScreen pantalla = new AdminMainMenuScreen(getDataBase(),getStore(),getManager(),admin);
             getManager().showScreen(pantalla);
             return null;
         }
