@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager implements Serializable{
@@ -19,6 +20,7 @@ public class DBManager implements Serializable{
     }
 
     public DBManager(){
+        this.requests = new ArrayList<>();
         this.dataBase = loadDataBase();
         System.out.println(dataBase.getUsers());
         System.out.println(dataBase.getAdmins());
