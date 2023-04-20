@@ -71,6 +71,7 @@ public class UserMainMenuScreen extends Screen{
                     PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
                     ScreenResult result = popUp.showPopUp(2);
                     if (result == ScreenResult.stay){
+                        System.out.println(user.getName());
                         super.getDataBase().deletePerson(user);
                     } else {
                         this.showOptions();

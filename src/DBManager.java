@@ -48,12 +48,12 @@ public class DBManager implements Serializable{
         return value.hashCode()==adminPassword;
     }
 
-    public void addUser(String nick, String password){
-        dataBase.addUser(nick, password.hashCode());
+    public void addUser(String nick, String name, String password){
+        dataBase.addUser(nick, name, password.hashCode());
     }
 
-    public void addAdmin(String nick, String password){
-        dataBase.addAdmin(nick, password.hashCode());
+    public void addAdmin(String nick, String name, String password){
+        dataBase.addAdmin(nick, name, password.hashCode());
     }
 
     public void save(){
