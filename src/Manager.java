@@ -7,7 +7,7 @@ public class Manager {
     public Manager(Store store) {
         this.store = store;
         this.database = new DBManager();
-        //name();
+        name();
         InRegMenuScreen inicio = new InRegMenuScreen(database, store,this);
         showScreen(inicio);
     }

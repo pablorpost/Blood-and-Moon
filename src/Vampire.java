@@ -7,10 +7,10 @@ public class Vampire extends Character{
     private int age;
     private int blood;
 
-    public Vampire (){
+    public Vampire (String directorio){
         super();
         try {
-            laodCharacter("vampire");
+            laodCharacter(directorio,"vampire");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

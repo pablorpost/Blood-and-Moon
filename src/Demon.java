@@ -6,11 +6,11 @@ public class Demon extends Minion{
     private List<String> minions;
     private String oath;
 
-    public Demon(){
+    public Demon(String directorio){
         super();
         this.minions = new ArrayList<>();
         try {
-            laodMinion("demon");
+            laodMinion(directorio,"demon");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

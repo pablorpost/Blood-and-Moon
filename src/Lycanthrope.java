@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Lycanthrope extends Character{
     private int anger;
 
-    public Lycanthrope(){
+    public Lycanthrope(String directorio){
         super();
         try {
-            laodCharacter("lycanthrope");
+            laodCharacter(directorio,"lycanthrope");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

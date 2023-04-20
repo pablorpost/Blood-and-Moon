@@ -4,10 +4,10 @@ import java.util.ArrayList;
 public class Ghoul extends Minion {
     private int dependency;
 
-    public Ghoul(){
+    public Ghoul(String directorio){
         super();
         try {
-            laodMinion("ghoul");
+            laodMinion(directorio,"ghoul");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
