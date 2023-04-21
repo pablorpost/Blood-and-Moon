@@ -9,8 +9,9 @@ public abstract class Person implements Serializable{
     private DataBaseResult type;
     private List<Battle> battles;
 
-    public Person(String nick, int password, DataBaseResult type){
+    public Person(String nick, String name, int password, DataBaseResult type){
         this.nick = nick;
+        this.name = name;
         this.password = password;
         this.type = type;
     }

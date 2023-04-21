@@ -3,10 +3,10 @@ import java.io.FileNotFoundException;
 public class Human extends Minion{
     private String loyalty;
 
-    public Human(){
+    public Human(String directorio){
         super();
         try {
-            laodMinion("human");
+            laodMinion(directorio,"human");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

@@ -33,8 +33,22 @@ public class UserMainMenuScreen extends Screen{
         this.options.put("1", auxList2);
 
     }
+    @Override
     public ScreenResult showOptions() {
         super.getManager().clearConsole();
+        String requester = super.getDataBase().getRequestUser(user.getNick());
+        if (requester != null){
+            PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
+            ScreenResult result = popUp.showPopUp(0);
+            if (result == ScreenResult.stay){
+                // REVISAR -----------------------------------------------------------------------------------
+                System.out.println("combatir " + user.getNick() + " vs " + requester);
+            } else {
+                // REVISAR -----------------------------------------------------------------------------------
+                System.out.println("rechazar combate " + user.getNick() + " vs " + requester);
+            }
+        }
+
         List<String> show;
         if (this.user.getCharacter() == null){
             show = options.get("1");
@@ -59,6 +73,15 @@ public class UserMainMenuScreen extends Screen{
                 case 3:
                     break;
                 case 4:
+                    PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
+                    ScreenResult result = popUp.showPopUp(1);
+                    if (result == ScreenResult.stay){
+                        // REVISAR -----------------------------------------------------------------------------------
+                        System.out.println("borrar personaje");
+                        user.setCharacter(null);
+                    } else {
+                        this.showOptions();
+                    }
                     break;
                 case 5:
                     return ScreenResult.exit;
@@ -71,6 +94,7 @@ public class UserMainMenuScreen extends Screen{
                     PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
                     ScreenResult result = popUp.showPopUp(2);
                     if (result == ScreenResult.stay){
+                        System.out.println(user.getName());
                         super.getDataBase().deletePerson(user);
                     } else {
                         this.showOptions();

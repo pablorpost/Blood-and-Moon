@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Hunter extends Character{
     private int willpower;
 
-    public Hunter(){
+    public Hunter(String directorio){
         super();
         try {
-            laodCharacter("hunter");
+            laodCharacter(directorio,"hunter");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

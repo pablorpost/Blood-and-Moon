@@ -11,8 +11,8 @@ public class User extends Person implements Comparator<User>{
     private List<Battle> battles;
     private int gold;
 
-    public User(String nick, int password){
-        super(nick,password,DataBaseResult.user);
+    public User(String nick, String name, int password){
+        super(nick,name,password,DataBaseResult.user);
     }
     public void uploadBattles(Battle value){
         this.battles.add(value);

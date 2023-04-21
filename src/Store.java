@@ -55,21 +55,21 @@ public class Store {
     }
 
     private void loadMinions() {
-        Human human = new Human();
+        Human human = new Human(this.directorio);
         this.minions.add(human);
-        Ghoul ghoul = new Ghoul();
+        Ghoul ghoul = new Ghoul(this.directorio);
         this.minions.add(ghoul);
-        Demon demon = new Demon();
+        Demon demon = new Demon(this.directorio);
         this.minions.add(demon);
 
     }
 
     private void loadCharacters() {
-        Vampire vampire = new Vampire();
+        Vampire vampire = new Vampire(this.directorio);
         this.chracters.add(vampire);
-        Hunter hunter = new Hunter();
+        Hunter hunter = new Hunter(this.directorio);
         this.chracters.add(hunter);
-        Lycanthrope lycanthrope = new Lycanthrope();
+        Lycanthrope lycanthrope = new Lycanthrope(this.directorio);
         this.chracters.add(lycanthrope);
     }
 
