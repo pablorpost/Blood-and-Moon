@@ -79,7 +79,10 @@ public class UserMainMenuScreen extends Screen{
                 case 2:
                     break;
                 case 3:
-                    break;
+                    RankingScreen rkSc = new RankingScreen(getDataBase(),getStore(),getManager());
+                    Manager manager = getManager();
+                    manager.showScreen(rkSc);
+                    return ScreenResult.stay;
                 case 4:
                     return ScreenResult.exit;
 

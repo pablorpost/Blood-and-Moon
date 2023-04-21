@@ -70,6 +70,10 @@ public class DBManager implements Serializable{
         dataBase.deletePerson(person);
     }
 
+    public List<User> top10(){
+        return dataBase.getTop10();
+    }
+
     public List<User> getRequests() {
         return requests;
     }

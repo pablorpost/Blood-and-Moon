@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.List;
 
-public class Person implements Serializable {
+public abstract class Person implements Serializable{
 
     private String name;
     private String nick;
@@ -57,4 +57,7 @@ public class Person implements Serializable {
     public void setBattles(List<Battle> battles) {
         this.battles = battles;
     }
+
+
+
 }

@@ -1,7 +1,5 @@
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DataBase implements Serializable{
     private Map<String, User> users;
@@ -72,7 +70,15 @@ public class DataBase implements Serializable{
     }
 
     public List<User> getTop10(){
-        return null;
+        UserComparator uc = new UserComparator();
+        List<User> aux = new ArrayList<User>(users.values());
+        Collections.sort(aux,uc);
+        Collections.reverse(aux);
+        List<User> aux2 = new ArrayList<>();
+        for (int j = 0; j<aux.size() && j<=10;j++){
+            aux2.add(aux.get(j));
+        }
+        return aux2;
     }
 
     public void uploadTop10(){
