@@ -20,6 +20,8 @@ public class AdminMainMenuScreen extends Screen{
                 break;
 
             case 1:
+                BanUnbanScreen banSc = new BanUnbanScreen(super.getDataBase(), super.getManager());
+                super.getManager().showScreen(banSc);
                 break;
 
             case 2:
@@ -56,6 +58,10 @@ public class AdminMainMenuScreen extends Screen{
         auxList.add("3. Delete admin account");
         auxList.add("4. Log out");
         options.put("0", auxList);
+    }
+
+    public void ban(User user){
+
     }
 
     public Admin getAdmin() {

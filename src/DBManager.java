@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DBManager implements Serializable{
     private DataBase dataBase;
@@ -101,6 +102,15 @@ public class DBManager implements Serializable{
 
     public List<User> top10() {
         return dataBase.getTop10();
+    }
+
+    public User getUserToBan(String nick){
+        Map<String, User> users =  dataBase.getUsers();
+        if (users.containsKey(nick)){
+            return users.get(nick);
+        }else{
+            return null;
+        }
     }
 }
 

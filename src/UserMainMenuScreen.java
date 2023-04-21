@@ -32,6 +32,7 @@ public class UserMainMenuScreen extends Screen{
         auxList2.add("4. Log out");
         this.options.put("1", auxList2);
 
+
     }
     @Override
     public ScreenResult showOptions() {
@@ -50,9 +51,19 @@ public class UserMainMenuScreen extends Screen{
         }
 
         List<String> show;
+        if (this.user.isBan()){
+            System.out.println("This user is banned temporarily");
+            System.out.println("Press 0 to go back to login page");
+            Scanner keyBoard = new Scanner(System.in);
+            int nxtInt = keyBoard.nextInt();
+            if (nxtInt == 0){
+                return ScreenResult.exit;
+            }
+            else return ScreenResult.exit;
+        }
         if (this.user.getCharacter() == null){
             show = options.get("1");
-        } else{
+        } else {
             show = options.get("0");
         }
 
