@@ -98,6 +98,10 @@ public class DBManager implements Serializable{
     public void setRequests(List<List<String>> requests) {
         this.requests = requests;
     }
+
+    public List<User> top10() {
+        return dataBase.getTop10();
+    }
 }
 
 
