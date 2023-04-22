@@ -6,8 +6,7 @@ import java.util.Map;
 public class DBManager{
     private DataBase dataBase;
     private int adminPassword;
-    private List<List<String>> requests;
-    private List<Integer> requestsMoney;
+
 
     public User getUser(String nick, String password){
         return dataBase.getUser(nick, password.hashCode());
@@ -21,8 +20,12 @@ public class DBManager{
         return dataBase.inDataBase(nick,password.hashCode());
     }
 
+    public DataBaseResult existingUser(String nick){
+        return dataBase.existingUser(nick);
+    }
+
     public DBManager(){
-        this.requests = new ArrayList<>();
+
         this.dataBase = loadDataBase();
         System.out.println(dataBase.getUsers());
         System.out.println(dataBase.getAdmins());
@@ -74,9 +77,9 @@ public class DBManager{
 
     public String getRequestUser(String nick){
         String hasUser = null;
-        for (int i = 0; i < requests.size(); i++) {
-            if (requests.get(i).get(0).equals(nick)){
-                hasUser = requests.get(i).get(1);
+        for (int i = 0; i < dataBase.getRequests().size(); i++) {
+            if (dataBase.getRequests().get(i).get(0).equals(nick)){
+                hasUser = dataBase.getRequests().get(i).get(1);
             }
         }
         return hasUser;
@@ -84,21 +87,15 @@ public class DBManager{
 
     public int getRequestMoney(String nick){
         int moneyBet = 0;
-        for (int i = 0; i < requests.size(); i++) {
-            if (requests.get(i).get(0).equals(nick)){
-                moneyBet = requestsMoney.get(i);
+        for (int i = 0; i < dataBase.getRequestsMoney().size(); i++) {
+            if (dataBase.getRequestsMoney().get(i).get(0).equals(nick)){
+                moneyBet = dataBase.getRequestsMoney().get(i);
             }
         }
         return moneyBet;
     }
 
-    public List<List<String>> getRequests() {
-        return requests;
-    }
 
-    public void setRequests(List<List<String>> requests) {
-        this.requests = requests;
-    }
 
     public List<User> top10() {
         return dataBase.getTop10();

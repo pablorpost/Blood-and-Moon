@@ -8,10 +8,13 @@ public class DataBase implements Serializable{
     private List<Battle> battles;
 
     private List<String> top10;
+    private List<List<String>> requests;
+    private List<Integer> requestsMoney;
 
     public DataBase(){
         users = new HashMap<String, User>();
         admins = new HashMap<String,Admin>();
+        this.requests = new ArrayList<>();
     }
 
     public User getUser(String nick, int password){
@@ -40,6 +43,12 @@ public class DataBase implements Serializable{
         }
     }
 
+    public DataBaseResult existingUser(String nick){
+        if (users.containsKey(nick)){
+                return DataBaseResult.user;
+            }
+        return DataBaseResult.notFound;
+    }
     public DataBaseResult inDataBase(String nick, int password){
         if (users.containsKey(nick)){
             if (users.get(nick).getPassword()==password){
@@ -92,12 +101,17 @@ public class DataBase implements Serializable{
 
     }
 
+    public List<List<String>> getRequests() {
+        return requests;
+    }
 
+    public void setRequests(List<List<String>> requests) {
+        this.requests = requests;
+    }
 
-
-
-
-
+    public List<Integer> getRequestsMoney(){
+        return requestsMoney;
+    }
 
 
 

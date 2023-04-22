@@ -13,6 +13,7 @@ public class User extends Person implements Comparator<User>{
 
     public User(String nick, String name, int password){
         super(nick,name,password,DataBaseResult.user);
+        character = null;
     }
     public void uploadBattles(Battle value){
         this.battles.add(value);
