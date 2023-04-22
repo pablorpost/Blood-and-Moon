@@ -30,9 +30,12 @@ public class DataBase implements Serializable{
 
     public void deletePerson(Person person){
         // IMPLEMENTAR ----------------------------------------------------------------------------------------
+
         if (person instanceof User){
+            users.remove(person.getNick());
             System.out.println("User " + person.getName() + " has been deleted.");
         } else {
+            admins.remove(person.getNick());
             System.out.println("Admin " + person.getName() + " has been deleted.");
         }
     }

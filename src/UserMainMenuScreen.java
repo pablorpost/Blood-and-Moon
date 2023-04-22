@@ -8,8 +8,7 @@ public class UserMainMenuScreen extends Screen{
 
 
     public UserMainMenuScreen(DBManager dataBase, Store store, Manager manager, User user) {
-        super.setTitle("What would you like to do?");
-        this.setDescription(null);
+        super.setDescription("What would you like to do?");
         setDataBase(dataBase);
         setStore(store);
         super.setManager(manager);
@@ -36,7 +35,6 @@ public class UserMainMenuScreen extends Screen{
     }
     @Override
     public ScreenResult showOptions() {
-        super.getManager().clearConsole();
         String requester = super.getDataBase().getRequestUser(user.getNick());
         if (requester != null){
             PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
@@ -108,7 +106,7 @@ public class UserMainMenuScreen extends Screen{
                         System.out.println(user.getName());
                         super.getDataBase().deletePerson(user);
                     } else {
-                        this.showOptions();
+                        return ScreenResult.stay;
                     }
                     break;
                 case 2:
@@ -125,7 +123,6 @@ public class UserMainMenuScreen extends Screen{
         }
         return ScreenResult.exit;
     }
-
 
     public Character getCharacter() {
         return character;
