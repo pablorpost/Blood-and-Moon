@@ -21,7 +21,7 @@ public class Character {
         this.modifiers = new ArrayList<>();
     }
 
-    public  void laodCharacter(String directorio, String character) throws FileNotFoundException {
+    public  void loadCharacter(String directorio, String character) throws FileNotFoundException {
             String ruta = directorio + File.separatorChar + "characters" + File.separatorChar + character+ ".txt";
             File fichero = new File(ruta);
             Scanner scanner = new Scanner(fichero);

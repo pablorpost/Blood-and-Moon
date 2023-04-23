@@ -1,6 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Vampire extends Character {
     private int age;
@@ -9,7 +7,7 @@ public class Vampire extends Character {
     public Vampire(String directorio) {
         super();
         try {
-            laodCharacter(directorio, "vampire");
+            loadCharacter(directorio, "vampire");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

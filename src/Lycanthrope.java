@@ -1,6 +1,4 @@
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class Lycanthrope extends Character{
     private int anger;
@@ -8,7 +6,7 @@ public class Lycanthrope extends Character{
     public Lycanthrope(String directorio){
         super();
         try {
-            laodCharacter(directorio,"lycanthrope");
+            loadCharacter(directorio,"lycanthrope");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

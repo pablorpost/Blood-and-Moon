@@ -11,6 +11,40 @@ public class Battle implements Serializable {
     private String challenger;
     private String challenged;
 
+    public Battle(User challenger, User challenged, int goldBet){
+        Character char0 = challenger.getCharacter();
+        Character char1 = challenged.getCharacter();
+        int vida0 = 0;
+        int vida1 = 0;
+        while (vida0 > 0 && vida1 > 0){
+
+        }
+    }
+
+    private int getPowerOfAtack(Character char0){
+        if (char0 instanceof Vampire){
+            int calc = 0;
+            //calc += poder??
+            //calc += valor de ataque de disciplina
+            //calc += valor de ataque de equipo activo
+            if (((Vampire)char0).getBlood() >= 5){
+                calc += 2;
+                ((Vampire)char0).setBlood(((Vampire)char0).getBlood() - 5);
+            }
+
+
+        } else if (char0 instanceof Lycanthrope){
+
+        } else {
+
+        }
+        return 0;
+    }
+
+    private int getPowerOfDeffense(Character char0){
+        return 0;
+    }
+
     public String getWinner() {
         return winner;
     }

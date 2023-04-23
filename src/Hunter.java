@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.Scanner;
 
 public class Hunter extends Character{
     private int willpower;
@@ -7,7 +6,7 @@ public class Hunter extends Character{
     public Hunter(String directorio){
         super();
         try {
-            laodCharacter(directorio,"hunter");
+            loadCharacter(directorio,"hunter");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
