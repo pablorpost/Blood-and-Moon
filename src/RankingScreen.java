@@ -15,16 +15,11 @@ public class RankingScreen extends Screen{
         DBManager db = getDataBase();
         List<User> list = db.top10();
         for(int j = 0; j< list.size(); j++){
-            System.out.println(j + ". " + list.get(j).getNick() +" --> "+ list.get(j).getGold() + " gold");
+            System.out.println((j+1) + ". " + list.get(j).getNick() +" --> "+ list.get(j).getGold() + " gold");
         }
-        System.out.println("Press 0 to exit");
+        System.out.println("(Press ENTER to exit)");
         Scanner sc = new Scanner(System.in);
-        int optionSelected = sc.nextInt();
-
-        if(optionSelected == 0){
-            return ScreenResult.exit;
-        }
-
-        return ScreenResult.stay;
+        String optionSelected = sc.nextLine();
+        return ScreenResult.exit;
     }
 }

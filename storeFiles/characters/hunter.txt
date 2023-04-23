@@ -1,20 +1,18 @@
 name:Hunter
 life:5
 description:Le encanta asesinar
-weapons:4
 weapon:Pistol1
 weapon:Shotgun1
 weapon:Shotgun2
 weapon:Shotgun3
-armors:4
 armor:Armor1
 armor:Armor2
 armor:Armor3
 armor:Armor4
 skill:Talent
 willpower:3
-minions:3
 minion:Demon
 minion:Ghoul
 minion:Human
 modifier:Licantropos
+w

@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Hunter extends Character{
@@ -35,6 +34,9 @@ public class Hunter extends Character{
             case "minion":
                 addMinion(var[1]);
                 break;
+            case "modifier":
+                addModifier(var[1]);
+                break;
             case "skill":
                 setSkill(var[1]);
                 break;
@@ -53,4 +55,5 @@ public class Hunter extends Character{
     public void setWillpower(int willpower) {
         this.willpower = willpower;
     }
+
 }
