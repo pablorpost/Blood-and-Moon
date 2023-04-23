@@ -17,6 +17,7 @@ public class BanUnbanScreen extends Screen{
 
     public ScreenResult showOptions(){
         Manager m =  super.getManager();
+        DBManager db = super.getDataBase();
         m.clearConsole();
         List<String> show = options.get("0");
         for(int i = 0; i<show.size(); i ++){
@@ -32,7 +33,7 @@ public class BanUnbanScreen extends Screen{
                 System.out.println("Write the user's nick:");
                 Scanner bannedUser = new Scanner(System.in);
                 String election = bannedUser.nextLine();
-                DBManager db = super.getDataBase();
+
                 User userToBan = db.getUserToBan(election);
                 if (userToBan != null){
                     ban(userToBan);
@@ -42,8 +43,23 @@ public class BanUnbanScreen extends Screen{
                 break;
 
             case 1:
+                m.clearConsole();
+                List<User> bannedUsers = db.getBannedUsers();
+                if(!bannedUsers.isEmpty()){
+                    for(int j = 0;j<bannedUsers.size(); j++){
+                        System.out.println(j + ". " + bannedUsers.get(j).getNick());
+                    }
+                    Scanner keyB = new Scanner(System.in);
+                    int opt = keyB.nextInt();
+                    desBan(bannedUsers.get(opt));
+                } else {
+                    System.out.println("There are no banned users");
+                    System.out.println("Press ENTER to exit");
+                    Scanner emptyListSc = new Scanner(System.in);
+                    String nxtLine = emptyListSc.nextLine();
+                    return ScreenResult.exit;
+                }
                 break;
-
             case 2:
                 return ScreenResult.exit;
         }
@@ -54,6 +70,6 @@ public class BanUnbanScreen extends Screen{
         user.setBan(true);
     }
     public void desBan(User user){
-
+        user.setBan(false);
     }
 }

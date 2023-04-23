@@ -109,6 +109,19 @@ public class DBManager{
             return null;
         }
     }
+
+    public List<User> getBannedUsers(){
+        Map<String, User> users = dataBase.getUsers();
+        List<User> values = new ArrayList<User>(users.values());
+        List<User> bannedUsers = new ArrayList<>();
+        for(int i = 0; i<values.size(); i++){
+            if (values.get(i).isBan()){
+                bannedUsers.add(values.get(i));
+            }
+        }
+        return bannedUsers;
+    }
+
 }
 
 
