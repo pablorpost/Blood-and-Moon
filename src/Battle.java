@@ -19,24 +19,16 @@ public class Battle implements Serializable {
         this.challenger = challenger.getName();
         this.challenged = challenged.getName();
         this.gold = goldBet;
+
         Character char0;
-        Character charac0 = challenger.getCharacter();
-        if (charac0 instanceof Vampire){
-             char0 = new Vampire((Vampire) charac0);
-        }else if (charac0 instanceof Hunter){
-             char0 = new Hunter((Hunter) charac0);
-        }else{
-             char0 = new Lycanthrope((Lycanthrope) charac0);
-        }
         Character char1;
+
+        Character charac0 = challenger.getCharacter();
         Character charac1 = challenged.getCharacter();
-        if (charac1 instanceof Vampire){
-            char1 = new Vampire((Vampire) charac0);
-        }else if (charac1 instanceof Hunter){
-            char1 = new Hunter((Hunter) charac0);
-        }else{
-            char1 = new Lycanthrope((Lycanthrope) charac0);
-        }
+
+        char0 = doCopy(charac0);
+        char1 = doCopy(charac1);
+
 
         int char0Life = char0.getLife();
         int char1Life = char1.getLife();
@@ -92,6 +84,18 @@ public class Battle implements Serializable {
         }
 
         setRounds(rounds);
+    }
+
+    private Character doCopy(Character charac) {
+        Character chara;
+        if (charac instanceof Vampire){
+            chara = new Vampire((Vampire) charac);
+        }else if (charac instanceof Hunter){
+            chara = new Hunter((Hunter) charac);
+        }else{
+            chara = new Lycanthrope((Lycanthrope) charac);
+        }
+        return chara;
     }
 
     private int calculateSucces(int atribute) {
