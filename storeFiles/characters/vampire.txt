@@ -9,6 +9,7 @@ armor:Armor2
 armor:Armor3
 armor:Armor4
 skill:Disciplines
+power:5
 age:25
 blood:10
 minion:Demon

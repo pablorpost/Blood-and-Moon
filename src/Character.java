@@ -14,6 +14,8 @@ public class Character {
     private List<String> minions;
     private List<String> modifiers;
 
+    private int power;
+
     public Character (){
         this.weapons = new ArrayList<>();
         this.armors = new ArrayList<>();
@@ -99,4 +101,10 @@ public class Character {
     public String getSkill() { return this.skill;}
 
     public List<String> getModifiers() { return this.modifiers;}
+
+    public int getPowerAtribute() { return 0;}
+
+    public int getPower() { return this.power;}
+
+    public void setPower(int pow){this.power = pow;}
 }

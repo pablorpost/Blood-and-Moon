@@ -13,6 +13,29 @@ public class Vampire extends Character {
         }
     }
 
+    //constructor copia
+    public Vampire(Vampire original) {
+        super.setName(original.getName());
+        super.setLife(original.getLife());
+        super.setDescription(original.getDescription());
+        super.setPower(original.getPower());
+        super.setSkill(original.getSkill());
+        this.age = original.getAge();
+        this.blood = original.getBlood();
+        for (String weapon : original.getWeapons()) {
+            addWeapon(weapon);
+        }
+        for (String armor : original.getArmors()) {
+            addArmor(armor);
+        }
+        for (String modifier : original.getModifiers()) {
+            addModifier(modifier);
+        }
+        for (String minion : original.getMinions()) {
+            addMinion(minion);
+        }
+    }
+
 
     @Override
     public void readLine(String[] var) {
@@ -51,6 +74,9 @@ public class Vampire extends Character {
             case "skill":
                 setSkill(var[1]);
                 break;
+            case "power":
+                setPower(Integer.valueOf(var[1]));
+                break;
             default:
                 break;
         }
@@ -72,6 +98,12 @@ public class Vampire extends Character {
         this.blood = blood;
     }
 
+    public void addBlood(int blood) {
+        if (this.blood<3){
+            this.blood+=blood;
+        }
+    }
+
     @Override
     public void addMinion(String minion) {
         if (!minion.equalsIgnoreCase("Human")) {
@@ -79,6 +111,8 @@ public class Vampire extends Character {
         }
 
     }
+    @Override
+    public int getPowerAtribute() { return this.blood;}
 
 }
 

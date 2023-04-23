@@ -10,6 +10,7 @@ armor:Armor2
 armor:Armor3
 armor:Armor4
 skill:Talent
+power:5
 willpower:3
 minion:Demon
 minion:Ghoul

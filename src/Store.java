@@ -150,6 +150,8 @@ public class Store {
 
             bw.write("skill:" + character.getSkill() + "\n");
 
+            bw.write("power:" + character.getPower() + "\n");
+
             if (character.getName().toLowerCase().equals("vampire")){
                 Vampire vamp = (Vampire)character;
                 bw.write("age:" + vamp.getAge() + "\n");

@@ -10,6 +10,7 @@ armor:Armor2
 armor:Armor3
 armor:Armor4
 skill:Gift
+power:5
 anger:0
 minion:Demon
 minion:Ghoul

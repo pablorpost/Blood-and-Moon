@@ -12,6 +12,27 @@ public class Hunter extends Character{
         }
     }
 
+    public Hunter(Hunter original) {
+        super.setName(original.getName());
+        super.setLife(original.getLife());
+        super.setDescription(original.getDescription());
+        super.setPower(original.getPower());
+        super.setSkill(original.getSkill());
+        this.willpower = original.getWillpower();
+        for (String weapon : original.getWeapons()) {
+            addWeapon(weapon);
+        }
+        for (String armor : original.getArmors()) {
+            addArmor(armor);
+        }
+        for (String modifier : original.getModifiers()) {
+            addModifier(modifier);
+        }
+        for (String minion : original.getMinions()) {
+            addMinion(minion);
+        }
+    }
+
 @Override
     public void readLine(String[] var) {
         if (null != var[0]) switch (var[0]) {
@@ -42,6 +63,9 @@ public class Hunter extends Character{
             case "willpower":
                 setWillpower(Integer.valueOf(var[1]));
                 break;
+            case "power":
+                setPower(Integer.valueOf(var[1]));
+                break;
             default:
                 break;
         }
@@ -54,5 +78,12 @@ public class Hunter extends Character{
     public void setWillpower(int willpower) {
         this.willpower = willpower;
     }
+    @Override
+    public int getPowerAtribute(){return this.willpower;}
 
+    public void lessWillpower(int i) {
+        if (this.willpower > 0){
+            this.willpower-=i;
+        }
+    }
 }
