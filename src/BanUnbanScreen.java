@@ -51,7 +51,12 @@ public class BanUnbanScreen extends Screen{
                     }
                     Scanner keyB = new Scanner(System.in);
                     int opt = keyB.nextInt();
-                    desBan(bannedUsers.get(opt));
+                    if (opt >= bannedUsers.size()){
+                        System.out.println("Insert a valid number");
+                    } else {
+                        desBan(bannedUsers.get(opt));
+                    }
+
                 } else {
                     System.out.println("There are no banned users");
                     System.out.println("Press ENTER to exit");
