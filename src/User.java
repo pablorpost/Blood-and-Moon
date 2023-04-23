@@ -1,7 +1,7 @@
 import java.util.Comparator;
 import java.util.List;
 
-public class User extends Person implements Comparator<User>{
+public class User extends Person{
 
     private Character character;
     private List<String> weapons;
@@ -78,8 +78,7 @@ public class User extends Person implements Comparator<User>{
         this.gold = gold;
     }
 
-    @Override
-    public int compare(User o1, User o2) {
-        return o1.getGold() - o2.getGold();
+    public int compare(User o2) {
+        return this.getGold() - o2.getGold();
     }
 }
