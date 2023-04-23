@@ -21,9 +21,10 @@ public class ModifyStoreScreen extends Screen{
         vampire.add("2. Add weapon ");
         vampire.add("3. Add armor");
         vampire.add("4. Add minion");
-        vampire.add("5. Modify age");
-        vampire.add("6. Modify blood points");
-        vampire.add("7. Exit");
+        vampire.add("5. Modify Power");
+        vampire.add("6. Modify age");
+        vampire.add("7. Modify blood points");
+        vampire.add("8. Exit");
         options.put("1", vampire);
         List<String> hunter = new ArrayList<>();
         hunter.add("0. Modify life");
@@ -31,8 +32,9 @@ public class ModifyStoreScreen extends Screen{
         hunter.add("2. Add weapon ");
         hunter.add("3. Add armor");
         hunter.add("4. Add minion");
-        hunter.add("5. Modify willpower");
-        hunter.add("6. Exit");
+        hunter.add("5. Modify Power");
+        hunter.add("6. Modify willpower");
+        hunter.add("7. Exit");
         options.put("2", hunter);
         List<String> lycanthrope = new ArrayList<>();
         lycanthrope.add("0. Modify life");
@@ -40,6 +42,7 @@ public class ModifyStoreScreen extends Screen{
         lycanthrope.add("2. Add weapon ");
         lycanthrope.add("3. Add armor");
         lycanthrope.add("4. Add minion");
+        lycanthrope.add("5. Modify Power");
         lycanthrope.add("5. Modify anger");
         lycanthrope.add("6. Exit");
         options.put("3", lycanthrope);
@@ -116,6 +119,15 @@ public class ModifyStoreScreen extends Screen{
                 store.getChracters().get(character).addMinion(minions.get(n));
                 break;
             case 5:
+                Scanner ssca = new Scanner(System.in);
+                int numbe = 0;
+                while (numbe < 1 || numbe > 5) {
+                    System.out.print("Choose a new power between 1 and 5: ");
+                    numbe = ssca.nextInt();
+                }
+                store.getChracters().get(character).setPower(numbe);
+                break;
+            case 6:
                 Scanner s = new Scanner(System.in);
                 int numm = 0;
                 if (character == 0) {
@@ -144,7 +156,7 @@ public class ModifyStoreScreen extends Screen{
 
                 }
                 break;
-            case 6:
+            case 7:
                 if (character == 0) {
                     Scanner sc = new Scanner(System.in);
                     int numb = 0;
