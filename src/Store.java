@@ -1,6 +1,7 @@
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Store {
     private String directorio;
@@ -16,10 +17,10 @@ public class Store {
         this.chracters = new ArrayList<>();
 
         //out/atrifacts/Blood-and-moon.jar
-        this.directorio = "../../../storeFiles";
+        //this.directorio = "../../../storeFiles";
 
         //src/
-        //this.directorio = "storeFiles";
+        this.directorio = "storeFiles";
 
         loadStore(this.directorio);
 
@@ -97,19 +98,85 @@ public class Store {
         return chracters;
     }
 
-    public List<Weapon> getWeapons() {
+    public List<String> getWeapons() {
+        List<String> weapons = new ArrayList<>();
+        for (Weapon weapon : this.weapons) {
+            weapons.add(weapon.getName());
+        }
         return weapons;
     }
 
-    public List<Armor> getArmors() {
+    public List<String> getArmors() {
+        List<String> armors = new ArrayList<>();
+        for (Armor armor : this.armors) {
+            armors.add(armor.getName());
+        }
         return armors;
     }
 
-    public List<Minion> getMinions() {
+    public List<String> getMinions() {
+        List<String> minions = new ArrayList<>();
+        for (Minion minion : this.minions) {
+            minions.add(minion.getName());
+        }
         return minions;
     }
 
     public List<Modifier> getModifiers() {
         return modifiers;
+    }
+
+    public String getDirectory() {
+        return directorio;
+    }
+
+    public void saveCharacter(int charac){
+        Character character = getChracters().get(charac);
+        try {
+            FileWriter fw = new FileWriter(getDirectory() + File.separatorChar + "characters" + File.separatorChar+ character.getName().toLowerCase()+".txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write("name:" + character.getName() + "\n");
+            bw.write("life:" + character.getLife() + "\n");
+            bw.write("description:" + character.getDescription() + "\n");
+
+            for (String weapon : character.getWeapons()) {
+                bw.write("weapon:" + weapon + "\n");
+            }
+
+            for (String armor : character.getArmors()) {
+                bw.write("armor:" + armor + "\n");
+            }
+
+            bw.write("skill:" + character.getSkill() + "\n");
+
+            if (character.getName().toLowerCase().equals("vampire")){
+                Vampire vamp = (Vampire)character;
+                bw.write("age:" + vamp.getAge() + "\n");
+                bw.write("blood:" + vamp.getBlood() + "\n");
+
+            } else if (character.getName().toLowerCase().equals("hunter")) {
+                Hunter hunt = (Hunter) character;
+                bw.write("willpower:" + hunt.getWillpower() + "\n");
+
+            } else if (character.getName().toLowerCase().equals("lycanthrope")) {
+                Lycanthrope lycanth = (Lycanthrope) character;
+                bw.write("anger:" + lycanth.getAnger() + "\n");
+
+            }
+
+
+            for (String minion : character.getMinions()) {
+                bw.write("minion:" + minion + "\n");
+            }
+            for (String modifier : character.getModifiers()) {
+                bw.write("modifier:" + modifier + "\n");
+            }
+
+            // Cerrar el objeto BufferedWriter
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Ha ocurrido un error al reescribir el archivo: " + e.getMessage());
+        }
     }
 }

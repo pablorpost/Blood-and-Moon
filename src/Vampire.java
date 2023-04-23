@@ -1,23 +1,22 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Vampire extends Character{
+public class Vampire extends Character {
     private int age;
     private int blood;
 
-    public Vampire (String directorio){
+    public Vampire(String directorio) {
         super();
         try {
-            laodCharacter(directorio,"vampire");
+            laodCharacter(directorio, "vampire");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
 
-@Override
+    @Override
     public void readLine(String[] var) {
         if (null != var[0]) switch (var[0]) {
             case "name":
@@ -35,12 +34,15 @@ public class Vampire extends Character{
             case "armor":
                 addArmor(var[1]);
                 break;
+            case "modifier":
+                addModifier(var[1]);
+                break;
             case "minion":
                 //Los vampiros NO pueden tener esbirros humanos
-                if  (!var[1].equalsIgnoreCase("human")){
-                addMinion(var[1]);
+                if (!var[1].equalsIgnoreCase("human")) {
+                    addMinion(var[1]);
 
-            }
+                }
                 break;
             case "age":
                 setAge(Integer.valueOf(var[1]));
@@ -71,4 +73,16 @@ public class Vampire extends Character{
     public void setBlood(int blood) {
         this.blood = blood;
     }
+
+    @Override
+    public void addMinion(String minion) {
+        if (!minion.equalsIgnoreCase("Human")) {
+            super.addMinion(minion);
+        }
+
+    }
+
 }
+
+
+

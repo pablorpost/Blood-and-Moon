@@ -12,11 +12,13 @@ public class Character {
     private List<String> armors;
     private String skill;
     private List<String> minions;
+    private List<String> modifiers;
 
     public Character (){
         this.weapons = new ArrayList<>();
         this.armors = new ArrayList<>();
         this.minions = new ArrayList<>();
+        this.modifiers = new ArrayList<>();
     }
 
     public  void laodCharacter(String directorio, String character) throws FileNotFoundException {
@@ -60,6 +62,16 @@ public class Character {
         this.minions = minions;
     }
 
+    public List<String> getWeapons() {
+        return this.weapons;
+    }
+
+    public List<String> getArmors() {return this.armors;}
+
+    public List<String> getMinions() {
+        return this.minions;
+    }
+
     public void addWeapon(String weapon) {
         this.weapons.add(weapon);
     }
@@ -68,11 +80,23 @@ public class Character {
         this.armors.add(armor);
     }
 
+    public void addModifier(String modifier) {
+        this.modifiers.add(modifier);
+    }
+
     public void addMinion(String minion) {
         this.minions.add(minion);
     }
 
-    private void setSkillDefault() {
+    private void setSkillDefault() {}
 
-    }
+    public String getName() { return this.name;}
+
+    public int getLife() {return this.life;}
+
+    public String getDescription() { return this.description;}
+
+    public String getSkill() { return this.skill;}
+
+    public List<String> getModifiers() { return this.modifiers;}
 }

@@ -35,6 +35,9 @@ public class Lycanthrope extends Character{
             case "minion":
                 addMinion(var[1]);
                 break;
+            case "modifier":
+                addModifier(var[1]);
+                break;
             case "skill":
                 setSkill(var[1]);
                 break;

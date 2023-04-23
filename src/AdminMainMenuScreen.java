@@ -17,12 +17,14 @@ public class AdminMainMenuScreen extends Screen{
 
         switch (optionSelected){
             case 0:
-                break;
+                ModifyStoreScreen modStoreSc = new ModifyStoreScreen(super.getManager());
+                super.getManager().showScreen(modStoreSc);
+                return ScreenResult.stay;
 
             case 1:
                 BanUnbanScreen banSc = new BanUnbanScreen(super.getDataBase(), super.getManager());
                 super.getManager().showScreen(banSc);
-                break;
+                return ScreenResult.stay;
 
             case 2:
                 break;

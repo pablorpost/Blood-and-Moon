@@ -1,19 +1,16 @@
 name:Lycanthrope
 life:5
 description:Le encanta la luna llena
-weapons:4
 weapon:Pistol1
 weapon:Pistol2
 weapon:Shotgun1
 weapon:Shotgun2
-armors:4
 armor:Armor1
 armor:Armor2
 armor:Armor3
 armor:Armor4
 skill:Gift
 anger:0
-minions:3
 minion:Demon
 minion:Ghoul
 minion:Human
