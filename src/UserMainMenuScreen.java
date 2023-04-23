@@ -51,13 +51,10 @@ public class UserMainMenuScreen extends Screen{
         List<String> show;
         if (this.user.isBan()){
             System.out.println("This user is banned temporarily");
-            System.out.println("Press 0 to go back to login page");
+            System.out.println("(Press ENTER to go back to login page)");
             Scanner keyBoard = new Scanner(System.in);
-            int nxtInt = keyBoard.nextInt();
-            if (nxtInt == 0){
-                return ScreenResult.exit;
-            }
-            else return ScreenResult.exit;
+            String nxtStr = keyBoard.nextLine();
+            return ScreenResult.exit;
         }
         if (this.user.getCharacter() == null){
             show = options.get("1");

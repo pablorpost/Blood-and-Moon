@@ -115,8 +115,9 @@ public class InRegMenuScreen extends Screen{
             getManager().showScreen(pantalla);
             return null;
         }
-        // por terminar------------------------------------
-
+        System.out.println("(Press ENTER to continue)");
+        teclado = new Scanner(System.in);
+        election = teclado.nextLine();
         return null;
     }
 
