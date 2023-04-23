@@ -85,7 +85,7 @@ public class DBManager{
         return hasUser;
     }
 
-    public int getRequestMoney(String nick){
+    /***public int getRequestMoney(String nick){
         int moneyBet = 0;
         for (int i = 0; i < dataBase.getRequestsMoney().size(); i++) {
             if (dataBase.getRequestsMoney().get(i).equals(nick)){
@@ -94,6 +94,7 @@ public class DBManager{
         }
         return moneyBet;
     }
+     ***/
 
 
 

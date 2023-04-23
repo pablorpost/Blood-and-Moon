@@ -51,6 +51,7 @@ public class Manager {
         }
     }
 
+
     public void name(int x){
         for (int i=0;i<101;i=i+2) {
             try {
@@ -68,4 +69,7 @@ public class Manager {
             }
         }
     }
+
+    public Store getStore(){return this.store;}
+    public DBManager getDatabase(){return this.database;}
 }
