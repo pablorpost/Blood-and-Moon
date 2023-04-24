@@ -9,7 +9,6 @@ public class DataBase implements Serializable{
 
     private List<String> top10;
     private List<List<String>> requests;
-    private List<Integer> requestsMoney;
 
     public DataBase(){
         users = new HashMap<String, User>();
@@ -107,10 +106,6 @@ public class DataBase implements Serializable{
 
     public void setRequests(List<List<String>> requests) {
         this.requests = requests;
-    }
-
-    public List<Integer> getRequestsMoney(){
-        return requestsMoney;
     }
 
 

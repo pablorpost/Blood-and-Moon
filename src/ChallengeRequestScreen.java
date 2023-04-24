@@ -1,28 +1,29 @@
 import java.util.Scanner;
 
 public class ChallengeRequestScreen extends Screen{
-    public ChallengeRequestScreen(DBManager dataBase) {
+    String challenger;
+    public ChallengeRequestScreen(DBManager dataBase, String usuario) {
         setDataBase(dataBase);
+        challenger=usuario;
     }
 
     @Override
     public ScreenResult showOptions() {
-        User challenged = null;
         System.out.println("What user would you like to challenge?");
         Scanner teclado = new Scanner(System.in);
-        String election = teclado.nextLine();
-        challenged = lookForNick(election);
+        String challenged = teclado.nextLine();
+        if(lookForNick(challenged)){
+            System.out.println("How much gold would you like to bet?");
+            Integer gold = teclado.nextInt();
+            getDataBase().addRequest(challenger, challenged, gold);
+        }
         return super.showOptions();
     }
 
-    public User lookForNick(String user){
+    public boolean lookForNick(String user){
         if (getDataBase().existingUser(user)==DataBaseResult.user){
-            return null;
+            return true;
         }
-        return null;
-    }
-
-    private void saveRequest(){
-
+        return false;
     }
 }

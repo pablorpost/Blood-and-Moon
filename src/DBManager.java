@@ -85,18 +85,10 @@ public class DBManager{
         return hasUser;
     }
 
-    /***public int getRequestMoney(String nick){
-        int moneyBet = 0;
-        for (int i = 0; i < dataBase.getRequestsMoney().size(); i++) {
-            if (dataBase.getRequestsMoney().get(i).equals(nick)){
-                moneyBet = dataBase.getRequestsMoney().get(i);
-            }
-        }
-        return moneyBet;
+    public void addRequest(String challenger, String challenged, int gold){
+        String[] request = {challenger,challenged,Integer.toString(gold)};
+        dataBase.getRequests().add(List.of(request));
     }
-     ***/
-
-
 
     public List<User> top10() {
         return dataBase.getTop10();

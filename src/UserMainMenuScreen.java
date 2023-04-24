@@ -71,7 +71,7 @@ public class UserMainMenuScreen extends Screen{
         if (this.user.getCharacter() != null) {
             switch (optionSelected) {
                 case 0:
-                    ChallengeRequestScreen screen = new ChallengeRequestScreen(this.getDataBase());
+                    ChallengeRequestScreen screen = new ChallengeRequestScreen(this.getDataBase(),user.getNick());
                     getManager().showScreen(screen);
                 case 1:
                     break;
