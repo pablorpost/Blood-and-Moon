@@ -1,3 +1,5 @@
+import java.io.Console;
+import java.io.IOException;
 import java.util.*;
 
 public class InRegMenuScreen extends Screen{
@@ -58,6 +60,9 @@ public class InRegMenuScreen extends Screen{
     }
 
     public Map<String, String> showForm(boolean isRegist, boolean isAdmin){
+        Console console = System.console();
+        Scanner teclado = new Scanner(System.in);
+        String password="";
         System.out.println("██████╗ ██╗      ██████╗  ██████╗ ██████╗    ██╗   ███╗   ███╗ ██████╗  ██████╗ ███╗   ██╗\n██╔══██╗██║     ██╔═══██╗██╔═══██╗██╔══██╗   ██║   ████╗ ████║██╔═══██╗██╔═══██╗████╗  ██║\n██████╔╝██║     ██║   ██║██║   ██║██║  ██║████████╗██╔████╔██║██║   ██║██║   ██║██╔██╗ ██║\n██╔══██╗██║     ██║   ██║██║   ██║██║  ██║██╔═██╔═╝██║╚██╔╝██║██║   ██║██║   ██║██║╚██╗██║\n██████╔╝███████╗╚██████╔╝╚██████╔╝██████╔╝██████║  ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║ ╚████║\n╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝  ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝");
         Map<String, String> formulario = new HashMap<String, String>();
         if (isAdmin){
@@ -73,9 +78,14 @@ public class InRegMenuScreen extends Screen{
         }
         if (isAdmin && isRegist){
             System.out.println("Introduce la contraseña de administrador");
-            Scanner teclado = new Scanner(System.in);
-            String election = teclado.nextLine();
-            if (!getDataBase().adminPasswordCheck(election)){
+            if (console == null) {
+                password = teclado.nextLine();
+            }
+            else{
+                char[] passwordArray = console.readPassword("Enter your  password: ");
+                password = new String(passwordArray);
+            }
+            if (!getDataBase().adminPasswordCheck(password)){
                 return null;
             }
             System.out.println();
@@ -83,21 +93,37 @@ public class InRegMenuScreen extends Screen{
         }
         System.out.print("User/Nick:  ");
         String election;
-        Scanner teclado = new Scanner(System.in);
         election = teclado.nextLine();
         formulario.put("nick", election);
 
         if (isRegist){
             System.out.print("Name:  ");
-            teclado = new Scanner(System.in);
             election = teclado.nextLine();
             formulario.put("name", election);
         }
 
+
+
+
+        if (console == null) {
+            password = teclado.nextLine();
+        }
+        else{
+            char[] passwordArray = console.readPassword("Enter your  password: ");
+            password = new String(passwordArray);
+        }
         System.out.print("Password:  ");
-        teclado = new Scanner(System.in);
-        election = teclado.nextLine();
-        formulario.put("pas", election);
+        formulario.put("pas", password);
+
+
+
+
+
+
+
+
+
+
 
         if (isRegist){
             this.addPerson(formulario.get("nick"), formulario.get("name"), formulario.get("pas"), isAdmin);
