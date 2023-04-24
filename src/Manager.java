@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class Manager {
     private DBManager database;
     private Store store;
@@ -19,6 +17,8 @@ public class Manager {
         String desc;
         while (sr==ScreenResult.stay) {//sr.equals(ScreenResult.stay)) {
             clearConsole();
+            System.out.println("██████╗ ██╗      ██████╗  ██████╗ ██████╗    ██╗   ███╗   ███╗ ██████╗  ██████╗ ███╗   ██╗\n██╔══██╗██║     ██╔═══██╗██╔═══██╗██╔══██╗   ██║   ████╗ ████║██╔═══██╗██╔═══██╗████╗  ██║\n██████╔╝██║     ██║   ██║██║   ██║██║  ██║████████╗██╔████╔██║██║   ██║██║   ██║██╔██╗ ██║\n██╔══██╗██║     ██║   ██║██║   ██║██║  ██║██╔═██╔═╝██║╚██╔╝██║██║   ██║██║   ██║██║╚██╗██║\n██████╔╝███████╗╚██████╔╝╚██████╔╝██████╔╝██████║  ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║ ╚████║\n╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝  ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝");
+
             title = screen.getTitle();
             desc = screen.getDescription();
             if (title!=null){
@@ -52,7 +52,7 @@ public class Manager {
     }
 
 
-    public void name(int x){
+    public void loadScreen(int x){
         for (int i=0;i<101;i=i+2) {
             try {
                 clearConsole();

@@ -11,7 +11,7 @@ public class RankingScreen extends Screen{
 
     public ScreenResult showOptions(){
         Manager m = super.getManager();
-        m.clearConsole();
+
         DBManager db = getDataBase();
         List<User> list = db.top10();
         for(int j = 0; j< list.size(); j++){
