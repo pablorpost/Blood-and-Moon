@@ -86,6 +86,8 @@ public class InRegMenuScreen extends Screen{
                 password = new String(passwordArray);
             }
             if (!getDataBase().adminPasswordCheck(password)){
+                System.out.println("Incorrect admin password");
+                System.out.println("(Press ENTER to continue)");
                 return null;
             }
             System.out.println();
@@ -129,7 +131,6 @@ public class InRegMenuScreen extends Screen{
             this.addPerson(formulario.get("nick"), formulario.get("name"), formulario.get("pas"), isAdmin);
         }
         DataBaseResult resulta = this.checkPerson(formulario.get("nick"), formulario.get("pas"));
-        System.out.println(resulta);
         if (resulta == DataBaseResult.user && !isAdmin){
             User user = getDataBase().getUser(formulario.get("nick"), formulario.get("pas"));
             UserMainMenuScreen pantalla = new UserMainMenuScreen(getDataBase(),getStore(),getManager(), user);
@@ -141,6 +142,7 @@ public class InRegMenuScreen extends Screen{
             getManager().showScreen(pantalla);
             return null;
         }
+        System.out.println("Incorrect user or password");
         System.out.println("(Press ENTER to continue)");
         teclado = new Scanner(System.in);
         election = teclado.nextLine();
