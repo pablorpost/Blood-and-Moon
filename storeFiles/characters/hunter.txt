@@ -16,4 +16,3 @@ minion:Demon
 minion:Ghoul
 minion:Human
 modifier:Licantropos
-w
