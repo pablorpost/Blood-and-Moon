@@ -30,6 +30,14 @@ public class AdminMainMenuScreen extends Screen{
                 break;
 
             case 3:
+                PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), admin);
+                ScreenResult result = popUp.showPopUp(3);
+                if (result == ScreenResult.stay){
+                    System.out.println(admin.getName());
+                    super.getDataBase().deletePerson(admin);
+                } else {
+                    return ScreenResult.stay;
+                }
                 break;
 
             case 4:

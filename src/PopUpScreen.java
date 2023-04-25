@@ -3,7 +3,7 @@ import java.util.*;
 public class PopUpScreen extends Screen{
     private Map<String, List<String>> options = new HashMap<>();
 
-    public PopUpScreen(DBManager dataBase, Manager manager, User request) {
+    public PopUpScreen(DBManager dataBase, Manager manager, Person request) {
         super.setTitle("ATENTION!!!");
         super.setDataBase(dataBase);
         this.setDescription(null);
@@ -26,6 +26,12 @@ public class PopUpScreen extends Screen{
         auxList.add("0. Continue");
         auxList.add("1. Cancel");
         options.put("2", auxList);
+
+        auxList = new ArrayList<>();
+        auxList.add("Are you sure you want to delete your admin account?\nYou can not undo this action.\n");
+        auxList.add("0. Continue");
+        auxList.add("1. Cancel");
+        options.put("3", auxList);
     }
 
     public ScreenResult showPopUp(int option){
