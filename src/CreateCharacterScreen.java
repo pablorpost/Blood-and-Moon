@@ -27,12 +27,15 @@ public class CreateCharacterScreen extends Screen{
         }
 
         Scanner sc = new Scanner(System.in);
-        int optionSelected = sc.nextInt();
+        int optionSelected = -1;
+        while (optionSelected<0 || optionSelected>2){
+            optionSelected = sc.nextInt();
+        }
         ((User) getPerson()).setCharacter(getManager().getStore().getChracters().get(optionSelected));
         m.clearConsole();
-        chooseWeapons(optionSelected);
-        m.clearConsole();
-        chooseArmor(optionSelected);
+        ConfigureEquipmentScreen configureScreen = new ConfigureEquipmentScreen(getManager(), ((User) getPerson()));
+        getManager().showScreen(configureScreen);
+
         return ScreenResult.exit;
     }
 
@@ -76,6 +79,5 @@ public class CreateCharacterScreen extends Screen{
         }
         ((User) getPerson()).setArmor(charArmors.get(mu));
     }
-
 
 }

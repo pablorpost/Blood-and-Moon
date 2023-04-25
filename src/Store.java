@@ -21,10 +21,10 @@ public class Store {
         this.modifiers = new ArrayList<>();
 
         //out/atrifacts/Blood-and-moon.jar
-        //this.directorio = "../../../storeFiles";
+        this.directorio = "../../../storeFiles";
 
         //src/
-        this.directorio = "storeFiles";
+        //this.directorio = "storeFiles";
 
         loadStore(this.directorio);
 

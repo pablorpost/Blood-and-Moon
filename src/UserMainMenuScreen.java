@@ -75,10 +75,12 @@ public class UserMainMenuScreen extends Screen{
                 case 0:
                     ChallengeRequestScreen screen = new ChallengeRequestScreen(this.getDataBase(),user.getNick());
                     getManager().showScreen(screen);
-
+                    return ScreenResult.stay;
 
                 case 1:
-                    break;
+                    ConfigureEquipmentScreen configureScreen = new ConfigureEquipmentScreen(getManager(), this.user);
+                    getManager().showScreen(configureScreen);
+                    return ScreenResult.stay;
                 case 2:
                     break;
                 case 3:
@@ -115,8 +117,7 @@ public class UserMainMenuScreen extends Screen{
                     break;
                 case 3:
                     RankingScreen rkSc = new RankingScreen(getDataBase(),getStore(),getManager());
-                    Manager manager = getManager();
-                    manager.showScreen(rkSc);
+                    getManager().showScreen(rkSc);
                     return ScreenResult.stay;
                 case 4:
                     return ScreenResult.exit;
