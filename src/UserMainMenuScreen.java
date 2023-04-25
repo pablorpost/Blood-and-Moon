@@ -56,16 +56,18 @@ public class UserMainMenuScreen extends Screen{
             String nxtStr = keyBoard.nextLine();
             return ScreenResult.exit;
         }
+        int op;
         if (this.user.getCharacter() == null){
             show = options.get("1");
+            op = 1;
         } else {
             show = options.get("0");
+            op = 0;
         }
 
         for(int i = 0; i<show.size(); i ++){
             System.out.println(show.get(i));
         }
-
         Scanner sc = new Scanner(System.in);
         int optionSelected = sc.nextInt();
         if (this.user.getCharacter() != null) {
@@ -73,6 +75,8 @@ public class UserMainMenuScreen extends Screen{
                 case 0:
                     ChallengeRequestScreen screen = new ChallengeRequestScreen(this.getDataBase(),user.getNick());
                     getManager().showScreen(screen);
+
+
                 case 1:
                     break;
                 case 2:
@@ -84,11 +88,9 @@ public class UserMainMenuScreen extends Screen{
                     ScreenResult result = popUp.showPopUp(1);
                     if (result == ScreenResult.stay){
                         // REVISAR -----------------------------------------------------------------------------------
-                        System.out.println("borrar personaje");
                         user.setCharacter(null);
-                    } else {
-                        this.showOptions();
                     }
+                    this.showOptions();
                     break;
                 case 5:
                     return ScreenResult.exit;
@@ -96,7 +98,9 @@ public class UserMainMenuScreen extends Screen{
         } else{
             switch (optionSelected) {
                 case 0:
-                    break;
+                    CreateCharacterScreen selectCharac = new CreateCharacterScreen(this.user, getManager());
+                    getManager().showScreen(selectCharac);
+                    return ScreenResult.stay;
                 case 1:
                     PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
                     ScreenResult result = popUp.showPopUp(2);

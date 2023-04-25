@@ -12,7 +12,7 @@ public class InRegMenuScreen extends Screen{
         super.setStore(store);
         super.setDataBase(dataBase);
         super.setManager(manager);
-        super.setDescription("What would you like to do?");
+        super.setTitle("What would you like to do?");
         this.options = new HashMap<String, List<String>>();
         this.formVersions = new HashMap<String, List<String>>();
         option = "user";

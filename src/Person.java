@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Person implements Serializable{
@@ -14,6 +15,7 @@ public abstract class Person implements Serializable{
         this.name = name;
         this.password = password;
         this.type = type;
+        this.battles = new ArrayList<>();
     }
     public void addBattle(Battle battle){
 

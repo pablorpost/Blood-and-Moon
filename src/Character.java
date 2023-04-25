@@ -1,10 +1,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Character {
+public class Character implements Serializable {
     private String name;
     private int life;
     private String description;

@@ -15,12 +15,16 @@ public class Store {
     public Store(){
         this.minions = new ArrayList<>();
         this.chracters = new ArrayList<>();
+        this.armors = new ArrayList<>();
+        this.weapons = new ArrayList<>();
+        this.skills = new ArrayList<>();
+        this.modifiers = new ArrayList<>();
 
         //out/atrifacts/Blood-and-moon.jar
-        this.directorio = "../../../storeFiles";
+        //this.directorio = "../../../storeFiles";
 
         //src/
-        //this.directorio = "storeFiles";
+        this.directorio = "storeFiles";
 
         loadStore(this.directorio);
 
@@ -75,10 +79,20 @@ public class Store {
     }
 
     public Weapon getInfoWeapon(String name){
+        for(Weapon weapon : this.weapons){
+            if(weapon.getName().equals(name)){
+                return weapon;
+            }
+        }
         return null;
     }
 
     public Armor getInfoArmor(String name){
+        for(Armor armor : this.armors){
+            if(armor.getName().equals(name)){
+                return armor;
+            }
+        }
         return null;
     }
 

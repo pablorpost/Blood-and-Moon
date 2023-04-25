@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -13,6 +14,8 @@ public class User extends Person{
 
     public User(String nick, String name, int password){
         super(nick,name,password,DataBaseResult.user);
+        this.weapons = new ArrayList<>();
+        this.pendingRequest = new ArrayList<>();
         character = null;
     }
     public void uploadBattles(Battle value){
@@ -69,6 +72,9 @@ public class User extends Person{
         this.battles = battles;
     }
 
+    public void addWeapon(String weapon) {
+        this.weapons.add(weapon);
+    }
 
     public int getGold() {
         return gold;
