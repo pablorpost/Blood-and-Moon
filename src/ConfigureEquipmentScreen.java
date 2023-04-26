@@ -40,9 +40,10 @@ public class ConfigureEquipmentScreen extends Screen{
             while (nu < 0 || nu >= a) {
                 nu = sc.nextInt();
             }
-            ((User) getPerson()).addWeapon(charWeap.get(nu));
-            if (numHands-nu > 0){
-                numHands-=getStore().getInfoWeapon(charWeap.get(nu)).getHands();
+            int hands = getStore().getInfoWeapon(charWeap.get(nu)).getHands();
+            if (numHands-hands >= 0){
+                ((User) getPerson()).addWeapon(charWeap.get(nu));
+                numHands-= hands;
             }
 
         }
