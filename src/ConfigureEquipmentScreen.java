@@ -33,15 +33,18 @@ public class ConfigureEquipmentScreen extends Screen{
             }
         }
         Scanner sc = new Scanner(System.in);
-        int numHands = 0;
-        while (numHands<2){
+        int numHands = 2;
+        while (numHands>0){
             int nu = -1;
             int a = charWeap.size();
-            while (nu < 0 || nu >= charWeap.size()) {
+            while (nu < 0 || nu >= a) {
                 nu = sc.nextInt();
             }
             ((User) getPerson()).addWeapon(charWeap.get(nu));
-            numHands+=getStore().getInfoWeapon(charWeap.get(nu)).getHands();
+            if (numHands-nu > 0){
+                numHands-=getStore().getInfoWeapon(charWeap.get(nu)).getHands();
+            }
+
         }
 
     }
