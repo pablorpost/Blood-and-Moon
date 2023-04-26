@@ -12,29 +12,37 @@ public class Battle implements Serializable {
     private int gold;
     private String challenger;
     private String challenged;
-    private Store store;
 
     public Battle(User challenger, User challenged, int goldBet, Store store){
-        this.store = store;
         this.challenger = challenger.getName();
         this.challenged = challenged.getName();
         this.gold = goldBet;
 
+        //ELIMINARR-----VVVVV
+        this.rounds = new Random().nextInt(6);
+        if(new Random().nextInt(2) == 1){
+            this.winner = this.challenger;
+            this.looser = this.challenged;
+        }else{
+            this.winner = this.challenged;
+            this.looser = this.challenger;
+        }
+        /*
         Character char0 = challenger.getCharacter();
         Character char1 = challenged.getCharacter();
 
         int rounds = 0;
         //la vida de cada personaje será la suya predeterminada, sumando la de sus esbirros
-        int char0Life = calculateLife(char0);
-        int char1Life = calculateLife(char1);
+        int char0Life = calculateLife(char0, store);
+        int char1Life = calculateLife(char1, store);
 
         while (char0Life > 0 && char1Life > 0) {
             rounds += 1;
-            int firstAttack = getPowerOfAtack(char0, challenger.getWeapons(), challenger.getArmor());
-            int secondAttack = getPowerOfAtack(char1, challenged.getWeapons(), challenged.getArmor());
+            int firstAttack = getPowerOfAtack(char0, challenger.getWeapons(), challenger.getArmor(), store);
+            int secondAttack = getPowerOfAtack(char1, challenged.getWeapons(), challenged.getArmor(), store);
 
-            int firstDefense = getPowerOfDefense(char1, challenged.getWeapons(), challenged.getArmor());
-            int secondDefense = getPowerOfDefense(char0, challenger.getWeapons(), challenger.getArmor());
+            int firstDefense = getPowerOfDefense(char1, challenged.getWeapons(), challenged.getArmor(), store);
+            int secondDefense = getPowerOfDefense(char0, challenger.getWeapons(), challenger.getArmor(), store);
 
             int succesAttack1 = calculateSucces(firstAttack);
             int succesAttack2 = calculateSucces(secondAttack);
@@ -68,15 +76,16 @@ public class Battle implements Serializable {
             }
         }
         //dejará los personajes como estaban
-        this.store.loadCharacters();
+        store.loadCharacters();
         setRounds(rounds);
+        */
     }
 
 
-    private int calculateLife(Character chara) {
+    private int calculateLife(Character chara, Store store) {
         int lifeAux = chara.getLife();
         for (String minion : chara.getMinions()) {
-            lifeAux+= this.store.getInfoMinion(minion).getLife();
+            lifeAux+= store.getInfoMinion(minion).getLife();
         }
 
         return lifeAux;
@@ -108,19 +117,19 @@ public class Battle implements Serializable {
         return acum;
     }
 
-    private int getPowerOfAtack(Character charac, List<String> weapons, String armor){
+    private int getPowerOfAtack(Character charac, List<String> weapons, String armor, Store store){
         //poder
         int power = charac.getPower();
         //poder según personaje
         int powerAtribute = charac.getPowerAtribute();
 
         String skill = charac.getSkill();
-        int skillPoints = this.store.getInfoSkill(skill).getAttackPoints();
+        int skillPoints = store.getInfoSkill(skill).getAttackPoints();
         int equipmentPoints = 0;
         for (String weapon:weapons){
-            equipmentPoints += this.store.getInfoWeapon(weapon).getAttack();
+            equipmentPoints += store.getInfoWeapon(weapon).getAttack();
         }
-        equipmentPoints += this.store.getInfoArmor(armor).getAtack();
+        equipmentPoints += store.getInfoArmor(armor).getAtack();
         int acum = power + skillPoints + equipmentPoints;
         if (charac instanceof Vampire){
             if (powerAtribute >= 5){
@@ -143,16 +152,16 @@ public class Battle implements Serializable {
         return acum;
     }
 
-    private int getPowerOfDefense(Character charac, List<String> weapons, String armor){
+    private int getPowerOfDefense(Character charac, List<String> weapons, String armor, Store store){
         int power = charac.getPower();
         int powerAtribute = charac.getPowerAtribute();
         String skill = charac.getSkill();
-        int skillPoints = this.store.getInfoSkill(skill).getDefensePoints();
+        int skillPoints = store.getInfoSkill(skill).getDefensePoints();
         int equipmentPoints = 0;
         for (String weapon:weapons){
-            equipmentPoints += this.store.getInfoWeapon(weapon).getDefense();
+            equipmentPoints += store.getInfoWeapon(weapon).getDefense();
         }
-        equipmentPoints += this.store.getInfoArmor(armor).getAtack();
+        equipmentPoints += store.getInfoArmor(armor).getAtack();
         int acum = power + skillPoints + equipmentPoints;
         if (charac instanceof Vampire){
             if (powerAtribute >= 5){
