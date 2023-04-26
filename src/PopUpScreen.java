@@ -10,7 +10,7 @@ public class PopUpScreen extends Screen{
         super.setManager(manager);
 
         List<String> auxList = new ArrayList<>();
-        auxList.add("You have an incoming challenge from " + request.getName() + ".\n");
+        auxList.add("You have an incoming challenge from " + request.getNick() + ".\n");
         auxList.add("0. Accept");
         auxList.add("1. Decline");
         options.put("0", auxList);

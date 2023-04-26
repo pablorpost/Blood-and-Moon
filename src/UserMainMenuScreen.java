@@ -84,7 +84,9 @@ public class UserMainMenuScreen extends Screen{
                 case 2:
                     break;
                 case 3:
-                    break;
+                    RankingScreen rkSc = new RankingScreen(getDataBase(),getStore(),getManager());
+                    getManager().showScreen(rkSc);
+                    return ScreenResult.stay;
                 case 4:
                     PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
                     ScreenResult result = popUp.showPopUp(1);
