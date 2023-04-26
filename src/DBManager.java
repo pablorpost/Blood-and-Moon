@@ -78,8 +78,8 @@ public class DBManager{
     public String getRequestUser(String nick){
         String hasUser = null;
         for (int i = 0; i < dataBase.getRequests().size(); i++) {
-            if (dataBase.getRequests().get(i).get(0).equals(nick)){
-                hasUser = dataBase.getRequests().get(i).get(1);
+            if (dataBase.getRequests().get(i).get(1).equals(nick)){
+                hasUser = dataBase.getRequests().get(i).get(0);
             }
         }
         return hasUser;
