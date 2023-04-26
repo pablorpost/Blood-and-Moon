@@ -15,7 +15,8 @@ public class User extends Person{
     public User(String nick, String name, int password){
         super(nick,name,password,DataBaseResult.user);
         this.weapons = new ArrayList<>();
-        this.pendingRequest = null;
+        this.pendingRequest = new ArrayList<>();
+        this.battles = new ArrayList<>();
         character = null;
         gold = 500;
     }
@@ -71,9 +72,6 @@ public class User extends Person{
     @Override
     public void setBattles(List<Battle> battles) {
         this.battles = battles;
-    }
-    public void addBattle(Battle battle) {
-        this.battles.add(battle);
     }
 
     public void addWeapon(String weapon) {

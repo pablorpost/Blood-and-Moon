@@ -47,8 +47,8 @@ public class UserMainMenuScreen extends Screen{
             if (result == ScreenResult.stay){
                 System.out.println("combatir " + user.getNick() + " vs " + request.get(0));
                 Battle thisBattle = new Battle(origen, destino, goldBet, getStore());
-                origen.addBattle(thisBattle);
-                destino.addBattle(thisBattle);
+                origen.uploadBattles(thisBattle);
+                destino.uploadBattles(thisBattle);
                 getDataBase().addBattleToList(thisBattle);
                 if (thisBattle.getWinner().equals(request.get(0))){
                     origen.setGold(origen.getGold() + goldBet);
