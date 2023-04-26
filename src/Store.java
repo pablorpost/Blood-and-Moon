@@ -69,7 +69,7 @@ public class Store {
 
     }
 
-    private void loadCharacters() {
+    public void loadCharacters() {
         Vampire vampire = new Vampire(this.directorio);
         this.chracters.add(vampire);
         Hunter hunter = new Hunter(this.directorio);

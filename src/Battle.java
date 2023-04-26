@@ -20,56 +20,41 @@ public class Battle implements Serializable {
         this.challenged = challenged.getName();
         this.gold = goldBet;
 
-        Character char0;
-        Character char1;
+        Character char0 = challenger.getCharacter();
+        Character char1 = challenged.getCharacter();
 
-        Character charac0 = challenger.getCharacter();
-        Character charac1 = challenged.getCharacter();
-
-        char0 = doCopy(charac0);
-        char1 = doCopy(charac1);
-
-
-        int char0Life = char0.getLife();
-        int char1Life = char1.getLife();
         int rounds = 0;
+        //la vida de cada personaje será la suya predeterminada, sumando la de sus esbirros
+        int char0Life = calculateLife(char0);
+        int char1Life = calculateLife(char1);
+
         while (char0Life > 0 && char1Life > 0) {
             rounds += 1;
             int firstAttack = getPowerOfAtack(char0, challenger.getWeapons(), challenger.getArmor());
             int secondAttack = getPowerOfAtack(char1, challenged.getWeapons(), challenged.getArmor());
 
-            int firstDefense = getPowerOfDefense(char1, challenger.getWeapons(), challenger.getArmor());
-            int secondDefense = getPowerOfDefense(char0, challenged.getWeapons(), challenged.getArmor());
+            int firstDefense = getPowerOfDefense(char1, challenged.getWeapons(), challenged.getArmor());
+            int secondDefense = getPowerOfDefense(char0, challenger.getWeapons(), challenger.getArmor());
 
             int succesAttack1 = calculateSucces(firstAttack);
             int succesAttack2 = calculateSucces(secondAttack);
             int succesDefense1 = calculateSucces(firstDefense);
             int succesDefense2 = calculateSucces(secondDefense);
 
-            Character winner = new Character();
-            Character looser = new Character();
+            Character winner;
+            Character looser;
 
             if (succesAttack1>=succesDefense1){
                 char1Life-=1;
                 winner = char0;
                 looser = char1;
-            } else if ((succesAttack2>=succesDefense2)) {
+                update(winner,looser);
+            }
+            if ((succesAttack2>=succesDefense2)) {
                 char0Life-=1;
                 winner = char1;
                 looser = char0;
-            }
-
-            if (winner instanceof Vampire){
-                ((Vampire) char0).addBlood((5));
-
-            }
-            if (looser instanceof Lycanthrope){
-                ((Lycanthrope) char1).addAnger((1));
-
-            }
-            if (looser instanceof Hunter){
-                ((Hunter) char1).lessWillpower((1));
-
+                update(winner,looser);
             }
 
             if (char1Life <= 0 && char0Life <= 0) {
@@ -82,22 +67,35 @@ public class Battle implements Serializable {
                 this.looser = char0.getName();
             }
         }
-
+        //dejará los personajes como estaban
+        this.store.loadCharacters();
         setRounds(rounds);
     }
 
-    private Character doCopy(Character charac) {
-        Character chara;
-        if (charac instanceof Vampire){
-            chara = new Vampire((Vampire) charac);
-        }else if (charac instanceof Hunter){
-            chara = new Hunter((Hunter) charac);
-        }else{
-            chara = new Lycanthrope((Lycanthrope) charac);
+
+    private int calculateLife(Character chara) {
+        int lifeAux = chara.getLife();
+        for (String minion : chara.getMinions()) {
+            lifeAux+= this.store.getInfoMinion(minion).getLife();
         }
-        return chara;
+
+        return lifeAux;
     }
 
+    private void update(Character winner, Character looser){
+        if (winner instanceof Vampire){
+            ((Vampire) winner).addBlood((5));
+
+        }
+        if (looser instanceof Lycanthrope){
+            ((Lycanthrope) looser).addAnger((1));
+
+        }
+        if (looser instanceof Hunter){
+            ((Hunter) looser).lessWillpower((1));
+
+        }
+    }
     private int calculateSucces(int atribute) {
         Random random = new Random();
         int acum = 0;
@@ -111,8 +109,11 @@ public class Battle implements Serializable {
     }
 
     private int getPowerOfAtack(Character charac, List<String> weapons, String armor){
+        //poder
         int power = charac.getPower();
+        //poder según personaje
         int powerAtribute = charac.getPowerAtribute();
+
         String skill = charac.getSkill();
         int skillPoints = this.store.getInfoSkill(skill).getAttackPoints();
         int equipmentPoints = 0;
@@ -125,6 +126,7 @@ public class Battle implements Serializable {
             if (powerAtribute >= 5){
                 acum += 2;
                 Random random = new Random();
+                //pagar el coste de su disciplina
                 int cost = random.nextInt(3) + 1;
                 ((Vampire)charac).setBlood(((Vampire)charac).getBlood() - cost);
             }
