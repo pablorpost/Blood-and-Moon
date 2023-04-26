@@ -6,8 +6,6 @@ public class DataBase implements Serializable{
 
     private Map<String, Admin> admins;
     private List<Battle> battles;
-
-    private List<String> top10;
     private List<List<String>> requests;
 
     public DataBase(){
@@ -90,14 +88,6 @@ public class DataBase implements Serializable{
             aux2.add(aux.get(j));
         }
         return aux2;
-    }
-
-    public void uploadTop10(){
-
-    }
-
-    private void loadData(){
-
     }
 
     public List<List<String>> getRequests() {

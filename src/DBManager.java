@@ -115,6 +115,10 @@ public class DBManager{
         return bannedUsers;
     }
 
+    public List<List<String>> getRequests(){
+        return dataBase.getRequests();
+    }
+
 }
 
 

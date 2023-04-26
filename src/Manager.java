@@ -5,7 +5,7 @@ public class Manager {
     public Manager(Store store) {
         this.store = store;
         this.database = new DBManager();
-        //name(25);
+        loadScreen(25);
         InRegMenuScreen inicio = new InRegMenuScreen(database, store,this);
         showScreen(inicio);
     }
@@ -15,7 +15,7 @@ public class Manager {
         ScreenResult sr = ScreenResult.stay;
         String title;
         String desc;
-        while (sr==ScreenResult.stay) {//sr.equals(ScreenResult.stay)) {
+        while (sr==ScreenResult.stay) {
             clearConsole();
             System.out.println("██████╗ ██╗      ██████╗  ██████╗ ██████╗    ██╗   ███╗   ███╗ ██████╗  ██████╗ ███╗   ██╗\n██╔══██╗██║     ██╔═══██╗██╔═══██╗██╔══██╗   ██║   ████╗ ████║██╔═══██╗██╔═══██╗████╗  ██║\n██████╔╝██║     ██║   ██║██║   ██║██║  ██║████████╗██╔████╔██║██║   ██║██║   ██║██╔██╗ ██║\n██╔══██╗██║     ██║   ██║██║   ██║██║  ██║██╔═██╔═╝██║╚██╔╝██║██║   ██║██║   ██║██║╚██╗██║\n██████╔╝███████╗╚██████╔╝╚██████╔╝██████╔╝██████║  ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║ ╚████║\n╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝  ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝");
 
