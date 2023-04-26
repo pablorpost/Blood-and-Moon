@@ -21,10 +21,10 @@ public class Store {
         this.modifiers = new ArrayList<>();
 
         //out/atrifacts/Blood-and-moon.jar
-        this.directorio = "../../../storeFiles";
+        //this.directorio = "../../../storeFiles";
 
         //src/
-        //this.directorio = "storeFiles";
+        this.directorio = "storeFiles";
 
         loadStore(this.directorio);
 
@@ -69,7 +69,7 @@ public class Store {
 
     }
 
-    private void loadCharacters() {
+    public void loadCharacters() {
         Vampire vampire = new Vampire(this.directorio);
         this.chracters.add(vampire);
         Hunter hunter = new Hunter(this.directorio);
@@ -97,14 +97,30 @@ public class Store {
     }
 
     public Modifier getInfoModifier(String name){
+        for(Modifier modifier : this.modifiers){
+            if(modifier.getName().equals(name)){
+                return modifier;
+            }
+        }
         return null;
     }
 
     public Minion getInfoMinion(String name){
+        for(Minion minion : this.minions){
+            if(minion.getName().equals(name)){
+                return minion;
+            }
+        }
         return null;
+
     }
 
     public Skill getInfoSkill(String name){
+        for(Skill skill : this.skills){
+            if(skill.getName().equals(name)){
+                return skill;
+            }
+        }
         return null;
     }
 

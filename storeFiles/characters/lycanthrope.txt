@@ -16,3 +16,4 @@ minion:Demon
 minion:Ghoul
 minion:Human
 modifier:LunaLlena
+modifier:MetalCerca

@@ -16,3 +16,4 @@ minion:Demon
 minion:Ghoul
 minion:Human
 modifier:Licantropos
+modifier:MalaVision
