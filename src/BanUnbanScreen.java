@@ -34,7 +34,7 @@ public class BanUnbanScreen extends Screen{
                 Scanner bannedUser = new Scanner(System.in);
                 String election = bannedUser.nextLine();
 
-                User userToBan = db.getUserToBan(election);
+                User userToBan = db.getUserByNick(election);
                 if (userToBan != null){
                     ban(userToBan);
                 } else {

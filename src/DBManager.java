@@ -88,13 +88,15 @@ public class DBManager{
     public void addRequest(String challenger, String challenged, int gold){
         String[] request = {challenger,challenged,Integer.toString(gold)};
         dataBase.getRequests().add(List.of(request));
+
+
     }
 
     public List<User> top10() {
         return dataBase.getTop10();
     }
 
-    public User getUserToBan(String nick){
+    public User getUserByNick(String nick){
         Map<String, User> users =  dataBase.getUsers();
         if (users.containsKey(nick)){
             return users.get(nick);
@@ -119,6 +121,9 @@ public class DBManager{
         return dataBase.getRequests();
     }
 
+    public void addBattleToList(Battle battle){
+        dataBase.addBattleToList(battle);
+    }
 }
 
 

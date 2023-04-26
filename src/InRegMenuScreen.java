@@ -82,7 +82,7 @@ public class InRegMenuScreen extends Screen{
                 password = teclado.nextLine();
             }
             else{
-                char[] passwordArray = console.readPassword("Enter your  password: ");
+                char[] passwordArray = console.readPassword("Enter the password: ");
                 password = new String(passwordArray);
             }
             if (!getDataBase().adminPasswordCheck(password)){
@@ -94,8 +94,14 @@ public class InRegMenuScreen extends Screen{
 
         }
         System.out.print("User/Nick:  ");
-        String election;
-        election = teclado.nextLine();
+        String election = teclado.nextLine();
+        if (isRegist) {
+            while (super.getDataBase().existingUser(election) != DataBaseResult.notFound) {
+                System.out.println("This user already exists. Please enter another nick name.");
+                System.out.print("User/Nick:  ");
+                election = teclado.nextLine();
+            }
+        }
         formulario.put("nick", election);
 
         if (isRegist){
@@ -116,15 +122,6 @@ public class InRegMenuScreen extends Screen{
         }
 
         formulario.put("pas", password);
-
-
-
-
-
-
-
-
-
 
 
         if (isRegist){

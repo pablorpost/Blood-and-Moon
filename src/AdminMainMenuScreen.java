@@ -22,7 +22,6 @@ public class AdminMainMenuScreen extends Screen{
         options.put("0", auxList);
     }
     public ScreenResult showOptions() {
-        super.getManager().clearConsole();
         List<String> show = options.get("0");
         for(int i = 0; i<show.size(); i ++){
             System.out.println(show.get(i));
@@ -51,7 +50,7 @@ public class AdminMainMenuScreen extends Screen{
                     if (nReq > getDataBase().getRequests().size()) {
                         nReq = getDataBase().getRequests().size();
                     }
-                    for (int i = -1; i < nReq; i++) {
+                    for (int i = 0; i <= nReq; i++) {
                         getManager().clearConsole();
                         List<String> request = getDataBase().getRequests().get(0);
                         System.out.println("Do you want to validate this request? (Y/N)");
@@ -59,18 +58,18 @@ public class AdminMainMenuScreen extends Screen{
                         System.out.println("Challenger: " + request.get(0));
                         System.out.println("Challenged: " + request.get(1));
                         System.out.println("Gold betted: " + request.get(2));
+                        sc = new Scanner(System.in);
                         String response = sc.nextLine();
-                        if (response.equals("Y")) {
-                            getDataBase().getRequests().remove(0);
-
+                        getDataBase().getRequests().remove(0);
+                        if (response.equals("Y") || response.equals("y")) {
+                            getDataBase().getRequests().add(request);
+                            User challengedUser = getDataBase().getUserByNick(request.get(1));
+                            challengedUser.setPendingRequest(request);
                         }
-                        if (response.equals("N")) {
-                            getDataBase().getRequests().remove(0);
-                        }
-
                     }
                 }else{
                     System.out.println("(Press ENTER to continue)");
+                    sc = new Scanner(System.in);
                     String nReq = sc.nextLine();
                 }
                 return ScreenResult.stay;

@@ -34,7 +34,7 @@ public class ConfigureEquipmentScreen extends Screen{
         }
         Scanner sc = new Scanner(System.in);
         int numHands = 2;
-        while (numHands>0){
+        while (numHands > 0){
             int nu = -1;
             int a = charWeap.size();
             while (nu < 0 || nu >= a) {

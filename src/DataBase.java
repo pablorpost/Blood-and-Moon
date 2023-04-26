@@ -29,7 +29,6 @@ public class DataBase implements Serializable{
     }
 
     public void deletePerson(Person person){
-        // IMPLEMENTAR ----------------------------------------------------------------------------------------
 
         if (person instanceof User){
             users.remove(person.getNick());
@@ -90,6 +89,7 @@ public class DataBase implements Serializable{
         return aux2;
     }
 
+
     public List<List<String>> getRequests() {
         return requests;
     }
@@ -98,15 +98,15 @@ public class DataBase implements Serializable{
         this.requests = requests;
     }
 
-
-
-
-
     //para borrar
     public Map<String, User> getUsers(){
         return users;
     }
     public Map<String, Admin> getAdmins(){
         return admins;
+    }
+
+    public void addBattleToList(Battle battle){
+        this.battles.add(battle);
     }
 }

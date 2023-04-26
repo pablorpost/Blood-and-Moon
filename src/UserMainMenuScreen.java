@@ -1,5 +1,7 @@
 import java.util.*;
 
+import static java.lang.Math.max;
+
 public class UserMainMenuScreen extends Screen{
     private Character character;
     private int gold;
@@ -35,17 +37,31 @@ public class UserMainMenuScreen extends Screen{
     }
     @Override
     public ScreenResult showOptions() {
-        String requester = super.getDataBase().getRequestUser(user.getNick());
-        if (requester != null){
+        if (user.getPendingRequest() != null){
+            List<String> request = user.getPendingRequest();
+            User origen = getDataBase().getUserByNick(request.get(0));
+            User destino = getDataBase().getUserByNick(request.get(1));
+            int goldBet = Integer.valueOf(request.get(2));
             PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
             ScreenResult result = popUp.showPopUp(0);
             if (result == ScreenResult.stay){
-                // REVISAR -----------------------------------------------------------------------------------
-                System.out.println("combatir " + user.getNick() + " vs " + requester);
+                System.out.println("combatir " + user.getNick() + " vs " + request.get(0));
+                Battle thisBattle = new Battle(origen, destino, goldBet, getStore());
+                origen.addBattle(thisBattle);
+                destino.addBattle(thisBattle);
+                getDataBase().addBattleToList(thisBattle);
+                if (thisBattle.getWinner().equals(request.get(0))){
+                    origen.setGold(origen.getGold() + goldBet);
+                    destino.setGold(max(destino.getGold() - goldBet, 0));
+                }else if (thisBattle.getWinner().equals(request.get(1))){
+                    destino.setGold(destino.getGold() + goldBet);
+                    origen.setGold(max(origen.getGold() - goldBet, 0));
+                }
             } else {
                 // REVISAR -----------------------------------------------------------------------------------
-                System.out.println("rechazar combate " + user.getNick() + " vs " + requester);
+                System.out.println("rechazar combate " + user.getNick() + " vs " + request.get(0));
             }
+            user.setPendingRequest(null);
         }
 
         List<String> show;
@@ -73,7 +89,7 @@ public class UserMainMenuScreen extends Screen{
         if (this.user.getCharacter() != null) {
             switch (optionSelected) {
                 case 0:
-                    ChallengeRequestScreen screen = new ChallengeRequestScreen(this.getDataBase(),user.getNick());
+                    ChallengeRequestScreen screen = new ChallengeRequestScreen(this.getDataBase(), user);
                     getManager().showScreen(screen);
                     return ScreenResult.stay;
 
