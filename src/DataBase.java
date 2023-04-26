@@ -12,6 +12,7 @@ public class DataBase implements Serializable{
         users = new HashMap<String, User>();
         admins = new HashMap<String,Admin>();
         this.requests = new ArrayList<>();
+        battles = new ArrayList<>();
     }
 
     public User getUser(String nick, int password){

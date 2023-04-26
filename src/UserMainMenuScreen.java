@@ -8,8 +8,8 @@ public class UserMainMenuScreen extends Screen{
     private Map<String, List<String>> options;
     private User user;
 
-
     public UserMainMenuScreen(DBManager dataBase, Store store, Manager manager, User user) {
+        super.setTitle("Welcome " + user.getNick() + " you have " + user.getGold() + " coins.");
         super.setDescription("What would you like to do?");
         setDataBase(dataBase);
         setStore(store);
@@ -38,30 +38,8 @@ public class UserMainMenuScreen extends Screen{
     @Override
     public ScreenResult showOptions() {
         if (user.getPendingRequest() != null){
-            List<String> request = user.getPendingRequest();
-            User origen = getDataBase().getUserByNick(request.get(0));
-            User destino = getDataBase().getUserByNick(request.get(1));
-            int goldBet = Integer.valueOf(request.get(2));
-            PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
-            ScreenResult result = popUp.showPopUp(0);
-            if (result == ScreenResult.stay){
-                System.out.println("combatir " + user.getNick() + " vs " + request.get(0));
-                Battle thisBattle = new Battle(origen, destino, goldBet, getStore());
-                origen.addBattle(thisBattle);
-                destino.addBattle(thisBattle);
-                getDataBase().addBattleToList(thisBattle);
-                if (thisBattle.getWinner().equals(request.get(0))){
-                    origen.setGold(origen.getGold() + goldBet);
-                    destino.setGold(max(destino.getGold() - goldBet, 0));
-                }else if (thisBattle.getWinner().equals(request.get(1))){
-                    destino.setGold(destino.getGold() + goldBet);
-                    origen.setGold(max(origen.getGold() - goldBet, 0));
-                }
-            } else {
-                // REVISAR -----------------------------------------------------------------------------------
-                System.out.println("rechazar combate " + user.getNick() + " vs " + request.get(0));
-            }
-            user.setPendingRequest(null);
+            showPendingRequest();
+            return ScreenResult.stay;
         }
 
         List<String> show;
@@ -72,13 +50,10 @@ public class UserMainMenuScreen extends Screen{
             String nxtStr = keyBoard.nextLine();
             return ScreenResult.exit;
         }
-        int op;
         if (this.user.getCharacter() == null){
             show = options.get("1");
-            op = 1;
         } else {
             show = options.get("0");
-            op = 0;
         }
 
         for(int i = 0; i<show.size(); i ++){
@@ -92,13 +67,14 @@ public class UserMainMenuScreen extends Screen{
                     ChallengeRequestScreen screen = new ChallengeRequestScreen(this.getDataBase(), user);
                     getManager().showScreen(screen);
                     return ScreenResult.stay;
-
                 case 1:
                     ConfigureEquipmentScreen configureScreen = new ConfigureEquipmentScreen(getManager(), this.user);
                     getManager().showScreen(configureScreen);
                     return ScreenResult.stay;
                 case 2:
-                    break;
+                    BattleHistoryScreen bhs = new BattleHistoryScreen(getDataBase(), getStore(), user);
+                    getManager().showScreen(bhs);
+                    return ScreenResult.stay;
                 case 3:
                     RankingScreen rkSc = new RankingScreen(getDataBase(),getStore(),getManager());
                     getManager().showScreen(rkSc);
@@ -107,7 +83,6 @@ public class UserMainMenuScreen extends Screen{
                     PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
                     ScreenResult result = popUp.showPopUp(1);
                     if (result == ScreenResult.stay){
-                        // REVISAR -----------------------------------------------------------------------------------
                         user.setCharacter(null);
                     }
                     this.showOptions();
@@ -132,7 +107,9 @@ public class UserMainMenuScreen extends Screen{
                     }
                     break;
                 case 2:
-                    break;
+                    BattleHistoryScreen bhs = new BattleHistoryScreen(getDataBase(), getStore(), user);
+                    getManager().showScreen(bhs);
+                    return ScreenResult.stay;
                 case 3:
                     RankingScreen rkSc = new RankingScreen(getDataBase(),getStore(),getManager());
                     getManager().showScreen(rkSc);
@@ -143,6 +120,41 @@ public class UserMainMenuScreen extends Screen{
             }
         }
         return ScreenResult.exit;
+    }
+
+    private void showPendingRequest() {
+        List<String> request = user.getPendingRequest();
+        User origen = getDataBase().getUserByNick(request.get(0));
+        User destino = getDataBase().getUserByNick(request.get(1));
+        int goldBet = Integer.valueOf(request.get(2));
+        PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), origen);
+        ScreenResult result = popUp.showPopUp(0);
+        if (result == ScreenResult.stay){
+            System.out.println("You have chosen to fight against " + origen.getNick() + ", then the fight will take place:\n");
+            Battle thisBattle = new Battle(origen, destino, goldBet, getStore());
+            origen.addBattle(thisBattle);
+            destino.addBattle(thisBattle);
+            getDataBase().addBattleToList(thisBattle);
+            if (thisBattle.getWinner().equals(request.get(0))){
+                origen.setGold(origen.getGold() + goldBet);
+                destino.setGold(max(destino.getGold() - goldBet, 0));
+                System.out.println("You have lost...\n");
+            }else if (thisBattle.getWinner().equals(request.get(1))){
+                destino.setGold(destino.getGold() + goldBet);
+                origen.setGold(max(origen.getGold() - goldBet, 0));
+                System.out.println("You have won!\n");
+            }
+        } else {
+            origen.setGold(origen.getGold() + (int)(goldBet * 0.1));
+            destino.setGold(max(destino.getGold() - (int)(goldBet * 0.1), 0));
+            System.out.println("You have rejected the fight against " + origen.getNick() + ".\n10% Of the bet will be transferred to the challenger.\n");
+        }
+        user.setPendingRequest(null);
+        super.setTitle("Welcome " + user.getNick() + " you have " + user.getGold() + " coins.");
+        System.out.println("(Press ENTER to continue)");
+        Scanner sc = new Scanner(System.in);
+        sc.nextLine();
+
     }
 
     public Character getCharacter() {

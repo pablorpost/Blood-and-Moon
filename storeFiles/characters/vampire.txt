@@ -1,5 +1,5 @@
 name:Vampire
-life:5
+life:4
 description:Le encanta beber sangre
 weapon:Pistol1
 weapon:Pistol2

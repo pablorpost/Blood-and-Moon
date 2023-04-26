@@ -16,6 +16,7 @@ public class User extends Person{
         super(nick,name,password,DataBaseResult.user);
         this.weapons = new ArrayList<>();
         this.pendingRequest = null;
+        this.battles = new ArrayList<>();
         character = null;
         gold = 500;
     }

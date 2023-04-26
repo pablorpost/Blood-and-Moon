@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -12,14 +13,28 @@ public class Battle implements Serializable {
     private int gold;
     private String challenger;
     private String challenged;
-    private Store store;
 
     public Battle(User challenger, User challenged, int goldBet, Store store){
-        this.store = store;
-        this.challenger = challenger.getName();
-        this.challenged = challenged.getName();
+        this.challenger = challenger.getNick();
+        this.challenged = challenged.getNick();
         this.gold = goldBet;
+        this.date = Date.from(Instant.now());
 
+
+        //ELIMINARR-----VVVVV
+        this.rounds = new Random().nextInt(6);
+        if(new Random().nextInt(2) == 1){
+            this.winner = this.challenger;
+            this.looser = this.challenged;
+        }else{
+            this.winner = this.challenged;
+            this.looser = this.challenger;
+        }
+
+
+
+
+        /*
         Character char0;
         Character char1;
 
@@ -84,6 +99,7 @@ public class Battle implements Serializable {
         }
 
         setRounds(rounds);
+        */
     }
 
     private Character doCopy(Character charac) {
@@ -110,16 +126,16 @@ public class Battle implements Serializable {
         return acum;
     }
 
-    private int getPowerOfAtack(Character charac, List<String> weapons, String armor){
+    private int getPowerOfAtack(Character charac, List<String> weapons, String armor, Store store){
         int power = charac.getPower();
         int powerAtribute = charac.getPowerAtribute();
         String skill = charac.getSkill();
-        int skillPoints = this.store.getInfoSkill(skill).getAttackPoints();
+        int skillPoints = store.getInfoSkill(skill).getAttackPoints();
         int equipmentPoints = 0;
         for (String weapon:weapons){
-            equipmentPoints += this.store.getInfoWeapon(weapon).getAttack();
+            equipmentPoints += store.getInfoWeapon(weapon).getAttack();
         }
-        equipmentPoints += this.store.getInfoArmor(armor).getAtack();
+        equipmentPoints += store.getInfoArmor(armor).getAtack();
         int acum = power + skillPoints + equipmentPoints;
         if (charac instanceof Vampire){
             if (powerAtribute >= 5){
@@ -141,16 +157,16 @@ public class Battle implements Serializable {
         return acum;
     }
 
-    private int getPowerOfDefense(Character charac, List<String> weapons, String armor){
+    private int getPowerOfDefense(Character charac, List<String> weapons, String armor, Store store){
         int power = charac.getPower();
         int powerAtribute = charac.getPowerAtribute();
         String skill = charac.getSkill();
-        int skillPoints = this.store.getInfoSkill(skill).getDefensePoints();
+        int skillPoints = store.getInfoSkill(skill).getDefensePoints();
         int equipmentPoints = 0;
         for (String weapon:weapons){
-            equipmentPoints += this.store.getInfoWeapon(weapon).getDefense();
+            equipmentPoints += store.getInfoWeapon(weapon).getDefense();
         }
-        equipmentPoints += this.store.getInfoArmor(armor).getAtack();
+        equipmentPoints += store.getInfoArmor(armor).getAtack();
         int acum = power + skillPoints + equipmentPoints;
         if (charac instanceof Vampire){
             if (powerAtribute >= 5){

@@ -1,5 +1,7 @@
 import java.util.*;
 
+import static java.lang.Math.min;
+
 public class AdminMainMenuScreen extends Screen{
 
     private Admin admin;
@@ -42,36 +44,7 @@ public class AdminMainMenuScreen extends Screen{
                 return ScreenResult.stay;
 
             case 2:
-                getManager().clearConsole();
-                System.out.println("There are "+getDataBase().getRequests().size()+" request prending of validation");
-                if (getDataBase().getRequests().size() > 0) {
-                    System.out.println("How many requests do you want to validate?");
-                    int nReq = sc.nextInt();
-                    if (nReq > getDataBase().getRequests().size()) {
-                        nReq = getDataBase().getRequests().size();
-                    }
-                    for (int i = 0; i <= nReq; i++) {
-                        getManager().clearConsole();
-                        List<String> request = getDataBase().getRequests().get(0);
-                        System.out.println("Do you want to validate this request? (Y/N)");
-                        System.out.println();
-                        System.out.println("Challenger: " + request.get(0));
-                        System.out.println("Challenged: " + request.get(1));
-                        System.out.println("Gold betted: " + request.get(2));
-                        sc = new Scanner(System.in);
-                        String response = sc.nextLine();
-                        getDataBase().getRequests().remove(0);
-                        if (response.equals("Y") || response.equals("y")) {
-                            getDataBase().getRequests().add(request);
-                            User challengedUser = getDataBase().getUserByNick(request.get(1));
-                            challengedUser.setPendingRequest(request);
-                        }
-                    }
-                }else{
-                    System.out.println("(Press ENTER to continue)");
-                    sc = new Scanner(System.in);
-                    String nReq = sc.nextLine();
-                }
+                displayScreenRequestAcceptance(sc);
                 return ScreenResult.stay;
 
             case 3:
@@ -92,6 +65,36 @@ public class AdminMainMenuScreen extends Screen{
 
 
         return ScreenResult.exit;
+    }
+
+    private void displayScreenRequestAcceptance(Scanner sc) {
+        getManager().clearConsole();
+        System.out.println("There are "+getDataBase().getRequests().size()+" request prending of validation");
+        if (getDataBase().getRequests().size() > 0) {
+            System.out.println("How many requests do you want to validate?");
+            int nReq = min(sc.nextInt(), getDataBase().getRequests().size());
+            for (int i = 0; i <= nReq; i++) {
+                getManager().clearConsole();
+                List<String> request = getDataBase().getRequests().get(0);
+                System.out.println("Do you want to validate this request? (Y/N)");
+                System.out.println();
+                System.out.println("Challenger: " + request.get(0));
+                System.out.println("Challenged: " + request.get(1));
+                System.out.println("Gold betted: " + request.get(2));
+                sc = new Scanner(System.in);
+                String response = sc.nextLine();
+                getDataBase().getRequests().remove(0);
+                if (response.equals("Y") || response.equals("y")) {
+                    getDataBase().getRequests().add(request);
+                    User challengedUser = getDataBase().getUserByNick(request.get(1));
+                    challengedUser.setPendingRequest(request);
+                }
+            }
+        }else{
+            System.out.println("(Press ENTER to continue)");
+            sc = new Scanner(System.in);
+            String nReq = sc.nextLine();
+        }
     }
 
     public void validatRequests(){
