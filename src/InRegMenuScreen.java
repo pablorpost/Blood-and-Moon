@@ -106,15 +106,15 @@ public class InRegMenuScreen extends Screen{
 
 
 
-
+        System.out.print("Password:  ");
         if (console == null) {
             password = teclado.nextLine();
         }
         else{
-            char[] passwordArray = console.readPassword("Enter your  password: ");
+            char[] passwordArray = console.readPassword();
             password = new String(passwordArray);
         }
-        System.out.print("Password:  ");
+
         formulario.put("pas", password);
 
 
