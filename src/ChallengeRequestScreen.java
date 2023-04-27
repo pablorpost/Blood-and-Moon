@@ -14,9 +14,8 @@ public class ChallengeRequestScreen extends Screen{
         System.out.println("What user would you like to challenge?");
         Scanner teclado = new Scanner(System.in);
         String challenged = teclado.nextLine();
-        ArrayList<String> emptyList = new ArrayList<>();
-        if (!lookForNick(challenged) || challenged.equals(challenger.getNick()) || !Objects.equals(getDataBase().getUserByNick(challenged).getBattles(), emptyList)) {
-            if (!Objects.equals(getDataBase().getUserByNick(challenged).getBattles(), emptyList)){
+        if (!lookForNick(challenged) || challenged.equals(challenger.getNick()) || getDataBase().getUserByNick(challenged).getPendingRequest()!=null) {
+            if (lookForNick(challenged) && getDataBase().getUserByNick(challenged).getPendingRequest()!=null){
                 System.out.println("This user currently has a pending challenge accepted by the admins.");
             }
             System.out.println("Please enter a valid user nick name.");
