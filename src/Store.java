@@ -1,15 +1,14 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Store {
-    private String directorio;
-    private List<Character> chracters;
+    private final String directorio;
+    private final List<Character> chracters;
     private List<Weapon> weapons;
     private List<Armor> armors;
-    private List<Minion> minions;
-    private List<Modifier> modifiers;
+    private final List<Minion> minions;
+    private final List<Modifier> modifiers;
     private List<Skill> skills;
 
     public Store(){
@@ -21,16 +20,12 @@ public class Store {
         this.modifiers = new ArrayList<>();
 
         //out/atrifacts/Blood-and-moon.jar
-        //this.directorio = "../../../storeFiles";
+        this.directorio = "../../../storeFiles";
 
         //src/
-        this.directorio = "storeFiles";
+        //this.directorio = "storeFiles";
 
         loadStore(this.directorio);
-
-    }
-
-    public void uploadInfo(){
 
     }
 

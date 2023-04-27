@@ -76,19 +76,30 @@ public class AdminMainMenuScreen extends Screen{
             for (int i = 0; i <= nReq; i++) {
                 getManager().clearConsole();
                 List<String> request = getDataBase().getRequests().get(0);
-                System.out.println("Do you want to validate this request? (Y/N)");
-                System.out.println();
-                System.out.println("Challenger: " + request.get(0));
-                System.out.println("Challenged: " + request.get(1));
-                System.out.println("Gold betted: " + request.get(2));
-                sc = new Scanner(System.in);
-                String response = sc.nextLine();
-                getDataBase().getRequests().remove(0);
-                if (response.equals("Y") || response.equals("y")) {
-                    getDataBase().getRequests().add(request);
-                    User challengedUser = getDataBase().getUserByNick(request.get(1));
-                    challengedUser.setPendingRequest(request);
+                if (getDataBase().getUserByNick(request.get(1)).getPendingRequest()!=null){
+                    System.out.println("A challenge for "+request.get(1)+" has already been set");
+                    System.out.println("Do you want to delete it (Y) or keep it for future validation (N)?");
+                    String response = sc.nextLine();
+                    if (response.equals("Y") || response.equals("y")) {
+                        getDataBase().getRequests().remove(0);
+                    }
                 }
+                else{
+                    System.out.println("Do you want to validate this request? (Y/N)");
+                    System.out.println();
+                    System.out.println("Challenger: " + request.get(0));
+                    System.out.println("Challenged: " + request.get(1));
+                    System.out.println("Gold betted: " + request.get(2));
+                    sc = new Scanner(System.in);
+                    String response = sc.nextLine();
+                    getDataBase().getRequests().remove(0);
+                    if (response.equals("Y") || response.equals("y")) {
+                        getDataBase().getRequests().add(request);
+                        User challengedUser = getDataBase().getUserByNick(request.get(1));
+                        challengedUser.setPendingRequest(request);
+                    }
+                }
+
             }
         }else{
             System.out.println("(Press ENTER to continue)");

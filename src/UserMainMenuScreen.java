@@ -66,6 +66,7 @@ public class UserMainMenuScreen extends Screen{
                 case 0:
                     ChallengeRequestScreen screen = new ChallengeRequestScreen(this.getDataBase(), user);
                     getManager().showScreen(screen);
+                    super.setTitle("Welcome " + user.getNick() + " you have " + user.getGold() + " coins.");
                     return ScreenResult.stay;
                 case 1:
                     ConfigureEquipmentScreen configureScreen = new ConfigureEquipmentScreen(getManager(), this.user);

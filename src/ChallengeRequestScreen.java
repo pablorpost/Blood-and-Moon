@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ChallengeRequestScreen extends Screen{
@@ -12,14 +14,17 @@ public class ChallengeRequestScreen extends Screen{
         System.out.println("What user would you like to challenge?");
         Scanner teclado = new Scanner(System.in);
         String challenged = teclado.nextLine();
-        if (!lookForNick(challenged) || challenged.equals(challenger.getNick()) || getDataBase().getUserByNick(challenged).getBattles() != null) {
-            if (getDataBase().getUserByNick(challenged).getBattles() != null){
+        ArrayList<String> emptyList = new ArrayList<>();
+        if (!lookForNick(challenged) || challenged.equals(challenger.getNick()) || !Objects.equals(getDataBase().getUserByNick(challenged).getBattles(), emptyList)) {
+            if (!Objects.equals(getDataBase().getUserByNick(challenged).getBattles(), emptyList)){
                 System.out.println("This user currently has a pending challenge accepted by the admins.");
             }
             System.out.println("Please enter a valid user nick name.");
+            System.out.println("\n(Press ENTER to continue)");
             teclado.nextLine();
             return super.showOptions();
         }
+
         System.out.println("How much gold would you like to bet (you have " + challenger.getGold() + " coins)?");
         int gold = teclado.nextInt();
         while (gold > challenger.getGold()){
@@ -27,7 +32,7 @@ public class ChallengeRequestScreen extends Screen{
             gold = teclado.nextInt();
         }
         getDataBase().addRequest(challenger.getNick(), challenged, gold);
-
+        challenger.setGold(challenger.getGold()-gold);
         return super.showOptions();
     }
 
