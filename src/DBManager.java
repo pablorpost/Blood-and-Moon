@@ -71,6 +71,9 @@ public class DBManager{
         }
     }
 
+    public boolean hasCharacter(String nick){
+        return getUserByNick(nick).getCharacter()==null;
+    }
     public void deletePerson(Person person){
         dataBase.deletePerson(person);
     }

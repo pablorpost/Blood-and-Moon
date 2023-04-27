@@ -81,12 +81,24 @@ public class AdminMainMenuScreen extends Screen{
                 System.out.println("Challenger: " + request.get(0));
                 System.out.println("Challenged: " + request.get(1));
                 System.out.println("Gold betted: " + request.get(2));
-                if (getDataBase().getUserByNick(request.get(1)).getPendingRequest()!=null){
-                    System.out.println("\nA challenge for "+request.get(1)+" has already been set");
-                    System.out.println("Do you want to delete it (Y) or keep it for future validation (N)?");
-                    String response = sc.nextLine();
-                    if (response.equals("Y") || response.equals("y")) {
+                if (getDataBase().getUserByNick(request.get(1)).getPendingRequest()!=null || getDataBase().existingUser(request.get(1))==DataBaseResult.user || getDataBase().getUserByNick(request.get(1)).getCharacter()!=null){
+                    if(!(getDataBase().existingUser(request.get(1))==DataBaseResult.user)){
+                        System.out.println("\n" + request.get(1) + " has deleted their account");
                         getDataBase().getRequests().remove(0);
+                    }
+                    else {
+                        if(getDataBase().getUserByNick(request.get(1)).getPendingRequest()!=null){
+                            System.out.println("\nA challenge for " + request.get(1) + " has already been set");
+                        }
+                        else{
+                            System.out.println("\n" + request.get(1) + " has deleted their character");
+                        }
+                        System.out.println("\nA challenge for " + request.get(1) + " has already been set");
+                        System.out.println("Do you want to delete it (Y) or keep it for future validation (N)?");
+                        String response = sc.nextLine();
+                        if (response.equals("Y") || response.equals("y")) {
+                            getDataBase().getRequests().remove(0);
+                        }
                     }
                 }
                 else{
