@@ -12,13 +12,19 @@ public class Battle implements Serializable {
     private int gold;
     private String challenger;
     private String challenged;
+    private Modifier modifier;
 
     public Battle(User challenger, User challenged, int goldBet, Store store){
         this.challenger = challenger.getName();
         this.challenged = challenged.getName();
         this.gold = goldBet;
+        Random rand = new Random();
+        int index = rand.nextInt(store.getModifiers().size());
+        this.modifier =  store.getModifiers().get(index);
+        boolean more = modifier.getType()==1;
 
         //ELIMINARR-----VVVVV
+        /*
         this.rounds = new Random().nextInt(6);
         if(new Random().nextInt(2) == 1){
             this.winner = this.challenger;
@@ -27,7 +33,8 @@ public class Battle implements Serializable {
             this.winner = this.challenged;
             this.looser = this.challenger;
         }
-        /*
+        **/
+
         Character char0 = challenger.getCharacter();
         Character char1 = challenged.getCharacter();
 
@@ -38,11 +45,11 @@ public class Battle implements Serializable {
 
         while (char0Life > 0 && char1Life > 0) {
             rounds += 1;
-            int firstAttack = getPowerOfAtack(char0, challenger.getWeapons(), challenger.getArmor(), store);
-            int secondAttack = getPowerOfAtack(char1, challenged.getWeapons(), challenged.getArmor(), store);
+            int firstAttack = getPowerOfAtack(char0, challenger, store, more);
+            int secondAttack = getPowerOfAtack(char1, challenged, store, more);
 
-            int firstDefense = getPowerOfDefense(char1, challenged.getWeapons(), challenged.getArmor(), store);
-            int secondDefense = getPowerOfDefense(char0, challenger.getWeapons(), challenger.getArmor(), store);
+            int firstDefense = getPowerOfDefense(char1, challenged, store, more);
+            int secondDefense = getPowerOfDefense(char0, challenger, store, more);
 
             int succesAttack1 = calculateSucces(firstAttack);
             int succesAttack2 = calculateSucces(secondAttack);
@@ -78,7 +85,7 @@ public class Battle implements Serializable {
         //dejará los personajes como estaban
         store.loadCharacters();
         setRounds(rounds);
-        */
+
     }
 
 
@@ -117,12 +124,13 @@ public class Battle implements Serializable {
         return acum;
     }
 
-    private int getPowerOfAtack(Character charac, List<String> weapons, String armor, Store store){
+    private int getPowerOfAtack(Character charac, User user, Store store, boolean more){
         //poder
         int power = charac.getPower();
         //poder según personaje
         int powerAtribute = charac.getPowerAtribute();
-
+        List<String> weapons = user.getWeapons();
+        String armor = user.getArmor();
         String skill = charac.getSkill();
         int skillPoints = store.getInfoSkill(skill).getAttackPoints();
         int equipmentPoints = 0;
@@ -149,12 +157,27 @@ public class Battle implements Serializable {
         } else {
             acum += powerAtribute;
         }
-        return acum;
+
+        boolean containModifier = false;
+        for (String modifier:charac.getModifiers()) {
+            containModifier = modifier.equals(this.modifier);
+        }
+
+        if (more && containModifier){
+            return acum+this.modifier.getPower();
+        } else if (!(more) && containModifier) {
+            return acum-this.modifier.getPower();
+        }else{
+            return acum;
+        }
+
     }
 
-    private int getPowerOfDefense(Character charac, List<String> weapons, String armor, Store store){
+    private int getPowerOfDefense(Character charac, User user, Store store, boolean more){
         int power = charac.getPower();
         int powerAtribute = charac.getPowerAtribute();
+        List<String> weapons = user.getWeapons();
+        String armor = user.getArmor();
         String skill = charac.getSkill();
         int skillPoints = store.getInfoSkill(skill).getDefensePoints();
         int equipmentPoints = 0;
