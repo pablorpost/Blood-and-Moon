@@ -53,7 +53,6 @@ public class InRegMenuScreen extends Screen{
             if (election==0 || election==1){
                 this.getManager().clearConsole();
                 System.out.println("██████╗ ██╗      ██████╗  ██████╗ ██████╗    ██╗   ███╗   ███╗ ██████╗  ██████╗ ███╗   ██╗\n██╔══██╗██║     ██╔═══██╗██╔═══██╗██╔══██╗   ██║   ████╗ ████║██╔═══██╗██╔═══██╗████╗  ██║\n██████╔╝██║     ██║   ██║██║   ██║██║  ██║████████╗██╔████╔██║██║   ██║██║   ██║██╔██╗ ██║\n██╔══██╗██║     ██║   ██║██║   ██║██║  ██║██╔═██╔═╝██║╚██╔╝██║██║   ██║██║   ██║██║╚██╗██║\n██████╔╝███████╗╚██████╔╝╚██████╔╝██████╔╝██████║  ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║ ╚████║\n╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝  ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝");
-
                 showForm((election==1),(option.equals("admin")));
                 option = "user";
             }
@@ -127,6 +126,7 @@ public class InRegMenuScreen extends Screen{
 
         if (isRegist){
             this.addPerson(formulario.get("nick"), formulario.get("name"), formulario.get("pas"), isAdmin);
+            this.getDataBase().save();
         }
         DataBaseResult resulta = this.checkPerson(formulario.get("nick"), formulario.get("pas"));
         if (resulta == DataBaseResult.user && !isAdmin){
