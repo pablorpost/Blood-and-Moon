@@ -16,14 +16,14 @@ public class Character implements Serializable {
     private List<String> modifiers;
 
     private int power;
-
+    // Constructor de personaje
     public Character (){
         this.weapons = new ArrayList<>();
         this.armors = new ArrayList<>();
         this.minions = new ArrayList<>();
         this.modifiers = new ArrayList<>();
     }
-
+    // Cargar la info del personaje del .txt
     public  void loadCharacter(String directorio, String character) throws FileNotFoundException {
             String ruta = directorio + File.separatorChar + "characters" + File.separatorChar + character+ ".txt";
             File fichero = new File(ruta);
@@ -35,7 +35,7 @@ public class Character implements Serializable {
             }
 
     }
-
+    //  Leer linea (se implementa en sus hijos)
     public void readLine(String[] var) {
     }
     public void setName(String name) {

@@ -2,6 +2,7 @@ import java.util.*;
 
 public class CreateCharacterScreen extends Screen{
     private Map<String, List<String>> options;
+    // Constructor de crear personaje
     public CreateCharacterScreen(User user, Manager manager) {
         setStore(manager.getStore());
         setManager(manager);
@@ -16,7 +17,7 @@ public class CreateCharacterScreen extends Screen{
         this.options.put("0", auxList);
     }
 
-
+    // mostrar las opciones del personaje
     public ScreenResult showOptions(){
         Manager m =  super.getManager();
         DBManager db = super.getDataBase();
@@ -38,7 +39,7 @@ public class CreateCharacterScreen extends Screen{
 
         return ScreenResult.exit;
     }
-
+    /*
     private void chooseWeapons(int optionSelected){
         List<String> charWeap = getStore().getChracters().get(optionSelected).getWeapons();
 
@@ -79,5 +80,7 @@ public class CreateCharacterScreen extends Screen{
         }
         ((User) getPerson()).setArmor(charArmors.get(mu));
     }
+
+     */
 
 }

@@ -7,12 +7,13 @@ import static java.lang.Math.min;
 public class BattleHistoryScreen extends Screen{
 
     private User user;
+    // El constructor del historial de batallas
     public BattleHistoryScreen(DBManager dataBase, Store store, User user) {
         setStore(store);
         setDataBase(dataBase);
         this.user = user;
     }
-
+    // Mostrar cada batalla del historial
     public ScreenResult showOptions(){
         List<Battle> battles = user.getBattles();
         for (int i = 0; i < min(battles.size(), 20); i++) {

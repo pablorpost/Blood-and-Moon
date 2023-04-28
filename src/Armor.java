@@ -8,18 +8,18 @@ public class Armor {
     private String name;
     private int defense;
     private int atack;
-
+    // Constructor de Armor
     public Armor(String [] line) {
         this.name = line[0];
         this.defense = Integer.valueOf(line[1]);
         this.atack = Integer.valueOf(line[2]);
     }
-
+    // Constructor vacio de Armor, para no inicializar
     public Armor() {
 
 
     }
-
+    // Cargar las armaduras de los .txt
     public List<Armor> loadArmors(String directorio) throws FileNotFoundException {
         ArrayList<Armor> armors = new ArrayList<>();
         String ruta = directorio + File.separatorChar + "armors" + File.separatorChar + "armors.txt";
