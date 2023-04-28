@@ -137,16 +137,14 @@ public class UserMainMenuScreen extends Screen{
             destino.addBattle(thisBattle);
             getDataBase().addBattleToList(thisBattle);
             if (thisBattle.getWinner().equals(request.get(0))){
-                origen.setGold(origen.getGold() + goldBet);
-                destino.setGold(max(destino.getGold() - goldBet, 0));
+                origen.setGold(origen.getGold() + 2*goldBet);
                 System.out.println("You have lost...\n");
             }else if (thisBattle.getWinner().equals(request.get(1))){
-                destino.setGold(destino.getGold() + goldBet);
-                origen.setGold(max(origen.getGold() - goldBet, 0));
+                destino.setGold(destino.getGold() + 2*goldBet);
                 System.out.println("You have won!\n");
             }
         } else {
-            origen.setGold(origen.getGold() + (int)(goldBet * 0.1));
+            origen.setGold(origen.getGold() + (int)(goldBet * 1.1));
             destino.setGold(max(destino.getGold() - (int)(goldBet * 0.1), 0));
             System.out.println("You have rejected the fight against " + origen.getNick() + ".\n10% Of the bet will be transferred to the challenger.\n");
         }
