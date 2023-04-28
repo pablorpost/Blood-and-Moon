@@ -11,6 +11,7 @@ public class Store {
     private List<Modifier> modifiers;
     private List<Skill> skills;
 
+    //Constructor
     public Store(){
         this.minions = new ArrayList<>();
         this.chracters = new ArrayList<>();
@@ -29,6 +30,7 @@ public class Store {
 
     }
 
+    //Cargará toda la información de la store, leyendo los diferentes archivos
     private void loadStore(String directorio){
         Armor armor= new Armor();
         try {
@@ -62,6 +64,7 @@ public class Store {
 
     }
 
+    //Cargará los esbirros
     private void loadMinions() {
         Human human = new Human(this.directorio);
         this.minions.add(human);
@@ -72,6 +75,7 @@ public class Store {
 
     }
 
+    //Cargará los personajes
     public void loadCharacters() {
         Vampire vampire = new Vampire(this.directorio);
         this.chracters.add(vampire);
@@ -81,6 +85,7 @@ public class Store {
         this.chracters.add(lycanthrope);
     }
 
+    //Cargará las armas
     public Weapon getInfoWeapon(String name){
         for(Weapon weapon : this.weapons){
             if(weapon.getName().equals(name)){
@@ -90,6 +95,7 @@ public class Store {
         return null;
     }
 
+    //Cargará las armaduras
     public Armor getInfoArmor(String name){
         for(Armor armor : this.armors){
             if(armor.getName().equals(name)){
@@ -99,15 +105,7 @@ public class Store {
         return null;
     }
 
-    public Modifier getInfoModifier(String name){
-        for(Modifier modifier : this.modifiers){
-            if(modifier.getName().equals(name)){
-                return modifier;
-            }
-        }
-        return null;
-    }
-
+    //Devolverá el esbirro que tenga el nombre indicado
     public Minion getInfoMinion(String name){
         for(Minion minion : this.minions){
             if(minion.getName().equals(name)){
@@ -118,6 +116,7 @@ public class Store {
 
     }
 
+    //Devolverá la skill que tenga el nombre indicado
     public Skill getInfoSkill(String name){
         for(Skill skill : this.skills){
             if(skill.getName().equals(name)){
@@ -127,10 +126,12 @@ public class Store {
         return null;
     }
 
+    //Devolverá la lista de personajes
     public List<Character> getChracters() {
         return chracters;
     }
 
+    //Devolverá la lista de armas
     public List<String> getWeapons() {
         List<String> weapons = new ArrayList<>();
         for (Weapon weapon : this.weapons) {
@@ -139,6 +140,7 @@ public class Store {
         return weapons;
     }
 
+    //Devolverá la lista de armaduras
     public List<String> getArmors() {
         List<String> armors = new ArrayList<>();
         for (Armor armor : this.armors) {
@@ -147,6 +149,7 @@ public class Store {
         return armors;
     }
 
+    //Devolverá la lista de esbirros
     public List<String> getMinions() {
         List<String> minions = new ArrayList<>();
         for (Minion minion : this.minions) {
@@ -155,14 +158,17 @@ public class Store {
         return minions;
     }
 
+    //Devolverá la lista de modificadores
     public List<Modifier> getModifiers() {
         return modifiers;
     }
 
+    //Devolverá el directorio
     public String getDirectory() {
         return directorio;
     }
 
+    //Modificará el fichero de texto del personaje indicado, con la información del mismo
     public void saveCharacter(int charac){
         Character character = getChracters().get(charac);
         try {

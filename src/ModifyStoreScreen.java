@@ -4,6 +4,7 @@ public class ModifyStoreScreen extends Screen{
 
     private Map<String, List<String>> options;
 
+    //Constructor
     public ModifyStoreScreen(Manager manager) {
         super.setManager(manager);
         super.setStore(manager.getStore());
@@ -48,6 +49,7 @@ public class ModifyStoreScreen extends Screen{
         options.put("3", lycanthrope);
     }
 
+    //Se encargará de interactuar con el usuario pidiéndole la nueva información para hacer la modificación
     public ScreenResult changeStore(Store store, int character, int atribute){
         switch (atribute) {
             case 0:
@@ -166,8 +168,6 @@ public class ModifyStoreScreen extends Screen{
                     }
                     Vampire vampire = (Vampire) store.getChracters().get(0);
                     vampire.setBlood(numb);
-
-
                 }
                 break;
         }
@@ -176,6 +176,7 @@ public class ModifyStoreScreen extends Screen{
     }
 
 
+    //Mostrará las distintas opciones a modificar
     @Override
     public ScreenResult showOptions(){
         Manager m =  super.getManager();
@@ -209,10 +210,8 @@ public class ModifyStoreScreen extends Screen{
         return ScreenResult.stay;
     }
 
-    public Map<String, List<String>> getOptions() {
-        return options;
-    }
 
+    //Guardará los nuevos cambios
     private void saveChanges(Store store, int character){
         store.saveCharacter(character);
     }

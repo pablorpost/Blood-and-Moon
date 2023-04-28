@@ -10,6 +10,7 @@ public abstract class Person implements Serializable{
     private DataBaseResult type;
     private List<Battle> battles;
 
+    //Constructor
     public Person(String nick, String name, int password, DataBaseResult type){
         this.nick = nick;
         this.name = name;
@@ -17,50 +18,35 @@ public abstract class Person implements Serializable{
         this.type = type;
         this.battles = new ArrayList<>();
     }
+
+    //Agregará una batalla a la lista
     public void addBattle(Battle battle){
 
     }
 
+    //Devolverá el nombre
     public String getName() {
         return name;
     }
 
+    //Modificará el nombre
     public void setName(String name) {
         this.name = name;
     }
 
+    //Devolverá el nick
     public String getNick() {
         return nick;
     }
 
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
-
+    //Devolverá la contraseña
     public int getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
-        this.password = password;
-    }
-
-    public DataBaseResult getType() {
-        return type;
-    }
-
-    public void setType(DataBaseResult type) {
-        this.type = type;
-    }
-
+    //Devolverá la lista de batallas
     public List<Battle> getBattles() {
         return battles;
     }
-
-    public void setBattles(List<Battle> battles) {
-        this.battles = battles;
-    }
-
-
 
 }

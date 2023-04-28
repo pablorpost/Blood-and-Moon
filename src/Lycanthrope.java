@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 public class Lycanthrope extends Character{
     private int anger;
 
+    //Constructor para cargar archivo
     public Lycanthrope(String directorio){
         super();
         try {
@@ -34,6 +35,7 @@ public class Lycanthrope extends Character{
         }
     }
 
+    //Modificará el valor del personaje en función de la clave
     @Override
     public void readLine(String[] var) {
         if (null != var[0]) switch (var[0]) {
@@ -72,20 +74,25 @@ public class Lycanthrope extends Character{
 
         }
     }
+
+    //Devolverá el atributo anger
     public int getAnger() {
         return anger;
     }
 
+    //Modificará el atributo anger
     public void setAnger(int anger) {
         this.anger = anger;
     }
 
+    //Devolverá el atributo distintivo del personaje
     @Override
     public int getPowerAtribute(){return this.anger;}
 
+    //Añadirá puntos de anger
     public void addAnger(int i) {
         if (this.anger<3){
-            this.anger+=1;
+            this.anger+=i;
         }
     }
 }

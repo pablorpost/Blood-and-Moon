@@ -6,8 +6,9 @@ public class InRegMenuScreen extends Screen{
 
     private Map<String, List<String>> options;
     private Map<String, List<String>> formVersions;
-
     private String option;
+
+    //Constructor
     public InRegMenuScreen(DBManager dataBase, Store store,Manager manager) {
         super.setStore(store);
         super.setDataBase(dataBase);
@@ -29,7 +30,7 @@ public class InRegMenuScreen extends Screen{
 
     }
 
-
+    //Mostrará al usuario las opciones de esta pantalla.
     @Override
     public ScreenResult showOptions(){
         int election = -1;
@@ -59,6 +60,7 @@ public class InRegMenuScreen extends Screen{
         return ScreenResult.stay;
     }
 
+    //Muestra los distintos campos que se solicitará al usuario (los campos dependen del tipo de usuario)
     public Map<String, String> showForm(boolean isRegist, boolean isAdmin){
         Console console = System.console();
         Scanner teclado = new Scanner(System.in);
@@ -152,10 +154,12 @@ public class InRegMenuScreen extends Screen{
         return null;
     }
 
+    //Devolverá el resultado de buscar una persona en la base de datos
     public DataBaseResult checkPerson(String nick, String pass){
         return getDataBase().inDataBase(nick,pass);
     }
 
+    //Añadirá una persona a la base de datos
     public Person addPerson(String nick, String name, String pass, boolean isAdmin){
         DBManager d = getDataBase();
         if (isAdmin){
@@ -166,27 +170,4 @@ public class InRegMenuScreen extends Screen{
         return d.getUser(nick, pass);
     }
 
-    public void showError(){
-
-    }
-
-    public Person getPersonAndSet(String name, String pass){
-        return null;
-    }
-
-    public Map<String, List<String>> getOptions() {
-        return options;
-    }
-
-    public void setOptions(Map<String, List<String>> options) {
-        this.options = options;
-    }
-
-    public Map<String, List<String>> getFormVersions() {
-        return formVersions;
-    }
-
-    public void setFormVersions(Map<String, List<String>> formVersions) {
-        this.formVersions = formVersions;
-    }
 }

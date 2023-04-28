@@ -9,15 +9,18 @@ public class Modifier {
     private int power;
     private String name;
 
+    //Constructor que leerá una línea de información
     public Modifier(String [] line){
         this.name = line[0];
         this.type = Integer.valueOf(line[1]);
         this.power = Integer.valueOf(line[2]);
 
     }
+    //Constructor
     public Modifier(){
     }
 
+    //Cargará la información de los modificadores que hay en el fichero
     public List<Modifier> loadModifiers(String directorio) throws FileNotFoundException {
         ArrayList<Modifier> modifiers = new ArrayList<>();
         String ruta = directorio + File.separatorChar + "modifiers" + File.separatorChar + "modifiers.txt";
@@ -33,26 +36,27 @@ public class Modifier {
 
     }
 
+    //Devolverá el tipo
     public int getType() {
         return type;
     }
 
-    public void setType(int type) {
-        this.type = type;
-    }
-
+    //Devolverá el poder
     public int getPower() {
         return power;
     }
 
+    //Modificará el poder
     public void setPower(int power) {
         this.power = power;
     }
 
+    //Devolverá el nombre
     public String getName() {
         return name;
     }
 
+    //Modificará el nombre
     public void setName(String name) {
         this.name = name;
     }
