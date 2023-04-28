@@ -85,6 +85,8 @@ public class AdminMainMenuScreen extends Screen{
                     if(!(getDataBase().existingUser(request.get(1))==DataBaseResult.user)){
                         System.out.println("\n" + request.get(1) + " has deleted their account");
                         getDataBase().getRequests().remove(0);
+                        int oldGold = getDataBase().getUserByNick(request.get(0)).getGold();
+                        getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
                     }
                     else {
                         if(getDataBase().getUserByNick(request.get(1)).getPendingRequest()!=null){
