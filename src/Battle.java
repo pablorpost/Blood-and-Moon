@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -12,7 +13,6 @@ public class Battle implements Serializable {
     private int gold;
     private String challenger;
     private String challenged;
-    private Modifier modifier;
 
     public Battle(User challenger, User challenged, int goldBet, Store store){
         this.challenger = challenger.getName();
@@ -20,8 +20,9 @@ public class Battle implements Serializable {
         this.gold = goldBet;
         Random rand = new Random();
         int index = rand.nextInt(store.getModifiers().size());
-        this.modifier =  store.getModifiers().get(index);
+        Modifier modifier =  store.getModifiers().get(index);
         boolean more = modifier.getType()==1;
+        this.date = Date.from(Instant.now());
 
         //ELIMINARR-----VVVVV
         /*
@@ -45,8 +46,8 @@ public class Battle implements Serializable {
 
         while (char0Life > 0 && char1Life > 0) {
             rounds += 1;
-            int firstAttack = getPowerOfAtack(char0, challenger, store, more);
-            int secondAttack = getPowerOfAtack(char1, challenged, store, more);
+            int firstAttack = getPowerOfAtack(char0, challenger, store, more, modifier);
+            int secondAttack = getPowerOfAtack(char1, challenged, store, more, modifier);
 
             int firstDefense = getPowerOfDefense(char1, challenged, store, more);
             int secondDefense = getPowerOfDefense(char0, challenger, store, more);
@@ -124,7 +125,7 @@ public class Battle implements Serializable {
         return acum;
     }
 
-    private int getPowerOfAtack(Character charac, User user, Store store, boolean more){
+    private int getPowerOfAtack(Character charac, User user, Store store, boolean more, Modifier modifier){
         //poder
         int power = charac.getPower();
         //poder según personaje
@@ -159,14 +160,14 @@ public class Battle implements Serializable {
         }
 
         boolean containModifier = false;
-        for (String modifier:charac.getModifiers()) {
-            containModifier = modifier.equals(this.modifier);
+        for (String modifierS:charac.getModifiers()) {
+            containModifier = modifierS.equals(modifier);
         }
 
         if (more && containModifier){
-            return acum+this.modifier.getPower();
+            return acum+modifier.getPower();
         } else if (!(more) && containModifier) {
-            return acum-this.modifier.getPower();
+            return acum-modifier.getPower();
         }else{
             return acum;
         }
