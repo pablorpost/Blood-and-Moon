@@ -2,6 +2,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ConfigureEquipmentScreen extends Screen{
+
+    //Constructor
     public ConfigureEquipmentScreen(Manager manager, User user) {
         setStore(manager.getStore());
         setManager(manager);
@@ -11,6 +13,7 @@ public class ConfigureEquipmentScreen extends Screen{
     }
 
 
+    //Mostrará las opciones de esta pantalla.
     public ScreenResult showOptions(){
         Manager m =  super.getManager();
         DBManager db = super.getDataBase();
@@ -21,6 +24,7 @@ public class ConfigureEquipmentScreen extends Screen{
         return ScreenResult.exit;
     }
 
+    //Mostrará las opciones para que el usuario eliga su(s) arma(s).
     private void chooseWeapons(){
         List<String> charWeap = ((User) getPerson()).getCharacter().getWeapons();
         int numHands = 2;
@@ -49,6 +53,7 @@ public class ConfigureEquipmentScreen extends Screen{
 
     }
 
+    //Mostrará al usuario las opciones que tiene para elegir su armadura
     private void chooseArmor(){
         List<String> charArmors = ((User) getPerson()).getCharacter().getArmors();
 
