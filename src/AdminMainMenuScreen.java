@@ -94,6 +94,7 @@ public class AdminMainMenuScreen extends Screen{
             sc = new Scanner(System.in);
             String nReq = sc.nextLine();
         }
+        getDataBase().save();
     }
 
     public void validatRequests(){
@@ -107,6 +108,9 @@ public class AdminMainMenuScreen extends Screen{
             getDataBase().getRequests().remove(0);
             int oldGold = getDataBase().getUserByNick(request.get(0)).getGold();
             getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
+            System.out.println("(Press ENTER to continue)");
+            sc = new Scanner(System.in);
+            String nReq = sc.nextLine();
         }
         else {
             if(getDataBase().getUserByNick(request.get(1)).getPendingRequest()!=null){

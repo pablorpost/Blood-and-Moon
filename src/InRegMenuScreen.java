@@ -94,15 +94,16 @@ public class InRegMenuScreen extends Screen{
         System.out.print("User/Nick:  ");
         String election = teclado.nextLine();
         if (isRegist) {
-            while (super.getDataBase().existingUser(election) != DataBaseResult.notFound) {
-                System.out.println("This user already exists. Please enter another nick name.");
-                System.out.print("User/Nick:  ");
-                election = teclado.nextLine();
-            }
-            while(election.contains(" ") || election.equals("")){
-                System.out.println("Your nick can't contain a space.");
-                System.out.print("User/Nick:  ");
-                election = teclado.nextLine();
+            while (super.getDataBase().existingUser(election) != DataBaseResult.notFound || election.contains(" ") || election.equals("")) {
+                if (super.getDataBase().existingUser(election) != DataBaseResult.notFound) {
+                    System.out.println("This user already exists. Please enter another nick name.");
+                    System.out.print("User/Nick:  ");
+                    election = teclado.nextLine();
+                } else {
+                    System.out.println("Your nick can't contain a space.");
+                    System.out.print("User/Nick:  ");
+                    election = teclado.nextLine();
+                }
             }
         }
         formulario.put("nick", election);
@@ -118,6 +119,14 @@ public class InRegMenuScreen extends Screen{
         else{
             char[] passwordArray = console.readPassword();
             password = new String(passwordArray);
+            if (isRegist){
+                while(password.length()<8 || password.length()>12){
+                    System.out.println("Your password must be in a length between 8 and 12 characters");
+                    System.out.print("Password:  ");
+                    passwordArray = console.readPassword();
+                    password = new String(passwordArray);
+                }
+            }
         }
         formulario.put("pas", password);
         if (isRegist){

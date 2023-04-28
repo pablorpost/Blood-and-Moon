@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Battle implements Serializable {
 
@@ -38,6 +39,7 @@ public class Battle implements Serializable {
         int rounds = 0;
         int char0Life = calculateLife(char0, store); //la vida de cada personaje será la suya predeterminada, sumando la de sus esbirros
         int char1Life = calculateLife(char1, store);
+        printStats(challenger,challenged,char0Life,char1Life);
         while (char0Life > 0 && char1Life > 0) {
             rounds += 1;
             int firstAttack = getPowerOfAtack(char0, challenger, store, more, modifier);
@@ -48,18 +50,20 @@ public class Battle implements Serializable {
             int succesAttack2 = calculateSucces(secondAttack);
             int succesDefense1 = calculateSucces(firstDefense);
             int succesDefense2 = calculateSucces(secondDefense);
-            Character winner;
-            Character looser;
+            Character winner = null;
+            Character looser = null;
             if (succesAttack1>=succesDefense1){
                 char1Life -=1;
                 winner = char0;
                 looser = char1;
+                printPhrase(winner,looser,challenger.getNick(),challenged.getNick());
                 update(winner,looser);
             }
             if ((succesAttack2>=succesDefense2)) {
                 char0Life -=1;
                 winner = char1;
                 looser = char0;
+                printPhrase(winner,looser,challenged.getNick(),challenger.getNick());
                 update(winner,looser);
             }
             if (char1Life <= 0 && char0Life <= 0) {
@@ -71,11 +75,62 @@ public class Battle implements Serializable {
                 this.winner = challenged.getNick();
                 this.looser = challenger.getNick();
             }
+            printCalcs(rounds,challenger,challenged,firstAttack,firstDefense,secondDefense,secondAttack);
+            printStats(challenger,challenged,char0Life,char1Life);
         }
         return rounds;
     }
 
+    private void printPhrase(Character winner, Character looser,String wnick, String lnick){
+        if (winner instanceof Vampire){
+            System.out.print(wnick+"'s vampire violently bites");
+        }
+        if (winner instanceof Lycanthrope){
+            System.out.print(wnick+"'s lycanthrope gives a serious slash");
+        }
+        if (winner instanceof Hunter){
+            System.out.print(wnick+"'s hunter repeatedly shots in the chest");
+        }
+        if (looser instanceof Vampire){
+            System.out.println(" to "+lnick+"'s vampire\n");
+        }
+        if (looser instanceof Lycanthrope){
+            System.out.println(" to "+lnick+"'s lycanthrope\n");
+        }
+        if (looser instanceof Hunter){
+            System.out.println(" to "+lnick+"'s hunter\n");
+        }
+    }
+    private void printStats(User challenger, User challenged,int challengerChar, int challengedChar){
+        System.out.println(challenger.getNick()+"'s character has "+challengerChar+" life points");
+        System.out.println(challenged.getNick()+"'s character has "+challengedChar+" life points\n");
 
+        System.out.println("(Press ENTER to continue)");
+        Scanner sc = new Scanner(System.in);
+        String nReq = sc.nextLine();
+
+        try {
+            final String os = System.getProperty("os.name");
+            if (os.contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033\143");
+            }
+        } catch (final Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("██████╗ ██╗      ██████╗  ██████╗ ██████╗    ██╗   ███╗   ███╗ ██████╗  ██████╗ ███╗   ██╗\n██╔══██╗██║     ██╔═══██╗██╔═══██╗██╔══██╗   ██║   ████╗ ████║██╔═══██╗██╔═══██╗████╗  ██║\n██████╔╝██║     ██║   ██║██║   ██║██║  ██║████████╗██╔████╔██║██║   ██║██║   ██║██╔██╗ ██║\n██╔══██╗██║     ██║   ██║██║   ██║██║  ██║██╔═██╔═╝██║╚██╔╝██║██║   ██║██║   ██║██║╚██╗██║\n██████╔╝███████╗╚██████╔╝╚██████╔╝██████╔╝██████║  ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║ ╚████║\n╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝  ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝");
+
+
+    }
+
+    private void printCalcs(int Round,User challenger, User challenged,int at_r, int at_d, int def_r, int def_d ){
+        System.out.println("Round: "+Round);
+        System.out.println(challenger.getNick()+" attacks with "+at_r+ " attack points");
+        System.out.println(challenged.getNick()+" defends itslef with "+def_d+ " defense points");
+        System.out.println(challenged.getNick()+" attacks with "+at_d+ " attack points");
+        System.out.println(challenger.getNick()+" defends itslef with "+def_r+ " defense points\n");
+    }
     private int calculateLife(Character chara, Store store) {
         int lifeAux = chara.getLife();
         for (String minion : chara.getMinions()) {
