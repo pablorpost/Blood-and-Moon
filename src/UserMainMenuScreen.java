@@ -1,6 +1,7 @@
 import java.util.*;
 
 import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class UserMainMenuScreen extends Screen{
     private Character character;
@@ -134,6 +135,7 @@ public class UserMainMenuScreen extends Screen{
         User origen = getDataBase().getUserByNick(request.get(0));
         User destino = getDataBase().getUserByNick(request.get(1));
         int goldBet = Integer.valueOf(request.get(2));
+        user.setGold(max(0, user.getGold()-goldBet));
         PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), origen);
         ScreenResult result = popUp.showPopUp(0);
         if (result == ScreenResult.stay){
@@ -150,6 +152,8 @@ public class UserMainMenuScreen extends Screen{
                 System.out.println("You have won!\n");
             } else {
                 System.out.println("It's a tie.\n");
+                origen.setGold(origen.getGold() + goldBet);
+                destino.setGold(destino.getGold() + goldBet);
             }
         } else {
             origen.setGold(origen.getGold() + (int)(goldBet * 1.1));
@@ -161,6 +165,7 @@ public class UserMainMenuScreen extends Screen{
         System.out.println("(Press ENTER to continue)");
         Scanner sc = new Scanner(System.in);
         sc.nextLine();
+        getDataBase().save();
         getManager().clearConsole();
     }
 

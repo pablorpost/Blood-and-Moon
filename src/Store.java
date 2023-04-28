@@ -8,7 +8,7 @@ public class Store {
     private List<Weapon> weapons;
     private List<Armor> armors;
     private final List<Minion> minions;
-    private final List<Modifier> modifiers;
+    private List<Modifier> modifiers;
     private List<Skill> skills;
 
     public Store(){
@@ -48,8 +48,16 @@ public class Store {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+
+        Modifier modifier = new Modifier();
+        try {
+            this.modifiers = modifier.loadModifiers(directorio);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         loadCharacters();
         loadMinions();
+
 
 
     }

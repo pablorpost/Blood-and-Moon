@@ -43,6 +43,7 @@ public class ChallengeRequestScreen extends Screen{
         getDataBase().addRequest(challenger.getNick(), challenged, gold);
         challenger.setGold(challenger.getGold()-gold);
         getDataBase().addLastRequestDate(challenger.getNick(),challenged);
+        getDataBase().save();
         return super.showOptions();
     }
 
