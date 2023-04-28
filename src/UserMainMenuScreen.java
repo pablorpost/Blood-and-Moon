@@ -155,6 +155,7 @@ public class UserMainMenuScreen extends Screen{
         System.out.println("(Press ENTER to continue)");
         Scanner sc = new Scanner(System.in);
         sc.nextLine();
+        getDataBase().save();
         getManager().clearConsole();
     }
 
