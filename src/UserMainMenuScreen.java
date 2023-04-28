@@ -129,7 +129,7 @@ public class UserMainMenuScreen extends Screen{
         User origen = getDataBase().getUserByNick(request.get(0));
         User destino = getDataBase().getUserByNick(request.get(1));
         int goldBet = Integer.valueOf(request.get(2));
-        user.setGold(min(0, user.getGold())-goldBet);
+        user.setGold(max(0, user.getGold()-goldBet));
         PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), origen);
         ScreenResult result = popUp.showPopUp(0);
         if (result == ScreenResult.stay){
