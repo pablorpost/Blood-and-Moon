@@ -72,11 +72,11 @@ public class Battle implements Serializable {
             if (char1Life <= 0 && char0Life <= 0) {
                 this.winner = "BOTH";
             } else if (char1Life <= 0) {
-                this.winner = char0.getName();
-                this.looser = char1.getName();
+                this.winner = challenger.getNick();
+                this.looser = challenged.getNick();
             } else {
-                this.winner = char1.getName();
-                this.looser = char0.getName();
+                this.winner = challenged.getNick();
+                this.looser = challenger.getNick();
             }
         }
         return rounds;
