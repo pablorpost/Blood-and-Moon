@@ -49,6 +49,7 @@ public class BanUnbanScreen extends Screen{
                     for(int j = 0;j<bannedUsers.size(); j++){
                         System.out.println(j + ". " + bannedUsers.get(j).getNick());
                     }
+                    System.out.println("Insert number");
                     Scanner keyB = new Scanner(System.in);
                     int opt = keyB.nextInt();
                     if (opt >= bannedUsers.size()){
