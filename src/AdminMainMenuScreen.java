@@ -64,7 +64,7 @@ public class AdminMainMenuScreen extends Screen{
         if (getDataBase().getRequests().size() > 0) {
             System.out.println("How many requests do you want to validate?");
             int nReq = min(sc.nextInt(), getDataBase().getRequests().size());
-            for (int i = 0; i <= nReq; i++) {
+            for (int i = 0; i < nReq; i++) {
                 getManager().clearConsole();
                 List<String> request = getDataBase().getRequests().get(0);
                 System.out.println("Do you want to validate this request? (Y/N)");
@@ -104,8 +104,6 @@ public class AdminMainMenuScreen extends Screen{
                         getDataBase().getRequests().add(request);
                         User challengedUser = getDataBase().getUserByNick(request.get(1));
                         challengedUser.setPendingRequest(request);
-                        int oldGold = getDataBase().getUserByNick(request.get(0)).getGold();
-                        getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
                     }
                 }
 
