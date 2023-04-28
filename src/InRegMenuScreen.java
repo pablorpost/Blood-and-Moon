@@ -99,7 +99,7 @@ public class InRegMenuScreen extends Screen{
                 System.out.print("User/Nick:  ");
                 election = teclado.nextLine();
             }
-            while(election.contains(" ")){
+            while(election.contains(" ") || election.equals("")){
                 System.out.println("Your nick can't contain a space.");
                 System.out.print("User/Nick:  ");
                 election = teclado.nextLine();
