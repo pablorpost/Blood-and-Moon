@@ -79,13 +79,13 @@ public class AdminMainMenuScreen extends Screen{
                     String response = sc.nextLine();
                     getDataBase().getRequests().remove(0);
                     if (response.equals("Y") || response.equals("y")) {
-                        getDataBase().getRequests().add(request);
                         User challengedUser = getDataBase().getUserByNick(request.get(1));
                         challengedUser.setPendingRequest(request);
                     }else{
                         int oldGold = getDataBase().getUserByNick(request.get(0)).getGold();
                         getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
                     }
+
                 }
 
             }
