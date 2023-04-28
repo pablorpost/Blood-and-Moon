@@ -23,27 +23,26 @@ public class ConfigureEquipmentScreen extends Screen{
 
     private void chooseWeapons(){
         List<String> charWeap = ((User) getPerson()).getCharacter().getWeapons();
-
-        System.out.println("Choose a weapon that needs 2 hands, or two that need 1 each");
-        for(int i = 0; i<charWeap.size(); i ++){
-            String weaponName = charWeap.get(i);
-            Weapon wea = getStore().getInfoWeapon(weaponName);
-            if (!(wea == null)){
-                System.out.println(i + ". " + weaponName +" (needs " + wea.getHands()+")");
-            }
-        }
-        Scanner sc = new Scanner(System.in);
         int numHands = 2;
         while (numHands > 0){
-            int nu = -1;
-            int a = charWeap.size();
-            while (nu < 0 || nu >= a) {
-                nu = sc.nextInt();
+            System.out.println("\nChoose a weapon, you have " + numHands+ " free hands.");
+            for(int i = 0; i<charWeap.size(); i ++){
+                String weaponName = charWeap.get(i);
+                Weapon wea = getStore().getInfoWeapon(weaponName);
+                if (wea != null && wea.getHands() <= numHands){
+                    System.out.println(i + ". " + weaponName +" (defense: " + wea.getDefense() +
+                            ", attack: "+ wea.getAttack()+")-"+ "(needs " + wea.getHands()+" hands)");
+                }
             }
-            int hands = getStore().getInfoWeapon(charWeap.get(nu)).getHands();
-            if (numHands-hands >= 0){
+            Scanner sc = new Scanner(System.in);
+            int nu = sc.nextInt();
+            int a = charWeap.size();
+            if (!(nu < 0 || nu >= a)) {
+                int hands = getStore().getInfoWeapon(charWeap.get(nu)).getHands();
                 ((User) getPerson()).addWeapon(charWeap.get(nu));
-                numHands-= hands;
+                numHands -= hands;
+            } else {
+                System.out.println("Thats not a weapon. Please enter a valid number.");
             }
 
         }
@@ -56,7 +55,8 @@ public class ConfigureEquipmentScreen extends Screen{
         System.out.println("Choose an armor");
         for(int i = 0; i<charArmors.size(); i ++){
             String armorName = charArmors.get(i);
-            System.out.println(i + ". " + armorName);
+            Armor arm = getStore().getInfoArmor(armorName);
+            System.out.println(i + ". " + armorName + "(defense: "+ arm.getDefense()+", attack: "+ arm.getAtack()+")");
         }
         int mu = -1;
         Scanner sc = new Scanner(System.in);
