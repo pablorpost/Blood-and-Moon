@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -9,7 +10,7 @@ public class Battle implements Serializable {
     private String winner;
     private String looser;
     private int rounds;
-    private Date date;
+    private LocalDateTime date;
     private int gold;
     private String challenger;
     private String challenged;
@@ -22,7 +23,7 @@ public class Battle implements Serializable {
         int index = rand.nextInt(store.getModifiers().size());
         Modifier modifier =  store.getModifiers().get(index);
         boolean more = modifier.getType()==1;
-        this.date = Date.from(Instant.now());
+        this.date = LocalDateTime.now();
 
         //ELIMINARR-----VVVVV
         /*
@@ -232,11 +233,11 @@ public class Battle implements Serializable {
         this.rounds = rounds;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,8 +26,8 @@ public class BattleHistoryScreen extends Screen{
                 againstNick = bat.getChallenger();
             }
             System.out.println((i + 1) + ". Battle against " + againstNick + " on " + bat.getDate().getMonth() + "/" +
-                    bat.getDate().getDay() + "/" + bat.getDate().getYear() + " at " +
-                    bat.getDate().getHours() + ":" + bat.getDate().getMinutes() + " that you have " + monStr +
+                    bat.getDate().getDayOfMonth() + "/" + bat.getDate().getYear() + " at " +
+                    bat.getDate().getHour() + ":" + bat.getDate().getMinute() + " that you have " + monStr +
                     bat.getGold() + " coins in total.");
         }
         System.out.println("(Press ENTER to continue)");
