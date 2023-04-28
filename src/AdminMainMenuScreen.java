@@ -67,34 +67,12 @@ public class AdminMainMenuScreen extends Screen{
             for (int i = 0; i < nReq; i++) {
                 getManager().clearConsole();
                 List<String> request = getDataBase().getRequests().get(0);
-                System.out.println("Do you want to validate this request? (Y/N)");
-                System.out.println();
+                System.out.println("Do you want to validate this request? (Y/N)\n");
                 System.out.println("Challenger: " + request.get(0));
                 System.out.println("Challenged: " + request.get(1));
                 System.out.println("Gold betted: " + request.get(2));
                 if (getDataBase().getUserByNick(request.get(1)).getPendingRequest()!=null || getDataBase().existingUser(request.get(1))!=DataBaseResult.user || getDataBase().getUserByNick(request.get(1)).getCharacter()==null){
-                    if(!(getDataBase().existingUser(request.get(1))==DataBaseResult.user)){
-                        System.out.println("\n" + request.get(1) + " has deleted their account");
-                        getDataBase().getRequests().remove(0);
-                        int oldGold = getDataBase().getUserByNick(request.get(0)).getGold();
-                        getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
-                    }
-                    else {
-                        if(getDataBase().getUserByNick(request.get(1)).getPendingRequest()!=null){
-                            System.out.println("\nA challenge for " + request.get(1) + " has already been set");
-                        }
-                        else{
-                            System.out.println("\n" + request.get(1) + " has deleted their character");
-                        }
-                        System.out.println("\nA challenge for " + request.get(1) + " has already been set");
-                        System.out.println("Do you want to delete it (Y) or keep it for future validation (N)?");
-                        String response = sc.nextLine();
-                        if (response.equals("Y") || response.equals("y")) {
-                            getDataBase().getRequests().remove(0);
-                            int oldGold = getDataBase().getUserByNick(request.get(0)).getGold();
-                            getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
-                        }
-                    }
+                    failedValidation(request);
                 }
                 else{
                     sc = new Scanner(System.in);
@@ -122,7 +100,31 @@ public class AdminMainMenuScreen extends Screen{
 
     }
 
-
+    private void failedValidation(List<String> request){
+        Scanner sc = new Scanner(System.in);
+        if(!(getDataBase().existingUser(request.get(1))==DataBaseResult.user)){
+            System.out.println("\n" + request.get(1) + " has deleted their account");
+            getDataBase().getRequests().remove(0);
+            int oldGold = getDataBase().getUserByNick(request.get(0)).getGold();
+            getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
+        }
+        else {
+            if(getDataBase().getUserByNick(request.get(1)).getPendingRequest()!=null){
+                System.out.println("\nA challenge for " + request.get(1) + " has already been set");
+            }
+            else{
+                System.out.println("\n" + request.get(1) + " has deleted their character");
+            }
+            System.out.println("\nA challenge for " + request.get(1) + " has already been set");
+            System.out.println("Do you want to delete it (Y) or keep it for future validation (N)?");
+            String response = sc.nextLine();
+            if (response.equals("Y") || response.equals("y")) {
+                getDataBase().getRequests().remove(0);
+                int oldGold = getDataBase().getUserByNick(request.get(0)).getGold();
+                getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
+            }
+        }
+    }
 
     public void ban(User user){
 

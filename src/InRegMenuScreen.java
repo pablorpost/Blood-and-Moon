@@ -105,18 +105,12 @@ public class InRegMenuScreen extends Screen{
                 election = teclado.nextLine();
             }
         }
-
-
         formulario.put("nick", election);
-
         if (isRegist){
             System.out.print("Name:  ");
             election = teclado.nextLine();
             formulario.put("name", election);
         }
-
-
-
         System.out.print("Password:  ");
         if (console == null) {
             password = teclado.nextLine();
@@ -125,10 +119,7 @@ public class InRegMenuScreen extends Screen{
             char[] passwordArray = console.readPassword();
             password = new String(passwordArray);
         }
-
         formulario.put("pas", password);
-
-
         if (isRegist){
             this.addPerson(formulario.get("nick"), formulario.get("name"), formulario.get("pas"), isAdmin);
             this.getDataBase().save();
