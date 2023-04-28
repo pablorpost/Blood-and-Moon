@@ -95,11 +95,11 @@ public class AdminMainMenuScreen extends Screen{
                         }
                         System.out.println("\nA challenge for " + request.get(1) + " has already been set");
                         System.out.println("Do you want to delete it (Y) or keep it for future validation (N)?");
-                        int oldGold = getDataBase().getUserByNick(request.get(0)).getGold();
-                        getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
                         String response = sc.nextLine();
                         if (response.equals("Y") || response.equals("y")) {
                             getDataBase().getRequests().remove(0);
+                            int oldGold = getDataBase().getUserByNick(request.get(0)).getGold();
+                            getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
                         }
                     }
                 }
