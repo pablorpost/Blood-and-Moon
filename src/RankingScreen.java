@@ -2,6 +2,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class RankingScreen extends Screen{
+
+    //Constructor
     public RankingScreen(DBManager dataBase, Store store, Manager manager) {
         super.setTitle("Player ranking");
         super.setManager(manager);
@@ -9,6 +11,7 @@ public class RankingScreen extends Screen{
         super.setDataBase(dataBase);
     }
 
+    //Mostrará la lista de los 10 usuarios con más oro en orden descendente.
     public ScreenResult showOptions(){
         Manager m = super.getManager();
 
