@@ -94,13 +94,21 @@ public class InRegMenuScreen extends Screen{
         }
         System.out.print("User/Nick:  ");
         String election = teclado.nextLine();
+
         if (isRegist) {
             while (super.getDataBase().existingUser(election) != DataBaseResult.notFound) {
                 System.out.println("This user already exists. Please enter another nick name.");
                 System.out.print("User/Nick:  ");
                 election = teclado.nextLine();
             }
+            while(election.contains(" ")){
+                System.out.println("Your nick can't contain a space.");
+                System.out.print("User/Nick:  ");
+                election = teclado.nextLine();
+            }
         }
+
+
         formulario.put("nick", election);
 
         if (isRegist){
