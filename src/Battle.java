@@ -32,30 +32,24 @@ public class Battle implements Serializable {
         //dejará los personajes como estaban
         store.loadCharacters();
         setRounds(rounds);
-
     }
 
     private int battleExecute(User challenger, User challenged, Store store, Modifier modifier, boolean more, Character char0, Character char1) {
         int rounds = 0;
-        //la vida de cada personaje será la suya predeterminada, sumando la de sus esbirros
-        int char0Life = calculateLife(char0, store);
+        int char0Life = calculateLife(char0, store); //la vida de cada personaje será la suya predeterminada, sumando la de sus esbirros
         int char1Life = calculateLife(char1, store);
         while (char0Life > 0 && char1Life > 0) {
             rounds += 1;
             int firstAttack = getPowerOfAtack(char0, challenger, store, more, modifier);
             int secondAttack = getPowerOfAtack(char1, challenged, store, more, modifier);
-
             int firstDefense = getPowerOfDefense(char1, challenged, store, more);
             int secondDefense = getPowerOfDefense(char0, challenger, store, more);
-
             int succesAttack1 = calculateSucces(firstAttack);
             int succesAttack2 = calculateSucces(secondAttack);
             int succesDefense1 = calculateSucces(firstDefense);
             int succesDefense2 = calculateSucces(secondDefense);
-
             Character winner;
             Character looser;
-
             if (succesAttack1>=succesDefense1){
                 char1Life -=1;
                 winner = char0;
@@ -68,7 +62,6 @@ public class Battle implements Serializable {
                 looser = char0;
                 update(winner,looser);
             }
-
             if (char1Life <= 0 && char0Life <= 0) {
                 this.winner = "BOTH";
             } else if (char1Life <= 0) {
@@ -119,10 +112,8 @@ public class Battle implements Serializable {
     }
 
     private int getPowerOfAtack(Character charac, User user, Store store, boolean more, Modifier modifier){
-        //poder
-        int power = charac.getPower();
-        //poder según personaje
-        int powerAtribute = charac.getPowerAtribute();
+        int power = charac.getPower(); //poder
+        int powerAtribute = charac.getPowerAtribute(); //poder según personaje
         List<String> weapons = user.getWeapons();
         String armor = user.getArmor();
         String skill = charac.getSkill();
@@ -137,26 +128,20 @@ public class Battle implements Serializable {
             if (powerAtribute >= 5){
                 acum += 2;
                 Random random = new Random();
-                //pagar el coste de su disciplina
-                int cost = random.nextInt(3) + 1;
+                int cost = random.nextInt(3) + 1; //pagar el coste de su disciplina
                 ((Vampire)charac).setBlood(((Vampire)charac).getBlood() - cost);
             }
-
         } else if (charac instanceof Lycanthrope){
-            //si la rabia no llega al mínimo, no usará su don
-            if (! (powerAtribute < 1)){
-                acum += powerAtribute;
+            if (powerAtribute >= 1){
+                acum += powerAtribute; //si la rabia no llega al mínimo, no usará su don
             }
-
         } else {
             acum += powerAtribute;
         }
-
         boolean containModifier = false;
         for (String modifierS:charac.getModifiers()) {
             containModifier = modifierS.equals(modifier);
         }
-
         if (more && containModifier){
             return acum+modifier.getPower();
         } else if (!(more) && containModifier) {
@@ -164,7 +149,6 @@ public class Battle implements Serializable {
         }else{
             return acum;
         }
-
     }
 
     private int getPowerOfDefense(Character charac, User user, Store store, boolean more){
@@ -188,13 +172,10 @@ public class Battle implements Serializable {
                 int cost = random.nextInt(3) + 1;
                 ((Vampire)charac).setBlood(((Vampire)charac).getBlood() - cost);
             }
-
         } else if (charac instanceof Lycanthrope){
-            //si la rabia no llega al mínimo, no usará su don
             if (! (powerAtribute < 1)){
-                acum += powerAtribute;
+                acum += powerAtribute; //si la rabia no llega al mínimo, no usará su don
             }
-
         } else {
             acum += powerAtribute;
         }

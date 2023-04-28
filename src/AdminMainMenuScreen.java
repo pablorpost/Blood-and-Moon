@@ -28,25 +28,20 @@ public class AdminMainMenuScreen extends Screen{
         for(int i = 0; i<show.size(); i ++){
             System.out.println(show.get(i));
         }
-
         Scanner sc = new Scanner(System.in);
         int optionSelected = sc.nextInt();
-
         switch (optionSelected){
             case 0:
                 ModifyStoreScreen modStoreSc = new ModifyStoreScreen(super.getManager());
                 super.getManager().showScreen(modStoreSc);
                 return ScreenResult.stay;
-
             case 1:
                 BanUnbanScreen banSc = new BanUnbanScreen(super.getDataBase(), super.getManager());
                 super.getManager().showScreen(banSc);
                 return ScreenResult.stay;
-
             case 2:
                 displayScreenRequestAcceptance(sc);
                 return ScreenResult.stay;
-
             case 3:
                 PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), admin);
                 ScreenResult result = popUp.showPopUp(3);
@@ -57,13 +52,9 @@ public class AdminMainMenuScreen extends Screen{
                     return ScreenResult.stay;
                 }
                 break;
-
             case 4:
                 return ScreenResult.exit;
         }
-
-
-
         return ScreenResult.exit;
     }
 

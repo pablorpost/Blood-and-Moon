@@ -90,11 +90,9 @@ public class InRegMenuScreen extends Screen{
                 return null;
             }
             System.out.println();
-
         }
         System.out.print("User/Nick:  ");
         String election = teclado.nextLine();
-
         if (isRegist) {
             while (super.getDataBase().existingUser(election) != DataBaseResult.notFound) {
                 System.out.println("This user already exists. Please enter another nick name.");

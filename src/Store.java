@@ -160,48 +160,35 @@ public class Store {
         try {
             FileWriter fw = new FileWriter(getDirectory() + File.separatorChar + "characters" + File.separatorChar+ character.getName().toLowerCase()+".txt");
             BufferedWriter bw = new BufferedWriter(fw);
-
             bw.write("name:" + character.getName() + "\n");
             bw.write("life:" + character.getLife() + "\n");
             bw.write("description:" + character.getDescription() + "\n");
-
             for (String weapon : character.getWeapons()) {
                 bw.write("weapon:" + weapon + "\n");
             }
-
             for (String armor : character.getArmors()) {
                 bw.write("armor:" + armor + "\n");
             }
-
             bw.write("skill:" + character.getSkill() + "\n");
-
             bw.write("power:" + character.getPower() + "\n");
-
             if (character.getName().toLowerCase().equals("vampire")){
                 Vampire vamp = (Vampire)character;
                 bw.write("age:" + vamp.getAge() + "\n");
                 bw.write("blood:" + vamp.getBlood() + "\n");
-
             } else if (character.getName().toLowerCase().equals("hunter")) {
                 Hunter hunt = (Hunter) character;
                 bw.write("willpower:" + hunt.getWillpower() + "\n");
-
             } else if (character.getName().toLowerCase().equals("lycanthrope")) {
                 Lycanthrope lycanth = (Lycanthrope) character;
                 bw.write("anger:" + lycanth.getAnger() + "\n");
-
             }
-
-
             for (String minion : character.getMinions()) {
                 bw.write("minion:" + minion + "\n");
             }
             for (String modifier : character.getModifiers()) {
                 bw.write("modifier:" + modifier + "\n");
             }
-
-            // Cerrar el objeto BufferedWriter
-            bw.close();
+            bw.close(); // Cerrar el objeto BufferedWriter
         } catch (IOException e) {
             System.out.println("Ha ocurrido un error al reescribir el archivo: " + e.getMessage());
         }

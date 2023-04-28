@@ -27,14 +27,20 @@ public class BanUnbanScreen extends Screen{
         Scanner sc = new Scanner(System.in);
         int optionSelected = sc.nextInt();
 
+        ScreenResult exit = differentOptions(optionSelected);
+        if (exit != null) return exit;
+        return ScreenResult.stay;
+    }
+
+    private ScreenResult differentOptions(int optionSelected) {
         switch (optionSelected){
             case 0:
-                m.clearConsole();
+                getManager().clearConsole();
                 System.out.println("Write the user's nick:");
                 Scanner bannedUser = new Scanner(System.in);
                 String election = bannedUser.nextLine();
 
-                User userToBan = db.getUserByNick(election);
+                User userToBan = getDataBase().getUserByNick(election);
                 if (userToBan != null){
                     ban(userToBan);
                 } else {
@@ -43,33 +49,39 @@ public class BanUnbanScreen extends Screen{
                 break;
 
             case 1:
-                m.clearConsole();
-                List<User> bannedUsers = db.getBannedUsers();
-                if(!bannedUsers.isEmpty()){
-                    for(int j = 0;j<bannedUsers.size(); j++){
-                        System.out.println(j + ". " + bannedUsers.get(j).getNick());
-                    }
-                    System.out.println("Insert number");
-                    Scanner keyB = new Scanner(System.in);
-                    int opt = keyB.nextInt();
-                    if (opt >= bannedUsers.size()){
-                        System.out.println("Insert a valid number");
-                    } else {
-                        desBan(bannedUsers.get(opt));
-                    }
-
-                } else {
-                    System.out.println("There are no banned users");
-                    System.out.println("Press ENTER to exit");
-                    Scanner emptyListSc = new Scanner(System.in);
-                    String nxtLine = emptyListSc.nextLine();
-                    return ScreenResult.exit;
-                }
+                ScreenResult exit = unBanUserM();
+                if (exit != null) return exit;
                 break;
             case 2:
                 return ScreenResult.exit;
         }
-        return ScreenResult.stay;
+        return null;
+    }
+
+    private ScreenResult unBanUserM() {
+        getManager().clearConsole();
+        List<User> bannedUsers = getDataBase().getBannedUsers();
+        if(!bannedUsers.isEmpty()){
+            for(int j = 0;j<bannedUsers.size(); j++){
+                System.out.println(j + ". " + bannedUsers.get(j).getNick());
+            }
+            System.out.println("Insert number");
+            Scanner keyB = new Scanner(System.in);
+            int opt = keyB.nextInt();
+            if (opt >= bannedUsers.size()){
+                System.out.println("Insert a valid number");
+            } else {
+                desBan(bannedUsers.get(opt));
+            }
+
+        } else {
+            System.out.println("There are no banned users");
+            System.out.println("Press ENTER to exit");
+            Scanner emptyListSc = new Scanner(System.in);
+            String nxtLine = emptyListSc.nextLine();
+            return ScreenResult.exit;
+        }
+        return null;
     }
 
     public void ban(User user){
