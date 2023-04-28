@@ -30,6 +30,9 @@ public class BattleHistoryScreen extends Screen{
                     bat.getDate().getHour() + ":" + bat.getDate().getMinute() + " that you have " + monStr +
                     bat.getGold() + " coins in total.");
         }
+        if (battles.isEmpty()){
+            System.out.println("You haven't batteled yet");
+        }
         System.out.println("(Press ENTER to continue)");
         Scanner sc = new Scanner(System.in);
         sc.nextLine();
