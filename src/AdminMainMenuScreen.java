@@ -100,8 +100,6 @@ public class AdminMainMenuScreen extends Screen{
                         String response = sc.nextLine();
                         if (response.equals("Y") || response.equals("y")) {
                             getDataBase().getRequests().remove(0);
-                            int oldGold = getDataBase().getUserByNick(request.get(0)).getGold();
-                            getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
                         }
                     }
                 }

@@ -146,6 +146,8 @@ public class UserMainMenuScreen extends Screen{
                 System.out.println("You have won!\n");
             } else {
                 System.out.println("It's a tie.\n");
+                origen.setGold(origen.getGold() + goldBet);
+                destino.setGold(destino.getGold() + goldBet);
             }
         } else {
             origen.setGold(origen.getGold() + (int)(goldBet * 1.1));
