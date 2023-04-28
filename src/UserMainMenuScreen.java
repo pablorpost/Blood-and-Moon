@@ -25,7 +25,6 @@ public class UserMainMenuScreen extends Screen{
         auxList.add("4. Delete character");
         auxList.add("5. Log out");
         this.options.put("0", auxList);
-
         List<String> auxList2 = new ArrayList<>();
         auxList2.add("0. Create character");
         auxList2.add("1. Delete user");
@@ -33,8 +32,6 @@ public class UserMainMenuScreen extends Screen{
         auxList2.add("3. Ranking");
         auxList2.add("4. Log out");
         this.options.put("1", auxList2);
-
-
     }
     @Override
     public ScreenResult showOptions() {
@@ -42,7 +39,6 @@ public class UserMainMenuScreen extends Screen{
             showPendingRequest();
             return ScreenResult.stay;
         }
-
         List<String> show;
         if (this.user.isBan()){
             System.out.println("This user is banned temporarily");
@@ -56,72 +52,82 @@ public class UserMainMenuScreen extends Screen{
         } else {
             show = options.get("0");
         }
-
         for(int i = 0; i<show.size(); i ++){
             System.out.println(show.get(i));
         }
         Scanner sc = new Scanner(System.in);
         int optionSelected = sc.nextInt();
         if (this.user.getCharacter() != null) {
-            switch (optionSelected) {
-                case 0:
-                    ChallengeRequestScreen screen = new ChallengeRequestScreen(this.getDataBase(), user);
-                    getManager().showScreen(screen);
-                    super.setTitle("Welcome " + user.getNick() + " you have " + user.getGold() + " coins.");
-                    return ScreenResult.stay;
-                case 1:
-                    ConfigureEquipmentScreen configureScreen = new ConfigureEquipmentScreen(getManager(), this.user);
-                    getManager().showScreen(configureScreen);
-                    return ScreenResult.stay;
-                case 2:
-                    BattleHistoryScreen bhs = new BattleHistoryScreen(getDataBase(), getStore(), user);
-                    getManager().showScreen(bhs);
-                    return ScreenResult.stay;
-                case 3:
-                    RankingScreen rkSc = new RankingScreen(getDataBase(),getStore(),getManager());
-                    getManager().showScreen(rkSc);
-                    return ScreenResult.stay;
-                case 4:
-                    PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
-                    ScreenResult result = popUp.showPopUp(1);
-                    if (result == ScreenResult.stay){
-                        user.setCharacter(null);
-                    }
-                    this.showOptions();
-                    break;
-                case 5:
-                    return ScreenResult.exit;
-            }
+            ScreenResult stay = hasCharacterOptions(optionSelected);
+            if (stay != null) return stay;
         } else{
-            switch (optionSelected) {
-                case 0:
-                    CreateCharacterScreen selectCharac = new CreateCharacterScreen(this.user, getManager());
-                    getManager().showScreen(selectCharac);
-                    return ScreenResult.stay;
-                case 1:
-                    PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
-                    ScreenResult result = popUp.showPopUp(2);
-                    if (result == ScreenResult.stay){
-                        System.out.println(user.getName());
-                        super.getDataBase().deletePerson(user);
-                    } else {
-                        return ScreenResult.stay;
-                    }
-                    break;
-                case 2:
-                    BattleHistoryScreen bhs = new BattleHistoryScreen(getDataBase(), getStore(), user);
-                    getManager().showScreen(bhs);
-                    return ScreenResult.stay;
-                case 3:
-                    RankingScreen rkSc = new RankingScreen(getDataBase(),getStore(),getManager());
-                    getManager().showScreen(rkSc);
-                    return ScreenResult.stay;
-                case 4:
-                    return ScreenResult.exit;
-
-            }
+            ScreenResult stay = hasNoCharacterOptions(optionSelected);
+            if (stay != null) return stay;
         }
         return ScreenResult.exit;
+    }
+
+    private ScreenResult hasCharacterOptions(int optionSelected) {
+        switch (optionSelected) {
+            case 0:
+                ChallengeRequestScreen screen = new ChallengeRequestScreen(this.getDataBase(), user);
+                getManager().showScreen(screen);
+                super.setTitle("Welcome " + user.getNick() + " you have " + user.getGold() + " coins.");
+                return ScreenResult.stay;
+            case 1:
+                ConfigureEquipmentScreen configureScreen = new ConfigureEquipmentScreen(getManager(), this.user);
+                getManager().showScreen(configureScreen);
+                return ScreenResult.stay;
+            case 2:
+                BattleHistoryScreen bhs = new BattleHistoryScreen(getDataBase(), getStore(), user);
+                getManager().showScreen(bhs);
+                return ScreenResult.stay;
+            case 3:
+                RankingScreen rkSc = new RankingScreen(getDataBase(),getStore(),getManager());
+                getManager().showScreen(rkSc);
+                return ScreenResult.stay;
+            case 4:
+                PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
+                ScreenResult result = popUp.showPopUp(1);
+                if (result == ScreenResult.stay){
+                    user.setCharacter(null);
+                }
+                this.showOptions();
+                break;
+            case 5:
+                return ScreenResult.exit;
+        }
+        return null;
+    }
+
+    private ScreenResult hasNoCharacterOptions(int optionSelected) {
+        switch (optionSelected) {
+            case 0:
+                CreateCharacterScreen selectCharac = new CreateCharacterScreen(this.user, getManager());
+                getManager().showScreen(selectCharac);
+                return ScreenResult.stay;
+            case 1:
+                PopUpScreen popUp = new PopUpScreen(super.getDataBase(), super.getManager(), user);
+                ScreenResult result = popUp.showPopUp(2);
+                if (result == ScreenResult.stay){
+                    System.out.println(user.getName());
+                    super.getDataBase().deletePerson(user);
+                } else {
+                    return ScreenResult.stay;
+                }
+                break;
+            case 2:
+                BattleHistoryScreen bhs = new BattleHistoryScreen(getDataBase(), getStore(), user);
+                getManager().showScreen(bhs);
+                return ScreenResult.stay;
+            case 3:
+                RankingScreen rkSc = new RankingScreen(getDataBase(),getStore(),getManager());
+                getManager().showScreen(rkSc);
+                return ScreenResult.stay;
+            case 4:
+                return ScreenResult.exit;
+        }
+        return null;
     }
 
     private void showPendingRequest() {
