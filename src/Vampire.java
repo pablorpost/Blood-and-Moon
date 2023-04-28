@@ -4,6 +4,7 @@ public class Vampire extends Character {
     private int age;
     private int blood;
 
+    //funcion constructora
     public Vampire(String directorio) {
         super();
         try {
@@ -36,7 +37,7 @@ public class Vampire extends Character {
         }
     }
 
-
+    //transforma datos en clase
     @Override
     public void readLine(String[] var) {
         if (null != var[0]) switch (var[0]) {
