@@ -37,6 +37,7 @@ public class UserMainMenuScreen extends Screen{
     }
     @Override
     public ScreenResult showOptions() {
+        getManager().clearConsole();
         if (user.getPendingRequest() != null){
             showPendingRequest();
             return ScreenResult.stay;
@@ -142,6 +143,8 @@ public class UserMainMenuScreen extends Screen{
             }else if (thisBattle.getWinner().equals(request.get(1))){
                 destino.setGold(destino.getGold() + 2*goldBet);
                 System.out.println("You have won!\n");
+            } else {
+                System.out.println("It's a tie.\n");
             }
         } else {
             origen.setGold(origen.getGold() + (int)(goldBet * 1.1));
