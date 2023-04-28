@@ -25,26 +25,21 @@ public class Battle implements Serializable {
         boolean more = modifier.getType()==1;
         this.date = LocalDateTime.now();
 
-        //ELIMINARR-----VVVVV
-        /*
-        this.rounds = new Random().nextInt(6);
-        if(new Random().nextInt(2) == 1){
-            this.winner = this.challenger;
-            this.looser = this.challenged;
-        }else{
-            this.winner = this.challenged;
-            this.looser = this.challenger;
-        }
-        **/
-
         Character char0 = challenger.getCharacter();
         Character char1 = challenged.getCharacter();
 
+        rounds = battleExecute(challenger, challenged, store, modifier, more, char0, char1);
+        //dejará los personajes como estaban
+        store.loadCharacters();
+        setRounds(rounds);
+
+    }
+
+    private int battleExecute(User challenger, User challenged, Store store, Modifier modifier, boolean more, Character char0, Character char1) {
         int rounds = 0;
         //la vida de cada personaje será la suya predeterminada, sumando la de sus esbirros
         int char0Life = calculateLife(char0, store);
         int char1Life = calculateLife(char1, store);
-
         while (char0Life > 0 && char1Life > 0) {
             rounds += 1;
             int firstAttack = getPowerOfAtack(char0, challenger, store, more, modifier);
@@ -62,13 +57,13 @@ public class Battle implements Serializable {
             Character looser;
 
             if (succesAttack1>=succesDefense1){
-                char1Life-=1;
+                char1Life -=1;
                 winner = char0;
                 looser = char1;
                 update(winner,looser);
             }
             if ((succesAttack2>=succesDefense2)) {
-                char0Life-=1;
+                char0Life -=1;
                 winner = char1;
                 looser = char0;
                 update(winner,looser);
@@ -84,10 +79,7 @@ public class Battle implements Serializable {
                 this.looser = char0.getName();
             }
         }
-        //dejará los personajes como estaban
-        store.loadCharacters();
-        setRounds(rounds);
-
+        return rounds;
     }
 
 
