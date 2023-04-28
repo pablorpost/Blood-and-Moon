@@ -15,6 +15,7 @@ public class DataBase implements Serializable{
         admins = new HashMap<String,Admin>();
         this.requests = new ArrayList<>();
         battles = new ArrayList<>();
+        lastRequest = new HashMap<>();
     }
     public User getUser(String nick, int password){
         if (inDataBase(nick,password)==DataBaseResult.user){
