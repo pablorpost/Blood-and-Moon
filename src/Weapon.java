@@ -10,6 +10,7 @@ public class Weapon {
     private int defense;
     private int attack;
 
+    //constructor
     public Weapon(String [] line){
         this.name = line[0];
         this.hands = Integer.valueOf(line[1]);
@@ -21,6 +22,7 @@ public class Weapon {
     public Weapon(){
     }
 
+    //carga las armas de los archivos
     public List<Weapon> loadWeapon(String directorio) throws FileNotFoundException {
         ArrayList<Weapon> weapons = new ArrayList<>();
         String ruta = directorio + File.separatorChar + "weapons" + File.separatorChar + "weapons.txt";

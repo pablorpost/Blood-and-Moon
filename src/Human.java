@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 
 public class Human extends Minion{
     private String loyalty;
-
+    // Constructor de humano
     public Human(String directorio){
         super();
         try {
@@ -11,7 +11,7 @@ public class Human extends Minion{
             throw new RuntimeException(e);
         }
     }
-
+    // Cargar datos del .txt
     @Override
     public void readLine(String[] var) {
         if (null != var[0]) switch (var[0]) {

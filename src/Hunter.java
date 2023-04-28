@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Hunter extends Character{
     private int willpower;
-
+    // Constructor de cazador
     public Hunter(String directorio){
         super();
         try {
@@ -11,7 +11,7 @@ public class Hunter extends Character{
             throw new RuntimeException(e);
         }
     }
-
+    // Constructor de cazador
     public Hunter(Hunter original) {
         super.setName(original.getName());
         super.setLife(original.getLife());
@@ -32,7 +32,7 @@ public class Hunter extends Character{
             addMinion(minion);
         }
     }
-
+    // Cargar datos del .txt
 @Override
     public void readLine(String[] var) {
         if (null != var[0]) {
@@ -82,7 +82,8 @@ public class Hunter extends Character{
     }
     @Override
     public int getPowerAtribute(){return this.willpower;}
-
+    
+    // Reducir la voluntad si se puede
     public void lessWillpower(int i) {
         if (this.willpower > 0){
             this.willpower-=i;

@@ -3,6 +3,7 @@ import java.util.*;
 public class PopUpScreen extends Screen{
     private Map<String, List<String>> options = new HashMap<>();
 
+    //inicia las pantallas con las posibilidades para cada confirmacion
     public PopUpScreen(DBManager dataBase, Manager manager, Person request) {
         super.setTitle("ATENTION!!!");
         super.setDataBase(dataBase);
@@ -34,6 +35,7 @@ public class PopUpScreen extends Screen{
         options.put("3", auxList);
     }
 
+    //muestra la confirmación dada una opcion, dictada por un entero en la pagina madre
     public ScreenResult showPopUp(int option){
         super.getManager().clearConsole();
         List<String> show = options.get(String.valueOf(option));
@@ -48,9 +50,5 @@ public class PopUpScreen extends Screen{
         }else{
             return ScreenResult.exit;
         }
-    }
-
-    public Battle startBattle(User request){
-        return null;
     }
 }
