@@ -4,11 +4,12 @@ import java.util.Scanner;
 
 public class ChallengeRequestScreen extends Screen{
     User challenger;
+    // Constructor de la pantalla
     public ChallengeRequestScreen(DBManager dataBase, User usuario) {
         setDataBase(dataBase);
         challenger=usuario;
     }
-
+    // Mostrar el formulario para desafiar a un usuario
     @Override
     public ScreenResult showOptions() {
         System.out.println("What user would you like to challenge?");
@@ -46,7 +47,7 @@ public class ChallengeRequestScreen extends Screen{
         getDataBase().save();
         return super.showOptions();
     }
-
+    // Comprobar si un nick existe en la base de datos
     public boolean lookForNick(String user){
         if (getDataBase().existingUser(user)==DataBaseResult.user){
             return true;

@@ -5,7 +5,7 @@ import java.util.List;
 public class Demon extends Minion{
     private List<String> minions;
     private String oath;
-
+    // Constructor de demonio
     public Demon(String directorio){
         super();
         this.minions = new ArrayList<>();
@@ -15,7 +15,7 @@ public class Demon extends Minion{
             throw new RuntimeException(e);
         }
     }
-
+    // cargar archivo .txt
     @Override
     public void readLine(String[] var) {
         if (null != var[0]) switch (var[0]) {

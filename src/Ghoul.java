@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Ghoul extends Minion {
     private int dependency;
-
+    // Constructor de ghoul
     public Ghoul(String directorio){
         super();
         try {
@@ -12,7 +12,7 @@ public class Ghoul extends Minion {
             throw new RuntimeException(e);
         }
     }
-
+    // Cargar el documento .txt en el ghoul
     @Override
     public void readLine(String[] var) {
         if (null != var[0]) switch (var[0]) {

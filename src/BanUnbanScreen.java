@@ -3,6 +3,8 @@ import java.util.*;
 public class BanUnbanScreen extends Screen{
     private boolean ban;
     private Map<String, List<String>> options;
+
+    //Constructor
     public BanUnbanScreen(DBManager dataBase, Manager manager) {
         super.setManager(manager);
         super.setDataBase(dataBase);
@@ -14,7 +16,7 @@ public class BanUnbanScreen extends Screen{
         auxList.add("2. Exit");
         options.put("0", auxList);
     }
-
+     //Mostrará al usuario las opciones de esta pantalla.
     public ScreenResult showOptions(){
         Manager m =  super.getManager();
         DBManager db = super.getDataBase();
@@ -32,6 +34,7 @@ public class BanUnbanScreen extends Screen{
         return ScreenResult.stay;
     }
 
+    //Este método mostrará el formulario que debe rellenar el admin para banear a un usuario, y una vez comprobado que el usuario existe, lo baneará.
     private ScreenResult differentOptions(int optionSelected) {
         switch (optionSelected){
             case 0:
@@ -58,6 +61,7 @@ public class BanUnbanScreen extends Screen{
         return null;
     }
 
+    //Este método mostrará la lista de usuarios baneados y desbaneará el usuario que decida el administrador.
     private ScreenResult unBanUserM() {
         getManager().clearConsole();
         List<User> bannedUsers = getDataBase().getBannedUsers();
@@ -84,9 +88,11 @@ public class BanUnbanScreen extends Screen{
         return null;
     }
 
+    //Baneará al usuario introducido en el parámetro
     public void ban(User user){
         user.setBan(true);
     }
+    //Baneará al usuario introducido en el parámetro
     public void desBan(User user){
         user.setBan(false);
     }

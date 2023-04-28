@@ -9,6 +9,7 @@ public class UserMainMenuScreen extends Screen{
     private Map<String, List<String>> options;
     private User user;
 
+    //Constructor. Inicializará las diferentes opciones de este menú.
     public UserMainMenuScreen(DBManager dataBase, Store store, Manager manager, User user) {
         super.setTitle("Welcome " + user.getNick() + " you have " + user.getGold() + " coins.");
         super.setDescription("What would you like to do?");
@@ -33,6 +34,11 @@ public class UserMainMenuScreen extends Screen{
         auxList2.add("4. Log out");
         this.options.put("1", auxList2);
     }
+
+    /*
+    Mostrará las opciones pertinentes en cada caso. Si el usuario está baneado, lo especificará. Sino mostrará
+    el menú. También distinguirá si el usuario tiene un personaje creado o no y mostrará el menú correspondiente.
+     */
     @Override
     public ScreenResult showOptions() {
         if (user.getPendingRequest() != null){
@@ -64,6 +70,7 @@ public class UserMainMenuScreen extends Screen{
         }
     }
 
+    //Mostrará el menú correspondiente al caso en el que el usuario tiene personaje.
     private ScreenResult hasCharacterOptions(int optionSelected) {
         switch (optionSelected) {
             case 0:
@@ -97,6 +104,7 @@ public class UserMainMenuScreen extends Screen{
         return ScreenResult.stay;
     }
 
+    //Mostrará el menú correspondiente al caso en el que el usuario no tiene personaje.
     private ScreenResult hasNoCharacterOptions(int optionSelected) {
         switch (optionSelected) {
             case 0:
@@ -127,6 +135,10 @@ public class UserMainMenuScreen extends Screen{
         return ScreenResult.stay;
     }
 
+    /*
+    Mostrará las opciones en caso de que el usuario quiera desafiar a otro.
+    También gestionará los mensajes de victoria, derrota y empate, y modificará el valor del oro en cada caso.
+     */
     private void showPendingRequest() {
         List<String> request = user.getPendingRequest();
         User origen = getDataBase().getUserByNick(request.get(0));
@@ -166,27 +178,14 @@ public class UserMainMenuScreen extends Screen{
         getManager().clearConsole();
     }
 
+    //getter
     public Character getCharacter() {
         return character;
     }
 
+    //setter
     public void setCharacter(Character character) {
         this.character = character;
     }
 
-    public int getGold() {
-        return gold;
-    }
-
-    public void setGold(int gold) {
-        this.gold = gold;
-    }
-
-    public Map<String, List<String>> getOptions() {
-        return options;
-    }
-
-    public void setOptions(Map<String, List<String>> options) {
-        this.options = options;
-    }
 }

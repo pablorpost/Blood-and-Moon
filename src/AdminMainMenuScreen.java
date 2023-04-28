@@ -7,6 +7,7 @@ public class AdminMainMenuScreen extends Screen{
     private Admin admin;
     private Map<String, List<String>> options;
 
+    // Constructor de Admin
     public AdminMainMenuScreen(DBManager dataBase, Store store, Manager manager, Admin admin) {
         super.setTitle("What would you like to do?");
         this.setDescription(null);
@@ -23,6 +24,7 @@ public class AdminMainMenuScreen extends Screen{
         auxList.add("4. Log out");
         options.put("0", auxList);
     }
+    // Mostrar las opciones de administrador
     public ScreenResult showOptions() {
         List<String> show = options.get("0");
         for(int i = 0; i<show.size(); i ++){
@@ -57,7 +59,7 @@ public class AdminMainMenuScreen extends Screen{
         }
         return ScreenResult.exit;
     }
-
+    // Mostrar la pantalla de validar request
     private void displayScreenRequestAcceptance(Scanner sc) {
         getManager().clearConsole();
         System.out.println("There are "+getDataBase().getRequests().size()+" request prending of validation");
@@ -96,11 +98,7 @@ public class AdminMainMenuScreen extends Screen{
         }
         getDataBase().save();
     }
-
-    public void validatRequests(){
-
-    }
-
+    // Completar validacion si no se puede realizar
     private void failedValidation(List<String> request){
         Scanner sc = new Scanner(System.in);
         if(!(getDataBase().existingUser(request.get(1))==DataBaseResult.user)){
@@ -128,10 +126,6 @@ public class AdminMainMenuScreen extends Screen{
                 getDataBase().getUserByNick(request.get(0)).setGold(Integer.valueOf(request.get(2))+oldGold);
             }
         }
-    }
-
-    public void ban(User user){
-
     }
 
     public Admin getAdmin() {
