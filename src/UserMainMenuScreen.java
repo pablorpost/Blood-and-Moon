@@ -132,7 +132,7 @@ public class UserMainMenuScreen extends Screen{
         ScreenResult result = popUp.showPopUp(0);
         if (result == ScreenResult.stay){
             System.out.println("You have chosen to fight against " + origen.getNick() + ", then the fight will take place:\n");
-            Battle thisBattle = new Battle(origen, destino, goldBet, getStore());
+            Battle thisBattle = new Battle(origen, destino, goldBet,getStore());
             origen.addBattle(thisBattle);
             destino.addBattle(thisBattle);
             getDataBase().addBattleToList(thisBattle);
