@@ -37,7 +37,6 @@ public class UserMainMenuScreen extends Screen{
     }
     @Override
     public ScreenResult showOptions() {
-        getManager().clearConsole();
         if (user.getPendingRequest() != null){
             showPendingRequest();
             return ScreenResult.stay;
@@ -156,7 +155,7 @@ public class UserMainMenuScreen extends Screen{
         System.out.println("(Press ENTER to continue)");
         Scanner sc = new Scanner(System.in);
         sc.nextLine();
-
+        getManager().clearConsole();
     }
 
     public Character getCharacter() {
