@@ -28,7 +28,7 @@ public class ChallengeRequestScreen extends Screen{
         }
         if (!getDataBase().lastRequestMoreThanADayAgo(challenger.getNick(),challenged)){
             System.out.println("You have challenged this user twice in less than 24 hours");
-            System.out.println("You are now banned, to regain acces to your account please contact an admin");
+            System.out.println("You are now banned, to regain access to your account please contact an admin");
             System.out.println("\n(Press ENTER to continue)");
             challenger.setBan(true);
             teclado.nextLine();
