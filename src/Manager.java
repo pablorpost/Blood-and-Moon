@@ -2,6 +2,7 @@ public class Manager {
     private DBManager database;
     private Store store;
 
+    //inicializa manager y sus atributos
     public Manager(Store store) {
         this.store = store;
         this.database = new DBManager();
@@ -10,7 +11,7 @@ public class Manager {
         showScreen(inicio);
     }
 
-
+    //muestra el titulo, la descripcion e inicia el funcionamiento de la pantalla
     public void showScreen(Screen screen) {
         ScreenResult sr = ScreenResult.stay;
         String title;
@@ -32,10 +33,7 @@ public class Manager {
 
     }
 
-    private void loadUsers() {
-
-    }
-
+    //limpia la consola y pone el nombre en ella
     public void clearConsole() {
         try {
             final String os = System.getProperty("os.name");
@@ -50,7 +48,7 @@ public class Manager {
         System.out.println("██████╗ ██╗      ██████╗  ██████╗ ██████╗    ██╗   ███╗   ███╗ ██████╗  ██████╗ ███╗   ██╗\n██╔══██╗██║     ██╔═══██╗██╔═══██╗██╔══██╗   ██║   ████╗ ████║██╔═══██╗██╔═══██╗████╗  ██║\n██████╔╝██║     ██║   ██║██║   ██║██║  ██║████████╗██╔████╔██║██║   ██║██║   ██║██╔██╗ ██║\n██╔══██╗██║     ██║   ██║██║   ██║██║  ██║██╔═██╔═╝██║╚██╔╝██║██║   ██║██║   ██║██║╚██╗██║\n██████╔╝███████╗╚██████╔╝╚██████╔╝██████╔╝██████║  ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║ ╚████║\n╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝  ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝");
     }
 
-
+    //pantalla de carga falsa, para dar sensacion de calidad
     public void loadScreen(int x){
         for (int i=0;i<101;i=i+2) {
             try {
@@ -67,7 +65,8 @@ public class Manager {
             }
         }
     }
-
+    //devuelve la store
     public Store getStore(){return this.store;}
+    //devuelve el gestor de la base de datos
     public DBManager getDatabase(){return this.database;}
 }
