@@ -26,7 +26,14 @@ public class ChallengeRequestScreen extends Screen{
             teclado.nextLine();
             return super.showOptions();
         }
-
+        if (!getDataBase().lastRequestMoreThanADayAgo(challenger.getNick(),challenged)){
+            System.out.println("You have challenged this user twice in less than 24 hours");
+            System.out.println("You are now banned, to regain access to your account please contact an admin");
+            System.out.println("\n(Press ENTER to continue)");
+            challenger.setBan(true);
+            teclado.nextLine();
+            return ScreenResult.exit;
+        }
         System.out.println("How much gold would you like to bet (you have " + challenger.getGold() + " coins)?");
         int gold = teclado.nextInt();
         while (gold > challenger.getGold()){
@@ -35,6 +42,7 @@ public class ChallengeRequestScreen extends Screen{
         }
         getDataBase().addRequest(challenger.getNick(), challenged, gold);
         challenger.setGold(challenger.getGold()-gold);
+        getDataBase().addLastRequestDate(challenger.getNick(),challenged);
         return super.showOptions();
     }
 

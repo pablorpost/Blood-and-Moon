@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,23 @@ public class DBManager{
     private int adminPassword;
 
 
+    public boolean lastRequestMoreThanADayAgo(String challenger, String challenged){
+        String par = challenger+" "+challenged;
+        if (dataBase.getLastRequest().containsKey(par)){
+            LocalDateTime n = LocalDateTime.now();
+            LocalDateTime last = dataBase.getLastRequest().get(par);
+            if (last.plusDays(1).isBefore(n)){
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public void addLastRequestDate(String challenger, String challenged) {
+        String par = challenger+" "+challenged;
+        dataBase.getLastRequest().put(par,LocalDateTime.now());
+    }
     public User getUser(String nick, String password){
         return dataBase.getUser(nick, password.hashCode());
     }

@@ -1,5 +1,5 @@
 import java.io.Serializable;
-import java.time.
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class DataBase implements Serializable{
@@ -8,7 +8,7 @@ public class DataBase implements Serializable{
     private Map<String, Admin> admins;
     private List<Battle> battles;
     private List<List<String>> requests;
-    private Map<String, DateTime> lastRequest;
+    private Map<String, LocalDateTime> lastRequest;
 
     public DataBase(){
         users = new HashMap<String, User>();
@@ -16,20 +16,15 @@ public class DataBase implements Serializable{
         this.requests = new ArrayList<>();
         battles = new ArrayList<>();
     }
-
-    public boolean lastRequestMoreThanADayAgo(String challenger, String challenged){
-        String par = challenger+" "+challenged;
-        if (lastRequest.containsKey(par)){
-            DateTime now = new DateTime.now();
-            if (now+DateTime.plusDays(1));
-        }
-        return true;
-    }
     public User getUser(String nick, int password){
         if (inDataBase(nick,password)==DataBaseResult.user){
             return users.get(nick);
         }
         return null;
+    }
+
+    public Map<String, LocalDateTime> getLastRequest(){
+        return lastRequest;
     }
 
     public Admin getAdmin(String nick, int password){
