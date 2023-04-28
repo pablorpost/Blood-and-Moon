@@ -58,13 +58,10 @@ public class UserMainMenuScreen extends Screen{
         Scanner sc = new Scanner(System.in);
         int optionSelected = sc.nextInt();
         if (this.user.getCharacter() != null) {
-            ScreenResult stay = hasCharacterOptions(optionSelected);
-            if (stay != null) return stay;
+            return hasCharacterOptions(optionSelected);
         } else{
-            ScreenResult stay = hasNoCharacterOptions(optionSelected);
-            if (stay != null) return stay;
+            return hasNoCharacterOptions(optionSelected);
         }
-        return ScreenResult.exit;
     }
 
     private ScreenResult hasCharacterOptions(int optionSelected) {
@@ -92,12 +89,12 @@ public class UserMainMenuScreen extends Screen{
                 if (result == ScreenResult.stay){
                     user.setCharacter(null);
                 }
-                this.showOptions();
+                //this.showOptions();
                 break;
             case 5:
                 return ScreenResult.exit;
         }
-        return null;
+        return ScreenResult.stay;
     }
 
     private ScreenResult hasNoCharacterOptions(int optionSelected) {
@@ -112,10 +109,10 @@ public class UserMainMenuScreen extends Screen{
                 if (result == ScreenResult.stay){
                     System.out.println(user.getName());
                     super.getDataBase().deletePerson(user);
+                    return result;
                 } else {
                     return ScreenResult.stay;
                 }
-                break;
             case 2:
                 BattleHistoryScreen bhs = new BattleHistoryScreen(getDataBase(), getStore(), user);
                 getManager().showScreen(bhs);
@@ -127,7 +124,7 @@ public class UserMainMenuScreen extends Screen{
             case 4:
                 return ScreenResult.exit;
         }
-        return null;
+        return ScreenResult.stay;
     }
 
     private void showPendingRequest() {
