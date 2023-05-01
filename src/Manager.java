@@ -6,7 +6,7 @@ public class Manager {
     public Manager(Store store) {
         this.store = store;
         this.database = new DBManager();
-        loadScreen(25);
+        //loadScreen(25);
         InRegMenuScreen inicio = new InRegMenuScreen(database, store,this);
         showScreen(inicio);
     }
@@ -17,7 +17,7 @@ public class Manager {
         String title;
         String desc;
         while (sr==ScreenResult.stay) {
-            clearConsole();
+            //clearConsole();
             title = screen.getTitle();
             desc = screen.getDescription();
             if (title!=null){

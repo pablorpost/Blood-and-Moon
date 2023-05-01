@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PopUpScreenTest {
+    /*
     ByteArrayInputStream
 
 
@@ -17,6 +18,6 @@ class PopUpScreenTest {
     }
 
     @Test
-    @DisplayName()
+    @DisplayName()*/
 
 }

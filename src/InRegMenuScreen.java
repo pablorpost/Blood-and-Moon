@@ -52,8 +52,8 @@ public class InRegMenuScreen extends Screen{
                 }
             }
             if (election==0 || election==1){
-                this.getManager().clearConsole();
-                showForm((election==1),(option.equals("admin")));
+                //this.getManager().clearConsole();
+                showForm((election==1),(option.equals("admin")), teclado);
                 option = "user";
             }
         }
@@ -61,9 +61,8 @@ public class InRegMenuScreen extends Screen{
     }
 
     //Muestra los distintos campos que se solicitará al usuario (los campos dependen del tipo de usuario)
-    public Map<String, String> showForm(boolean isRegist, boolean isAdmin){
+    public Map<String, String> showForm(boolean isRegist, boolean isAdmin, Scanner teclado){
         Console console = System.console();
-        Scanner teclado = new Scanner(System.in);
         String password="";
         Map<String, String> formulario = new HashMap<String, String>();
         if (isAdmin){
@@ -151,6 +150,7 @@ public class InRegMenuScreen extends Screen{
         System.out.println("(Press ENTER to continue)");
         teclado = new Scanner(System.in);
         election = teclado.nextLine();
+        teclado.close();
         return null;
     }
 
