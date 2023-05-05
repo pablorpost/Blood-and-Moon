@@ -23,14 +23,19 @@ public class Armor {
     public List<Armor> loadArmors(String directorio) throws FileNotFoundException {
         ArrayList<Armor> armors = new ArrayList<>();
         String ruta = directorio + File.separatorChar + "armors" + File.separatorChar + "armors.txt";
-        File fichero = new File(ruta);
-        Scanner scanner = new Scanner(fichero);
-        while (scanner.hasNextLine()){ //mientras existan lineas
-            String linea = scanner.nextLine();
-            String [] var = linea.split(" ");
-            Armor armor = new Armor(var);
-            armors.add(armor);
+        try {
+            File fichero = new File(ruta);
+            Scanner scanner = new Scanner(fichero);
+            while (scanner.hasNextLine()){ //mientras existan lineas
+                String linea = scanner.nextLine();
+                String [] var = linea.split(" ");
+                Armor armor = new Armor(var);
+                armors.add(armor);
+            }
+        } catch (FileNotFoundException e){
+            return new ArrayList<>();
         }
+
         return armors;
 
     }
