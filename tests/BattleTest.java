@@ -1,25 +1,39 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BattleTest {
 
     @Test
-    void battleExecute() {
-    }
+    void battleExecuteTest() {
+        RandomGenerator.initRandomGenerator();
+        RandomGenerator.setSeed(1234);
+        Store store = new Store();
+        store.loadStore("tests/storeFilesTests");
+        Character charac = new Lycanthrope("tests/storeFilesTests");
+        User user1 = new User("test","test",1234);
+        user1.setCharacter(charac);
+        user1.setArmor(store.getArmors().get(0));
+        String weapon = store.getWeapons().get(0);
+        user1.addWeapon(weapon);
 
-    @Test
-    void printPhrase() {
-    }
+        Character charac2 = new Lycanthrope("tests/storeFilesTests");
+        User user2 = new User("test2","test2",1234);
+        user2.setCharacter(charac2);
+        user2.setArmor(store.getArmors().get(1));
+        String weapon2 = store.getWeapons().get(1);
+        user2.addWeapon(weapon2);
 
-    @Test
-    void printStats() {
-    }
+        Battle battle = new Battle();
+        Modifier modifier = store.getModifiers().get(0);
 
-    @Test
-    void printCalcs() {
+
+        assertEquals(18,battle.battleExecute(user1,user2,store,modifier,true,charac,charac2,false));
     }
 
     @Test
