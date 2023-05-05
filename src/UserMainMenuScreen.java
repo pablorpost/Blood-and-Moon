@@ -8,13 +8,15 @@ public class UserMainMenuScreen extends Screen{
     private int gold;
     private Map<String, List<String>> options;
     private User user;
+    private Scanner teclado;
 
     //Constructor. Inicializará las diferentes opciones de este menú.
-    public UserMainMenuScreen(DBManager dataBase, Store store, Manager manager, User user) {
+    public UserMainMenuScreen(DBManager dataBase, Store store, Manager manager, User user, Scanner teclado) {
         super.setTitle("Welcome " + user.getNick() + " you have " + user.getGold() + " coins.");
         super.setDescription("What would you like to do?");
         setDataBase(dataBase);
         setStore(store);
+        this.teclado = teclado;
         super.setManager(manager);
         this.user = user;
         this.options = new HashMap<>();
@@ -49,8 +51,7 @@ public class UserMainMenuScreen extends Screen{
         if (this.user.isBan()){
             System.out.println("This user is banned temporarily");
             System.out.println("(Press ENTER to go back to login page)");
-            Scanner keyBoard = new Scanner(System.in);
-            String nxtStr = keyBoard.nextLine();
+            String nxtStr = teclado.nextLine();
             return ScreenResult.exit;
         }
         if (this.user.getCharacter() == null){
@@ -61,8 +62,7 @@ public class UserMainMenuScreen extends Screen{
         for(int i = 0; i<show.size(); i ++){
             System.out.println(show.get(i));
         }
-        Scanner sc = new Scanner(System.in);
-        int optionSelected = sc.nextInt();
+        int optionSelected = teclado.nextInt();
         if (this.user.getCharacter() != null) {
             return hasCharacterOptions(optionSelected);
         } else{
@@ -172,8 +172,7 @@ public class UserMainMenuScreen extends Screen{
         user.setPendingRequest(null);
         super.setTitle("Welcome " + user.getNick() + " you have " + user.getGold() + " coins.");
         System.out.println("(Press ENTER to continue)");
-        Scanner sc = new Scanner(System.in);
-        sc.nextLine();
+        teclado.nextLine();
         getDataBase().save();
         getManager().clearConsole();
     }

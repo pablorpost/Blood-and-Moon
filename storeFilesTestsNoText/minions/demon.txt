@@ -1,0 +1,4 @@
+name:struct.minion.Demon
+life:3
+minions:Minions
+oath:Oath

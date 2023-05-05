@@ -1,13 +1,18 @@
+import java.util.Scanner;
+
 public class Manager {
     private DBManager database;
     private Store store;
+
+    private Scanner teclado;
 
     //inicializa manager y sus atributos
     public Manager(Store store) {
         this.store = store;
         this.database = new DBManager();
+        this.teclado = new Scanner(System.in);
         //loadScreen(25);
-        InRegMenuScreen inicio = new InRegMenuScreen(database, store,this);
+        InRegMenuScreen inicio = new InRegMenuScreen(database, store,this, teclado);
         showScreen(inicio);
     }
 
@@ -17,7 +22,7 @@ public class Manager {
         String title;
         String desc;
         while (sr==ScreenResult.stay) {
-            //clearConsole();
+            clearConsole();
             title = screen.getTitle();
             desc = screen.getDescription();
             if (title!=null){

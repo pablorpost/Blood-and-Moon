@@ -7,13 +7,15 @@ public class InRegMenuScreen extends Screen{
     private Map<String, List<String>> options;
     private Map<String, List<String>> formVersions;
     private String option;
+    private Scanner teclado;
 
     //Constructor
-    public InRegMenuScreen(DBManager dataBase, Store store,Manager manager) {
+    public InRegMenuScreen(DBManager dataBase, Store store,Manager manager, Scanner teclado) {
         super.setStore(store);
         super.setDataBase(dataBase);
         super.setManager(manager);
         super.setTitle("What would you like to do?");
+        this.teclado = teclado;
         this.options = new HashMap<String, List<String>>();
         this.formVersions = new HashMap<String, List<String>>();
         option = "user";
@@ -38,7 +40,6 @@ public class InRegMenuScreen extends Screen{
         for (int i = 0; i < thisOptions.size(); i++) {
             System.out.println(i+ ".    " + thisOptions.get(i));
         }
-        Scanner teclado = new Scanner(System.in);
         try{
             election = Integer.parseInt(teclado.nextLine());
         }
@@ -52,7 +53,7 @@ public class InRegMenuScreen extends Screen{
                 }
             }
             if (election==0 || election==1){
-                //this.getManager().clearConsole();
+                this.getManager().clearConsole();
                 showForm((election==1),(option.equals("admin")), teclado);
                 option = "user";
             }
@@ -131,26 +132,31 @@ public class InRegMenuScreen extends Screen{
         }
         formulario.put("pas", password);
         if (isRegist){
-            this.addPerson(formulario.get("nick"), formulario.get("name"), formulario.get("pas"), isAdmin);
-            this.getDataBase().save();
+            if (formulario.get("pas").length() >= 8 && formulario.get("pas").length() <= 12) {
+                this.addPerson(formulario.get("nick"), formulario.get("name"), formulario.get("pas"), isAdmin);
+                this.getDataBase().save();
+            } else {
+                System.out.println("Invalid password");
+                System.out.println("(Press ENTER to continue)");
+                election = teclado.nextLine();
+                return null;
+            }
         }
         DataBaseResult resulta = this.checkPerson(formulario.get("nick"), formulario.get("pas"));
         if (resulta == DataBaseResult.user && !isAdmin){
             User user = getDataBase().getUser(formulario.get("nick"), formulario.get("pas"));
-            UserMainMenuScreen pantalla = new UserMainMenuScreen(getDataBase(),getStore(),getManager(), user);
+            UserMainMenuScreen pantalla = new UserMainMenuScreen(getDataBase(),getStore(),getManager(), user, teclado);
             getManager().showScreen(pantalla);
             return null;
         } else if (resulta==DataBaseResult.admin && isAdmin){
             Admin admin = getDataBase().getAdmin(formulario.get("nick"), formulario.get("pas"));
-            AdminMainMenuScreen pantalla = new AdminMainMenuScreen(getDataBase(),getStore(),getManager(),admin);
+            AdminMainMenuScreen pantalla = new AdminMainMenuScreen(getDataBase(),getStore(),getManager(),admin, teclado);
             getManager().showScreen(pantalla);
             return null;
         }
         System.out.println("Incorrect user or password");
         System.out.println("(Press ENTER to continue)");
-        teclado = new Scanner(System.in);
         election = teclado.nextLine();
-        teclado.close();
         return null;
     }
 
