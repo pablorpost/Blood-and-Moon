@@ -31,7 +31,7 @@ class MinionTest {
         vampire.setAge(25);
         vampire.addModifier("SangreCerca");
 
-        Vampire vampire
+        //Vampire vampire;
     }
 
     @Test
