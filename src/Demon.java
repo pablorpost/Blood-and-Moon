@@ -15,6 +15,10 @@ public class Demon extends Minion{
             throw new RuntimeException(e);
         }
     }
+    // Constructor de demonio
+    public Demon() {
+        super();
+    }
     // cargar archivo .txt
     @Override
     public void readLine(String[] var) {
