@@ -33,17 +33,20 @@ public class Battle implements Serializable {
         Character char0 = challenger.getCharacter();
         Character char1 = challenged.getCharacter();
 
-        rounds = battleExecute(challenger, challenged, store, modifier, more, char0, char1);
+        rounds = battleExecute(challenger, challenged, store, modifier, more, char0, char1,true);
         //dejará los personajes como estaban
         store.loadCharacters();
         setRounds(rounds);
     }
     // Ejecutar la batalla entro los dos contrincantes
-    public int battleExecute(User challenger, User challenged, Store store, Modifier modifier, boolean more, Character char0, Character char1) {
+    public int battleExecute(User challenger, User challenged, Store store, Modifier modifier, boolean more, Character char0, Character char1,boolean printable) {
         int rounds = 0;
         int char0Life = calculateLife(char0, store); //la vida de cada personaje será la suya predeterminada, sumando la de sus esbirros
         int char1Life = calculateLife(char1, store);
-        printStats(challenger,challenged,char0Life,char1Life);
+        if(printable){
+            printStats(challenger,challenged,char0Life,char1Life);
+        }
+
         while (char0Life > 0 && char1Life > 0) {
             rounds += 1;
             int firstAttack = getPowerOfAtack(char0, challenger, store, more, modifier);
@@ -60,14 +63,20 @@ public class Battle implements Serializable {
                 char1Life -=1;
                 winner = char0;
                 looser = char1;
-                printPhrase(winner,looser,challenger.getNick(),challenged.getNick());
+                if (printable){
+                    printPhrase(winner,looser,challenger.getNick(),challenged.getNick());
+                }
+
                 update(winner,looser);
             }
             if ((succesAttack2>=succesDefense2)) {
                 char0Life -=1;
                 winner = char1;
                 looser = char0;
-                printPhrase(winner,looser,challenged.getNick(),challenger.getNick());
+                if (printable){
+                    printPhrase(winner,looser,challenged.getNick(),challenger.getNick());
+                }
+
                 update(winner,looser);
             }
             if (char1Life <= 0 && char0Life <= 0) {
@@ -79,8 +88,11 @@ public class Battle implements Serializable {
                 this.winner = challenged.getNick();
                 this.looser = challenger.getNick();
             }
-            printCalcs(rounds,challenger,challenged,firstAttack,firstDefense,secondDefense,secondAttack);
-            printStats(challenger,challenged,char0Life,char1Life);
+            if(printable){
+                printCalcs(rounds,challenger,challenged,firstAttack,firstDefense,secondDefense,secondAttack);
+                printStats(challenger,challenged,char0Life,char1Life);
+            }
+
         }
         return rounds;
     }
@@ -165,7 +177,7 @@ public class Battle implements Serializable {
         Random random = new Random();
         int acum = 0;
         for (int i=0;i<atribute;i++){
-            int ran = random.nextInt(6) + 1;
+            int ran = RandomGenerator.RANDOM_OBJ.nextInt(6) + 1;
             if (ran==5 || ran==6){
                 acum +=1;
             }

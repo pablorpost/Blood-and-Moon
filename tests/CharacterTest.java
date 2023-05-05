@@ -130,8 +130,6 @@ class CharacterTest {
 
 
 
-
-
     @Test
     void loadCharacterLycanthropeTest() {
         Lycanthrope licanthrope = new Lycanthrope();
