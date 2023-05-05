@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,21 +9,30 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DBManagerTest {
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         RandomGenerator.initRandomGenerator();
         RandomGenerator.setSeed(1234);
     }
 
     @Test
     void lastRequestMoreThanADayAgo() {
-
+        DBManager db = new DBManager();
+        assertTrue(db.lastRequestMoreThanADayAgo("0","1"));
+        assertTrue(db.lastRequestMoreThanADayAgo("1","0"));
+        db.addLastRequestDate("0","1");
+        assertFalse(db.lastRequestMoreThanADayAgo("0","1"));
+        assertTrue(db.lastRequestMoreThanADayAgo("1","0"));
     }
 
     @Test
     void addLastRequestDate() {
-
-
+        DBManager db = new DBManager();
+        assertTrue(db.lastRequestMoreThanADayAgo("0","1"));
+        assertTrue(db.lastRequestMoreThanADayAgo("1","0"));
+        db.addLastRequestDate("0","1");
+        assertFalse(db.lastRequestMoreThanADayAgo("0","1"));
+        assertTrue(db.lastRequestMoreThanADayAgo("1","0"));
     }
 
     @Test
@@ -171,6 +181,20 @@ class DBManagerTest {
 
     @Test
     void addRequest() {
+        DBManager db = new DBManager();
+        String nick = "e";
+        String pass = "eqeqeqeq";
+        String name = "paco";
+        char c = 'a';
+        for(int i=0;i<25;i++){
+            db.addRequest(String.valueOf(c),String.valueOf(++c),i);
+        }
+        c = 'a';
+        for(int i=0;i<25;i++){
+            assertEquals(db.getRequests().get(i).get(0),String.valueOf(c++));
+            assertEquals(db.getRequests().get(i).get(1),String.valueOf(c));
+            assertEquals(db.getRequests().get(i).get(2),String.valueOf(i));
+        }
     }
 
     @Test
@@ -225,13 +249,44 @@ class DBManagerTest {
 
     @Test
     void getBannedUsers() {
+        DBManager db = new DBManager();
+        String nick = "e";
+        String pass = "eqeqeqeq";
+        String name = "paco";
+        db.addUser(nick,name,pass);
+        User u = db.getUser(nick,pass);
+        u.setBan(true);
+        for(User i:db.getBannedUsers()){
+            assertEquals(i.getNick(),nick);
+        }
+        u.setBan(false);
+        for(User i:db.getBannedUsers()){
+            assertEquals(i.getNick(),nick);
+        }
     }
 
     @Test
     void getRequests() {
+        DBManager db = new DBManager();
+        String nick = "e";
+        String pass = "eqeqeqeq";
+        String name = "paco";
+        char c = 'a';
+        for(int i=0;i<25;i++){
+            db.addRequest(String.valueOf(c),String.valueOf(++c),i);
+        }
+        c = 'a';
+        for(int i=0;i<25;i++){
+            assertEquals(db.getRequests().get(i).get(0),String.valueOf(c++));
+            assertEquals(db.getRequests().get(i).get(1),String.valueOf(c));
+            assertEquals(db.getRequests().get(i).get(2),String.valueOf(i));
+        }
     }
 
     @Test
     void addBattleToList() {
+        //explicar en memoria
+        //esta funcion no se puecer una prueba de ella porque no existe un get, ya que esta diseñada para un futuro uso,
+        //y llegado este que ya ste repleta de batallas que han tomado luegar desde el lanzamiento del juego
     }
 }
