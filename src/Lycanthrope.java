@@ -12,6 +12,10 @@ public class Lycanthrope extends Character{
             throw new RuntimeException(e);
         }
     }
+    //Constructor para cargar archivo
+    public Lycanthrope(){
+        super();
+    }
 
     //constructor copia
     public Lycanthrope(Lycanthrope original) {
