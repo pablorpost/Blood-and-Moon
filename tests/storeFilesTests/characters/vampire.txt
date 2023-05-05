@@ -3,11 +3,8 @@ life:4
 description:Le encanta beber sangre
 weapon:Pistol1
 weapon:Pistol2
-weapon:Shotgun1
 armor:Armor1
 armor:Armor2
-armor:Armor3
-armor:Armor4
 skill:Disciplines
 power:4
 age:25
@@ -15,4 +12,3 @@ blood:10
 minion:Demon
 minion:Ghoul
 modifier:SangreCerca
-modifier:AjoCerca
