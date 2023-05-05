@@ -23,16 +23,14 @@ class BattleTest {
     }
 
     @Test
-    void calculateLife() {
+    void calculateLifeTest() {
+        Character charac = new Lycanthrope("tests/storeFilesTests");
+        Store store = new Store();
+        Battle battle = new Battle();
+        charac.addMinion(store.getMinions().get(0));
+        assertEquals(17,battle.calculateLife(charac,store));
     }
 
-    @Test
-    void update() {
-    }
-
-    @Test
-    void calculateSucces() {
-    }
 
     @Test
     void getPowerOfAtackTest(){
@@ -52,7 +50,7 @@ class BattleTest {
     }
 
     @Test
-    void getPowerOfDefense() {
+    void getPowerOfDefenseTest() {
         RandomGenerator.initRandomGenerator();
         RandomGenerator.setSeed(1234);
         Character charac = new Lycanthrope("tests/storeFilesTests");
