@@ -8,17 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ArmorTest {
 
-    private ArrayList<Armor> armorsOriginal;
-
     @BeforeEach
     void setUp() {
-        armorsOriginal = new ArrayList<>();
-
     }
 
     @Test
     void loadArmorsCorrectTest() {
-
+        ArrayList<Armor> armorsOriginal = new ArrayList<>();
         for(int i = 0; i<=2; i++){
             String linea = "Armor"+ i + " " + i + " "+ i ;
             String [] var = linea.split(" ");
