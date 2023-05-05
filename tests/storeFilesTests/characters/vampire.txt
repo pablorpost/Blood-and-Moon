@@ -1,4 +1,4 @@
-name:character.Vampire
+name:Vampire
 life:4
 description:Le encanta beber sangre
 weapon:Pistol1
@@ -12,7 +12,7 @@ skill:Disciplines
 power:4
 age:25
 blood:10
-minion:struct.minion.Demon
-minion:struct.minion.Ghoul
+minion:Demon
+minion:Ghoul
 modifier:SangreCerca
 modifier:AjoCerca

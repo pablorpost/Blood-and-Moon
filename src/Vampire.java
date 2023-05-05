@@ -14,6 +14,10 @@ public class Vampire extends Character {
         }
     }
 
+    public Vampire() {
+        super();
+    }
+
     //constructor copia
     public Vampire(Vampire original) {
         super.setName(original.getName());
