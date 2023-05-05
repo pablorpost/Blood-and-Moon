@@ -30,6 +30,21 @@ public class Store {
 
     }
 
+    public Store(String directorio){
+        this.minions = new ArrayList<>();
+        this.chracters = new ArrayList<>();
+        this.armors = new ArrayList<>();
+        this.weapons = new ArrayList<>();
+        this.skills = new ArrayList<>();
+        this.modifiers = new ArrayList<>();
+
+        //src/directorio
+        this.directorio = directorio;
+
+        loadStore(this.directorio);
+
+    }
+
     //Cargará toda la información de la store, leyendo los diferentes archivos
     public void loadStore(String directorio){
         Armor armor= new Armor();
