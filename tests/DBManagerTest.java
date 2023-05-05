@@ -1,13 +1,17 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DBManagerTest {
 
     @BeforeEach
     void setUp() {
-
+        RandomGenerator.initRandomGenerator();
+        RandomGenerator.setSeed(1234);
     }
 
     @Test
@@ -87,10 +91,6 @@ class DBManagerTest {
     }
 
     @Test
-    void loadDataBase() {
-    }
-
-    @Test
     void adminPasswordCheck() {
         DBManager db = new DBManager();
         assertTrue(db.adminPasswordCheck("80085"));
@@ -136,10 +136,37 @@ class DBManagerTest {
 
     @Test
     void hasCharacter() {
+        DBManager db = new DBManager();
+        String nick = "e";
+        String pass = "eqeqeqeq";
+        String name = "paco";
+        db.addUser(nick,name,pass);
+        User u = db.getUser(nick,pass);
+        assertTrue(db.hasCharacter(nick));
+        Character c = new Character();
+        u.setCharacter(c);
+        assertFalse(db.hasCharacter(nick));
+        u.setCharacter(null);
+        assertTrue(db.hasCharacter(nick));
     }
 
     @Test
     void deletePerson() {
+        DBManager db = new DBManager();
+        String nick = "e";
+        String pass = "eqeqeqeq";
+        String name = "paco";
+        assertNull(db.getAdmin(nick, pass));
+        db.addAdmin(nick,name,pass);
+        Admin u = db.getAdmin(nick,pass);
+        assertEquals(u.getName(),name);
+        db.deletePerson(u);
+        assertNull(db.getAdmin(nick, pass));
+        db.addAdmin(nick,name,pass);
+        Admin a = db.getAdmin(nick,pass);
+        assertEquals(a.getName(),name);
+        db.deletePerson(a);
+        assertNull(db.getAdmin(nick, pass));
     }
 
     @Test
@@ -148,10 +175,52 @@ class DBManagerTest {
 
     @Test
     void top10() {
+        DBManager db = new DBManager();
+        ArrayList<ArrayList<String>> ab = new ArrayList<>();
+        for(char i='a';i<='g';i++){
+            db.addUser(String.valueOf(i),String.valueOf(i),"0000000"+String.valueOf(i));
+            User u = db.getUser(String.valueOf(i),"0000000"+String.valueOf(i));
+            int gold = RandomGenerator.RANDOM_OBJ.nextInt(2140000000);
+            u.setGold(gold);
+            ArrayList<String> a = new ArrayList<>();
+            a.add(String.valueOf(i));
+            a.add(String.valueOf(gold));
+            ab.add(a);
+        }
+        Collections.sort(ab, (d,c) -> Integer.valueOf(c.get(1)) - Integer.valueOf(d.get(1)));
+        int j = 0;
+        for(User l:db.top10()){
+            assertEquals(l.getNick(),ab.get(j++).get(0));
+        }
+        for(char i='h';i<='z';i++){
+            db.addUser(String.valueOf(i),String.valueOf(i),"0000000"+String.valueOf(i));
+            User u = db.getUser(String.valueOf(i),"0000000"+String.valueOf(i));
+            int gold = RandomGenerator.RANDOM_OBJ.nextInt(2140000000);
+            u.setGold(gold);
+            ArrayList<String> a = new ArrayList<>();
+            a.add(String.valueOf(i));
+            a.add(String.valueOf(gold));
+            ab.add(a);
+        }
+        Collections.sort(ab, (d,c) -> Integer.valueOf(c.get(1)) - Integer.valueOf(d.get(1)));
+        j = 0;
+        for(User l:db.top10()){
+            assertEquals(l.getNick(),ab.get(j++).get(0));
+        }
     }
 
     @Test
     void getUserByNick() {
+        DBManager db = new DBManager();
+        String nick = "e";
+        String pass = "eqeqeqeq";
+        String name = "paco";
+        assertNull(db.getUserByNick(nick));
+        db.addUser(nick,name,pass);
+        User u = db.getUserByNick(nick);
+        assertEquals(u.getName(),name);
+        db.deletePerson(u);
+        assertNull(db.getUserByNick(nick));
     }
 
     @Test

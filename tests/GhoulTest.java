@@ -11,10 +11,10 @@ class GhoulTest {
         Ghoul ghoul = new Ghoul();
 
 
-        String line = "name:Demon";
+        String line = "name:Ghoul";
         String[] var = line.split(":");
         ghoul.readLine(var);
-        assertEquals("Demon", ghoul.getName());
+        assertEquals("Ghoul", ghoul.getName());
 
         line = "life:3";
         var = line.split(":");

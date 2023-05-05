@@ -9,6 +9,5 @@ public class RandomGenerator {
 
     public static void setSeed(long seed){
         RANDOM_OBJ.setSeed(seed);
-        System.out.println(seed);
     }
 }
