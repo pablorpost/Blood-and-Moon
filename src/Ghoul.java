@@ -3,6 +3,10 @@ import java.util.ArrayList;
 
 public class Ghoul extends Minion {
     private int dependency;
+
+    public Ghoul(){
+
+    }
     // Constructor de ghoul
     public Ghoul(String directorio){
         super();

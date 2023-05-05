@@ -15,7 +15,12 @@ public class Battle implements Serializable {
     private int gold;
     private String challenger;
     private String challenged;
+
+
     // Constructor de la batalla
+    public Battle(){
+
+    }
     public Battle(User challenger, User challenged, int goldBet, Store store){
         this.challenger = challenger.getName();
         this.challenged = challenged.getName();
@@ -34,7 +39,7 @@ public class Battle implements Serializable {
         setRounds(rounds);
     }
     // Ejecutar la batalla entro los dos contrincantes
-    private int battleExecute(User challenger, User challenged, Store store, Modifier modifier, boolean more, Character char0, Character char1) {
+    public int battleExecute(User challenger, User challenged, Store store, Modifier modifier, boolean more, Character char0, Character char1) {
         int rounds = 0;
         int char0Life = calculateLife(char0, store); //la vida de cada personaje será la suya predeterminada, sumando la de sus esbirros
         int char1Life = calculateLife(char1, store);
@@ -80,7 +85,7 @@ public class Battle implements Serializable {
         return rounds;
     }
     // Mostrar las acciones de los personajes de la batalla por el momento
-    private void printPhrase(Character winner, Character looser,String wnick, String lnick){
+    public void printPhrase(Character winner, Character looser,String wnick, String lnick){
         if (winner instanceof Vampire){
             System.out.print(wnick+"'s vampire violently bites");
         }
@@ -101,7 +106,7 @@ public class Battle implements Serializable {
         }
     }
     // Mostrar el estado de los contrincantes en la batalla
-    private void printStats(User challenger, User challenged,int challengerChar, int challengedChar){
+    public void printStats(User challenger, User challenged,int challengerChar, int challengedChar){
         System.out.println(challenger.getNick()+"'s character has "+challengerChar+" life points");
         System.out.println(challenged.getNick()+"'s character has "+challengedChar+" life points\n");
 
@@ -124,7 +129,7 @@ public class Battle implements Serializable {
 
     }
     // Muestra los calculos de la batalla por ronda
-    private void printCalcs(int Round,User challenger, User challenged,int at_r, int at_d, int def_r, int def_d ){
+    public void printCalcs(int Round,User challenger, User challenged,int at_r, int at_d, int def_r, int def_d ){
         System.out.println("Round: "+Round);
         System.out.println(challenger.getNick()+" attacks with "+at_r+ " attack points");
         System.out.println(challenged.getNick()+" defends itslef with "+def_d+ " defense points");
@@ -132,7 +137,7 @@ public class Battle implements Serializable {
         System.out.println(challenger.getNick()+" defends itslef with "+def_r+ " defense points\n");
     }
     // Calcula la vida de un personaje
-    private int calculateLife(Character chara, Store store) {
+    public int calculateLife(Character chara, Store store) {
         int lifeAux = chara.getLife();
         for (String minion : chara.getMinions()) {
             lifeAux+= store.getInfoMinion(minion).getLife();
@@ -141,7 +146,7 @@ public class Battle implements Serializable {
         return lifeAux;
     }
     // Actualiza los valores internos de los personajes een funcion de si ganan o pierden
-    private void update(Character winner, Character looser){
+    public void update(Character winner, Character looser){
         if (winner instanceof Vampire){
             ((Vampire) winner).addBlood((5));
 
@@ -156,7 +161,7 @@ public class Battle implements Serializable {
         }
     }
     // Calcula la propabilidad de tener un ataque efectivo
-    private int calculateSucces(int atribute) {
+    public int calculateSucces(int atribute) {
         Random random = new Random();
         int acum = 0;
         for (int i=0;i<atribute;i++){
@@ -168,7 +173,7 @@ public class Battle implements Serializable {
         return acum;
     }
     // Obtiene el poder del ataque de un personaje
-    private int getPowerOfAtack(Character charac, User user, Store store, boolean more, Modifier modifier){
+    public int getPowerOfAtack(Character charac, User user, Store store, boolean more, Modifier modifier){
         int power = charac.getPower(); //poder
         int powerAtribute = charac.getPowerAtribute(); //poder según personaje
         List<String> weapons = user.getWeapons();
@@ -208,7 +213,7 @@ public class Battle implements Serializable {
         }
     }
     // Obtiene el poder de la defensa de un personaje
-    private int getPowerOfDefense(Character charac, User user, Store store, boolean more){
+    public int getPowerOfDefense(Character charac, User user, Store store, boolean more){
         int power = charac.getPower();
         int powerAtribute = charac.getPowerAtribute();
         List<String> weapons = user.getWeapons();

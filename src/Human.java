@@ -11,6 +11,10 @@ public class Human extends Minion{
             throw new RuntimeException(e);
         }
     }
+    // Constructor de humano
+    public Human(){
+        super();
+    }
     // Cargar datos del .txt
     @Override
     public void readLine(String[] var) {

@@ -12,6 +12,10 @@ public class Hunter extends Character{
         }
     }
     // Constructor de cazador
+    public Hunter() {
+        super();
+    }
+    // Constructor de cazador
     public Hunter(Hunter original) {
         super.setName(original.getName());
         super.setLife(original.getLife());
