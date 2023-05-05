@@ -8,16 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WeaponTest {
 
-    private ArrayList<Weapon> weaponsOriginal;
-
     @BeforeEach
     void setUp() {
-        weaponsOriginal = new ArrayList<>();
-
     }
 
     @Test
     void loadWeaponsCorrectTest() {
+        ArrayList<Weapon> weaponsOriginal = new ArrayList<>();
         String linea = "Pistol1 1 1 10";
         String[] var = linea.split(" ");
         Weapon weapon = new Weapon(var);
@@ -34,9 +31,8 @@ class WeaponTest {
         Weapon weapon1 = new Weapon();
         ArrayList<Weapon> weaponsComplete = new ArrayList<>();
         try {
-        weaponsComplete = (ArrayList<Weapon>) weapon1.loadWeapon("tests/storeFilesTests");
-        } catch(FileNotFoundException e)
-        {
+            weaponsComplete = (ArrayList<Weapon>) weapon1.loadWeapon("tests/storeFilesTests");
+        } catch(FileNotFoundException e) {
             throw new RuntimeException(e);
         }
         assertEquals(weaponsOriginal.size(),weaponsComplete.size());
