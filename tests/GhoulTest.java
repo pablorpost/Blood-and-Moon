@@ -10,6 +10,7 @@ class GhoulTest {
     void readLineTest() {
         Ghoul ghoul = new Ghoul();
 
+
         String line = "name:Demon";
         String[] var = line.split(":");
         ghoul.readLine(var);
