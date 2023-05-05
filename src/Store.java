@@ -31,7 +31,7 @@ public class Store {
     }
 
     //Cargará toda la información de la store, leyendo los diferentes archivos
-    private void loadStore(String directorio){
+    public void loadStore(String directorio){
         Armor armor= new Armor();
         try {
             this.armors = armor.loadArmors(directorio);
