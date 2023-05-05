@@ -15,6 +15,8 @@ public class Battle implements Serializable {
     private int gold;
     private String challenger;
     private String challenged;
+
+
     // Constructor de la batalla
     public Battle(User challenger, User challenged, int goldBet, Store store){
         this.challenger = challenger.getName();

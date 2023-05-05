@@ -10,12 +10,17 @@ class VampireTest {
     }
 
     @Test
-    void readLine() {
+    void readLineTest() {
         Vampire vampire = new Vampire();
         String line = "name:Vampire";
         String[] var = line.split(":");
         vampire.readLine(var);
         assertEquals("Vampire", vampire.getName());
+
+        line = "life:5";
+        var = line.split(":");
+        vampire.readLine(var);
+        assertEquals(5, vampire.getLife());
 
         line = "description:Le encanta beber sangre";
         var = line.split(":");
@@ -75,7 +80,7 @@ class VampireTest {
     }
 
     @Test
-    void addMinion() {
+    void addMinionTest() {
         Vampire vampire = new Vampire();
         vampire.addMinion("Demon");
         assertEquals(1, vampire.getMinions().size());
@@ -91,7 +96,7 @@ class VampireTest {
     }
 
     @Test
-    void addBlood() {
+    void addBloodTest() {
         Vampire vampire = new Vampire();
         vampire.addBlood(0);
         assertEquals(0, vampire.getBlood());
