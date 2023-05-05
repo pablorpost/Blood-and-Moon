@@ -63,7 +63,7 @@ public class DBManager{
     en caso contrario, creará una nueva base de datos
      */
 
-    public DataBase loadDataBase(){
+    private DataBase loadDataBase(){
         DataBase dataBaseCop = null;
         if (new File("dataBase.binaryDB").exists()) {
             try {
