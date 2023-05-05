@@ -1,0 +1,3 @@
+Pistol1 1 1 10
+Pistol2 2 2 5
+Pistol3 3 2 5

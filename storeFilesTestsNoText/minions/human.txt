@@ -1,3 +1,0 @@
-name:struct.minion.Human
-life:3
-loyalty:ALTA

@@ -1,3 +1,0 @@
-name:struct.minion.Ghoul
-life:3
-dependency:3
