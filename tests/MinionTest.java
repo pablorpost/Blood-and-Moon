@@ -43,8 +43,8 @@ class MinionTest {
     @Test
     void laodDemonTest() {
             Demon demon = new Demon();
-            demon.setName("Ghoul");
-            demon.setOath("oath");
+            demon.setName("Demon");
+            demon.setOath("Oath");
             demon.setLife(3);
 
             Demon demonAux = new Demon();
@@ -70,6 +70,30 @@ class MinionTest {
     }
 
     @Test
-    void laodMinionLycanthtopeTest() {
+    void laodMinionHumanTest() {
+        Human human = new Human();
+        human.setName("Human");
+        human.setLife(3);
+        human.setLoyalty("ALTA");
+
+        Human humanAux = new Human();
+        try {
+            humanAux.laodMinion("tests/storeFilesTests", "Human");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        assertEquals(human.getLoyalty(),humanAux.getLoyalty());
+        assertEquals(human.getLife(),humanAux.getLife());
+        assertEquals(human.getName(),humanAux.getName());
+
+        Human humanAuxNotFound = new Human();
+        try {
+            humanAuxNotFound.laodMinion("tests", "Human");
+        } catch (FileNotFoundException e) {
+        }
+        assertEquals(0,humanAuxNotFound.getLife());
+        assertNull(humanAuxNotFound.getName());
+        assertNull(humanAuxNotFound.getLoyalty());
     }
 }
