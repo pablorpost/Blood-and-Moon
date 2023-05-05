@@ -20,8 +20,7 @@ public class Battle implements Serializable {
         this.challenger = challenger.getName();
         this.challenged = challenged.getName();
         this.gold = goldBet;
-        Random rand = new Random();
-        int index = rand.nextInt(store.getModifiers().size());
+        int index = RandomGenerator.RANDOM_OBJ.nextInt(store.getModifiers().size());
         Modifier modifier =  store.getModifiers().get(index);
         boolean more = modifier.getType()==1;
         this.date = LocalDateTime.now();
