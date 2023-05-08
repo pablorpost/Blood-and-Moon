@@ -160,8 +160,8 @@ class DBManagerTest {
         String pass = "eqeqeqeq";
         String name = "paco";
         assertNull(db.getAdmin(nick, pass));
-        db.addAdmin(nick,name,pass);
-        Admin u = db.getAdmin(nick,pass);
+        db.addUser(nick,name,pass);
+        User u = db.getUser(nick,pass);
         assertEquals(u.getName(),name);
         db.deletePerson(u);
         assertNull(db.getAdmin(nick, pass));
