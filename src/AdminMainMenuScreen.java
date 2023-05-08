@@ -78,7 +78,7 @@ public class AdminMainMenuScreen extends Screen{
                     failedValidation(request);
                 }
                 else{
-                    String response = teclado.nextLine();
+                    String response = teclado.nextLine(); 
                     getDataBase().getRequests().remove(0);
                     if (response.equals("Y") || response.equals("y")) {
                         User challengedUser = getDataBase().getUserByNick(request.get(1));

@@ -16,7 +16,7 @@ class DBManagerTest {
     }
 
     @Test
-    void lastRequestMoreThanADayAgo() {
+    void lastRequestMoreThanADayAgoTest() {
         DBManager db = new DBManager();
         assertTrue(db.lastRequestMoreThanADayAgo("0","1"));
         assertTrue(db.lastRequestMoreThanADayAgo("1","0"));
@@ -26,7 +26,7 @@ class DBManagerTest {
     }
 
     @Test
-    void addLastRequestDate() {
+    void addLastRequestDateTest() {
         DBManager db = new DBManager();
         assertTrue(db.lastRequestMoreThanADayAgo("0","1"));
         assertTrue(db.lastRequestMoreThanADayAgo("1","0"));
@@ -36,7 +36,7 @@ class DBManagerTest {
     }
 
     @Test
-    void getUser() {
+    void getUserTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String pass = "eqeqeqeq";
@@ -50,7 +50,7 @@ class DBManagerTest {
     }
 
     @Test
-    void getAdmin() {
+    void getAdminTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String pass = "eqeqeqeq";
@@ -64,7 +64,7 @@ class DBManagerTest {
     }
 
     @Test
-    void inDataBase() {
+    void inDataBaseTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String nickAd = "ed";
@@ -87,7 +87,7 @@ class DBManagerTest {
     }
 
     @Test
-    void existingUser() {
+    void existingUserTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String pass = "eqeqeqeq";
@@ -101,7 +101,7 @@ class DBManagerTest {
     }
 
     @Test
-    void adminPasswordCheck() {
+    void adminPasswordCheckTest() {
         DBManager db = new DBManager();
         assertTrue(db.adminPasswordCheck("80085"));
         assertFalse(db.adminPasswordCheck("rjhgasbnbge"));
@@ -111,7 +111,7 @@ class DBManagerTest {
     }
 
     @Test
-    void addUser() {
+    void addUserTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String pass = "eqeqeqeq";
@@ -125,7 +125,7 @@ class DBManagerTest {
     }
 
     @Test
-    void addAdmin() {
+    void addAdminTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String pass = "eqeqeqeq";
@@ -137,15 +137,8 @@ class DBManagerTest {
         db.deletePerson(u);
         assertNull(db.getAdmin(nick, pass));
     }
-
     @Test
-    void save() {
-        //explicar en memoria
-        //esta funcion no se puecer una prueba de ella porque el lector dle binario es una funcion privado, y no genero un binario de una manera que sea comprobable
-    }
-
-    @Test
-    void hasCharacter() {
+    void hasCharacterTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String pass = "eqeqeqeq";
@@ -161,7 +154,7 @@ class DBManagerTest {
     }
 
     @Test
-    void deletePerson() {
+    void deletePersonTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String pass = "eqeqeqeq";
@@ -180,7 +173,7 @@ class DBManagerTest {
     }
 
     @Test
-    void addRequest() {
+    void addRequestTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String pass = "eqeqeqeq";
@@ -198,7 +191,7 @@ class DBManagerTest {
     }
 
     @Test
-    void top10() {
+    void top10Test() {
         DBManager db = new DBManager();
         ArrayList<ArrayList<String>> ab = new ArrayList<>();
         for(char i='a';i<='g';i++){
@@ -234,7 +227,7 @@ class DBManagerTest {
     }
 
     @Test
-    void getUserByNick() {
+    void getUserByNickTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String pass = "eqeqeqeq";
@@ -248,7 +241,7 @@ class DBManagerTest {
     }
 
     @Test
-    void getBannedUsers() {
+    void getBannedUsersTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String pass = "eqeqeqeq";
@@ -266,7 +259,7 @@ class DBManagerTest {
     }
 
     @Test
-    void getRequests() {
+    void getRequestsTest() {
         DBManager db = new DBManager();
         String nick = "e";
         String pass = "eqeqeqeq";
@@ -281,12 +274,5 @@ class DBManagerTest {
             assertEquals(db.getRequests().get(i).get(1),String.valueOf(c));
             assertEquals(db.getRequests().get(i).get(2),String.valueOf(i));
         }
-    }
-
-    @Test
-    void addBattleToList() {
-        //explicar en memoria
-        //esta funcion no se puecer una prueba de ella porque no existe un get, ya que esta diseñada para un futuro uso,
-        //y llegado este que ya ste repleta de batallas que han tomado luegar desde el lanzamiento del juego
     }
 }
